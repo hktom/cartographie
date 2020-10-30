@@ -10,6 +10,8 @@
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import {mapState} from "vuex" ;
+
 //const mapboxSdk  = require('@mapbox/mapbox-sdk');
 export default {
   data() {
@@ -47,14 +49,17 @@ export default {
           return "<div id='geo'>"+"</div>"
          }
         })
-   );
+      );
 
+      const countries = this.countries
       this.map.on("load", () => {
         this.mapAddSource()
 
         this.countrieShap()
 
-        this.setMarker("Angola", 12, "fg")
+        countries.forEach((data) => {
+         this.setMarker(data.name, data.nb, null) 
+        })
       });
     }, 
     mapAddSource(){
@@ -305,6 +310,17 @@ export default {
         });
     }
   },
+  computed: {
+    ...mapState(['countries'])
+  },
+  watch: {
+    countries(){
+      this.countries.forEach((data) => {
+         this.setMarker(data.name, data.nb, null) 
+      })
+    }
+  },
+
 }
 </script>
 

@@ -3,6 +3,28 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+function checkCountries(data){
+  let countries = []
+  data.forEach(pub => {
+    pub.pays.forEach((pays, index) => {
+      const exist = countries.findIndex(x => x.id == pays) 
+      if(exist != -1){
+        countries[exist].nb++
+      }else{
+        countries.push(
+          {
+            id : pays,
+            name : pub._embedded["wp:term"][1][index]['name'] ,
+            nb : 1
+          }
+        )
+      }
+    })
+  });
+
+  return countries
+}
+
 function checkSecteurs(data){
   let secteurs = []
   data.forEach(pub => {
@@ -28,6 +50,7 @@ function checkSecteurs(data){
 const state = {
   data : {} ,
   secteurs : [] ,
+  countries : [] ,
 }
 
 const actions = {
@@ -37,6 +60,7 @@ const actions = {
             console.log(data)
             commit('SET_DATA', data)
             commit('SET_SECTEURS', checkSecteurs(data))
+            commit('SET_COUNTRIES', checkCountries(data))
         }
     )
   }
@@ -49,6 +73,10 @@ const mutations = {
   SET_SECTEURS(state, data){
     console.log(data)
     state.secteurs = data
+  },
+  SET_COUNTRIES(state, data){
+    console.log(data)
+    state.countries = data
   }
 }
 

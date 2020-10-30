@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="row">
-      <Maps class="col-12 col-lg-8"></Maps>
-      <side-content class="col-12 col-lg-4"></side-content>
+      <Maps class="col-12 col-lg-8 p-0"></Maps>
+      <side-content class="col-12 col-lg-4 p-0"></side-content>
     </div>
   </div>
 </template>
@@ -10,13 +10,20 @@
 <script>
 import Maps from "./components/Maps.vue";
 import SideContent from "./components/SideContent.vue";
+import {mapActions} from "vuex" ;
 
 export default {
   name: "App",
   components: {
     Maps,
     SideContent
-  }
+  },
+  mounted() {
+    this.loadData()
+  },
+  methods: {
+    ...mapActions(['loadData'])
+  },
 };
 </script>
 

@@ -1,11 +1,16 @@
 <template>
   <div class="map-wrapper">
     <div id="map"></div>
+    <div id="geocoder" class="geocoder"></div>
+
   </div>
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
 export default {
   data() {
     return {
@@ -21,13 +26,25 @@ export default {
       mapboxgl.accessToken = "pk.eyJ1IjoiZ2VkZW9uLWUiLCJhIjoiY2tnMG13OTd6MDh5MTJzcXd3cjRsc2N6byJ9.z8taWAtfion1VwnGolnFtw";
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/gedeon-e/ckg0oefpt2e0319of5hfgyc9n", // stylesheet location
-        center: [20.435987, 2.332001], // starting position [lng, lat]
+        style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+        center:  [35, 5], // starting position [lng, lat]
         zoom: 2 // starting zoom
       });
 
       // Add zoom and rotation controls to the map.
-      this.map.addControl(new mapboxgl.NavigationControl());
+      this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+      this.map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        countries: "CD",
+        zoom: 14,
+        placeholder: "Rechercher une zone",
+        mapboxgl: mapboxgl,
+        render : function(){
+          return "<div id='geo'>"+"</div>"
+         }
+        })
+   );
 
       this.map.on("load", () => {
         this.mapAddSource()
@@ -263,7 +280,8 @@ export default {
     height: 500px;
     #map{
       width: 100%;
-      height: 100%;
+      height: 100vh;
     }
+
   }
 </style>

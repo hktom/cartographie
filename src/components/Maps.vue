@@ -38,7 +38,7 @@ export default {
         accessToken: mapboxgl.accessToken,
         countries: "CD",
         zoom: 14,
-        placeholder: "Rechercher une zone",
+        placeholder: "Rechercher un secteur ou un pays",
         mapboxgl: mapboxgl,
         render : function(){
           return "<div id='geo'>"+"</div>"
@@ -274,7 +274,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .map-wrapper{
     width: 100%;
     height: 500px;
@@ -282,6 +282,14 @@ export default {
       width: 100%;
       height: 100vh;
     }
-
+  }
+  .mapboxgl-ctrl-top-right{
+    width: 100%;
+    padding: 10px 20px;
+    .mapboxgl-ctrl-geocoder{
+      width: 100%;
+      float: none;
+      max-width: none;
+    }
   }
 </style>

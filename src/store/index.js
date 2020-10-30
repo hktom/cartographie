@@ -32,7 +32,7 @@ const state = {
 
 const actions = {
   loadData({commit}){
-    axios.get('https://resilient.digital-africa.co/wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
+    window.axios.get('https://resilient.digital-africa.co/wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
             console.log(data)
             commit('SET_DATA', data)

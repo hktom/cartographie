@@ -10,12 +10,13 @@
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-
+//const mapboxSdk  = require('@mapbox/mapbox-sdk');
 export default {
   data() {
     return {
       map : null,
-      hoveredStateId : null
+      hoveredStateId : null ,
+      mapboxClient : null
     }
   },
   mounted() {
@@ -24,6 +25,8 @@ export default {
   methods: {
     initMap(){
       mapboxgl.accessToken = "pk.eyJ1IjoiZ2VkZW9uLWUiLCJhIjoiY2tnMG13OTd6MDh5MTJzcXd3cjRsc2N6byJ9.z8taWAtfion1VwnGolnFtw";
+      this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
+      
       this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
@@ -50,6 +53,8 @@ export default {
         this.mapAddSource()
 
         this.countrieShap()
+
+        this.setMarker("Angola", 12, "fg")
       });
     }, 
     mapAddSource(){
@@ -250,9 +255,7 @@ export default {
       // When the user moves their mouse over the state-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'state-fills', function(e) {
-        console.log('move')
           if (e.features.length > 0) {
-              console.log(hoveredStateId)
               if (hoveredStateId) {
                   map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
               }
@@ -268,6 +271,37 @@ export default {
                 map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
             }
             hoveredStateId = null;
+        });
+    }, 
+    setMarker(countryName, totalPost, acf) {
+      const map = this.map
+      
+      this.mapboxClient.geocoding
+        .forwardGeocode({
+            query: countryName,
+            autocomplete: false,
+            limit: 1,
+        })
+        .send()
+        .then(function(res) {
+          if (res && res.body && res.body.features && res.body.features.length) {
+            console.log(res)
+                var feature = res.body.features[0];
+                // create DOM element for the marker
+                var el = document.createElement("div");
+                el.innerHTML = `${totalPost}`;
+                el.id = "marker-nbre-post";
+                el.addEventListener('click', () => {
+                    //alert("Marker Clicked. v2");
+                    //var url = $("#page-url").val();
+                    // url += `/?q=${acf}&v=${countryName}`;
+                    // window.location.href = url;
+                    console.log(`?q=${acf}&v=${countryName}`)
+                });
+                var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
+                marker.remove(map);
+                marker.addTo(map);
+            }
         });
     }
   },
@@ -290,6 +324,27 @@ export default {
       width: 100%;
       float: none;
       max-width: none;
+    }
+  }
+  #marker-nbre-post{
+    line-height: 20px;
+    background-color: #007bff;
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+    border-radius: 50%;
+    color: white;
+    top: 22px;
+    &::after{
+      width: 5px;
+      position: relative;
+      content: "";
+      display: block;
+      left: 50%;
+      top: -32px;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-bottom-color: #007bff;
     }
   }
 </style>

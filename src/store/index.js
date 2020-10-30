@@ -4,7 +4,8 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 const state = {
-  data : {}
+  data : {} ,
+  secteurs : [] ,
 }
 
 const actions = {

@@ -11,7 +11,6 @@ import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import {mapState} from "vuex" ;
-
 //const mapboxSdk  = require('@mapbox/mapbox-sdk');
 export default {
   data() {
@@ -26,37 +25,27 @@ export default {
   },
   methods: {
     initMap(){
-      mapboxgl.accessToken = "pk.eyJ1IjoiZ2VkZW9uLWUiLCJhIjoiY2tnMG13OTd6MDh5MTJzcXd3cjRsc2N6byJ9.z8taWAtfion1VwnGolnFtw";
+      mapboxgl.accessToken = "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
       this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
       
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+        style: "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft", // stylesheet location
         center:  [35, 5], // starting position [lng, lat]
         zoom: 2 // starting zoom
       });
-
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
       this.map.addControl(
       new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        countries: "CD",
-        zoom: 14,
-        placeholder: "Rechercher un secteur ou un pays",
-        mapboxgl: mapboxgl,
-        render : function(){
-          return "<div id='geo'>"+"</div>"
-         }
+        zoom: 1,
+
         })
       );
-
       const countries = this.countries
       this.map.on("load", () => {
         this.mapAddSource()
-
         this.countrieShap()
-
         countries.forEach((data) => {
          this.setMarker(data.name, data.nb, null) 
         })
@@ -219,8 +208,6 @@ export default {
       this.map.on("mouseleave", "places", function () {
         map.getCanvas().style.cursor = "";
       });
-
-
     },
     countrieShap(){
       let hoveredStateId = this.hoveredStateId 
@@ -230,7 +217,6 @@ export default {
           'type': 'geojson',
           'data': 'africa-countries.geo.json'
       });
-
       this.map.addLayer({
             'id': 'state-fills',
             'type': 'fill',
@@ -245,7 +231,6 @@ export default {
                 ]
             }
         });
-
       this.map.addLayer({
           'id': 'state-borders',
           'type': 'line',
@@ -256,7 +241,6 @@ export default {
               'line-width': 0.5
           }
       });
-
       // When the user moves their mouse over the state-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on('mousemove', 'state-fills', function(e) {
@@ -268,7 +252,6 @@ export default {
               map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: true });
           }
       });
-
       // When the mouse leaves the state-fill layer, update the feature state of the
       // previously hovered feature.
       this.map.on('mouseleave', 'state-fills', function() {
@@ -320,7 +303,6 @@ export default {
       })
     }
   },
-
 }
 </script>
 
@@ -331,6 +313,8 @@ export default {
     #map{
       width: 100%;
       height: 100vh;
+      z-index: 2;
+      position:absolute;
     }
   }
   .mapboxgl-ctrl-top-right{

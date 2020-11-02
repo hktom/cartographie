@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="row m-0">
+      <map-search class="search"></map-search>
       <Maps class="col-12 col-lg-8 p-0"></Maps>
       <side-content class="col-12 col-lg-4 p-0"></side-content>
     </div>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import MapSearch from '@/components/MapSearch';
 import Maps from "./components/Maps.vue";
 import SideContent from "./components/SideContent.vue";
 import {mapActions} from "vuex" ;
@@ -16,7 +18,8 @@ export default {
   name: "App",
   components: {
     Maps,
-    SideContent
+    SideContent,
+    MapSearch
   },
   mounted() {
     this.loadData()

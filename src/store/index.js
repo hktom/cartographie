@@ -21,7 +21,6 @@ function checkCountries(data){
       }
     })
   });
-
   return countries
 }
 
@@ -51,6 +50,7 @@ const state = {
   data : {} ,
   secteurs : [] ,
   countries : [] ,
+  search: [] 
 }
 
 const actions = {
@@ -63,6 +63,27 @@ const actions = {
             commit('SET_COUNTRIES', checkCountries(data))
         }
     )
+  },
+  filtredData({state, commit}, slug){
+    console.log('state data', state.data)
+    console.log('search text', slug)
+    slug=slug.toLowerCase()
+    // fonction de filtrage
+    let element = state.data.filter((x) => {
+      let find = false
+      x._embedded['wp:term'][1].forEach(y => {
+        if(y.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(y.name.toLowerCase()) !== -1 ){
+          console.log(1)
+          find = true
+        }
+      });
+      return find
+    })
+    console.log(element)
+    const filtredCountries = checkCountries(element)
+    console.log("je",filtredCountries)
+    // return filtredCountries
+    commit('SET_COUNTRIES', filtredCountries)
   }
 }
 
@@ -77,6 +98,10 @@ const mutations = {
   SET_COUNTRIES(state, data){
     console.log(data)
     state.countries = data
+  },
+  SET_SEARCH(state, data){
+    console.log(data)
+    state.search = data
   }
 }
 

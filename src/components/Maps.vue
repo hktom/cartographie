@@ -262,6 +262,9 @@ export default {
         });
     }, 
     setMarker(countryName, totalPost, acf) {
+      document.querySelectorAll('#marker-nbre-post').forEach(
+        domElement => domElement.remove()
+      )
       const map = this.map
       
       this.mapboxClient.geocoding

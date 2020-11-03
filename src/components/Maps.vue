@@ -8,8 +8,6 @@
 
 <script>
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import {mapState} from "vuex" ;
 //const mapboxSdk  = require('@mapbox/mapbox-sdk');
 export default {
@@ -36,12 +34,6 @@ export default {
       });
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
-      this.map.addControl(
-      new MapboxGeocoder({
-        zoom: 1,
-
-        })
-      );
       const countries = this.countries
       this.map.on("load", () => {
         this.mapAddSource()

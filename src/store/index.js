@@ -31,12 +31,14 @@ function checkSecteurs(data){
       const exist = secteurs.findIndex(x => x.id == secteur) 
       if(exist != -1){
         secteurs[exist].nb++
+        secteurs[exist].solutions.push(pub)
       }else{
         secteurs.push(
           {
             id : secteur,
             name : pub._embedded["wp:term"][2][index]['name'] ,
-            nb : 1
+            nb : 1 ,
+            solutions : [pub]
           }
         )
       }

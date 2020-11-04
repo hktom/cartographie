@@ -34,12 +34,6 @@ export default {
         width:67%;
         padding: 10px 20px;
     }
-    
-        @media screen and(max-width: 993px) {
-            .active-cyan-4{
-                width:67%;
-            }
-        }
     .input-search{
         padding-right: 45px;
         box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);

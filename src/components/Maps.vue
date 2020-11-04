@@ -307,7 +307,8 @@ export default {
     height: 500px;
     #map{
       width: 100%;
-      height: 500px;
+      height: calc(100vh - 50px);
+      max-height: 500px;
       z-index: 2;
       position:absolute;
     }

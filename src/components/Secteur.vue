@@ -15,7 +15,7 @@
       </ul>
     </div>
 
-    <publications :solutions="solutions" v-else class="pub"></publications>    
+    <publications :solutions="solutions" @back="secteurInit" v-else class="pub"></publications>    
   
   </div>
 </template>
@@ -42,6 +42,9 @@ export default {
       console.log("secteur cliqué", data)
       this.secteurActive = true
       this.solutions = data.solutions
+    },
+    secteurInit(){
+      this.secteurActive = null
     }
   },
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="active-cyan-4 mb-4">
+    <div class="map-search active-cyan-4 mb-4">
         <font-awesome-icon class="ico-search" icon="search" />
         <input class="form-control input-search"  type="text" placeholder="Rechercher un secteur ou un pays" aria-label="Search" 
             v-model="search">
@@ -31,7 +31,7 @@ export default {
     .active-cyan-4{
         position: absolute;;
         z-index:5;
-        width:67%;
+        width:100%;
         padding: 10px 20px;
     }
     .input-search{

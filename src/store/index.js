@@ -10,12 +10,14 @@ function checkCountries(data){
       const exist = countries.findIndex(x => x.id == pays) 
       if(exist != -1){
         countries[exist].nb++
+        countries[exist].solutions.push(pub)
       }else{
         countries.push(
           {
             id : pays,
             name : pub._embedded["wp:term"][1][index]['name'] ,
-            nb : 1
+            nb : 1,
+            solutions : [pub]
           }
         )
       }
@@ -53,7 +55,9 @@ const state = {
   secteurs : [] ,
   countries : [] ,
   search: [] ,
-  activeSecteur : null
+  activeSecteur : null,
+  menu: 1,
+  solutionsActive :  [] 
 }
 
 const actions = {
@@ -104,6 +108,12 @@ const actions = {
   },
   setActiveSecteur({commit}, slug){
     commit('SET_ACTIVE_SECTEUR', slug)
+  },
+  setMenu({commit},slug){
+    commit('SET_MENU',slug)
+  },
+  setSolutionsActive({commit},data){
+    commit('SET_SOLUTIONS_ACTIVE',data)
   }
 }
 
@@ -125,6 +135,12 @@ const mutations = {
   },
   SET_ACTIVE_SECTEUR(state, data){
     state.activeSecteur = data
+  },
+  SET_MENU(state, data){
+    state.menu = data
+  },
+  SET_SOLUTIONS_ACTIVE(state, data){
+    state.solutionsActive = data
   }
 }
 

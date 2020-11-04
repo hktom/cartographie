@@ -8,7 +8,7 @@
 
 <script>
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
-import {mapState} from "vuex" ;
+import {mapActions, mapState} from "vuex" ;
 //const mapboxSdk  = require('@mapbox/mapbox-sdk');
 export default {
   data() {
@@ -22,6 +22,7 @@ export default {
     this.initMap()
   },
   methods: {
+    ...mapActions(['setMenu','setSolutionsActive']),
     initMap(){
       mapboxgl.accessToken = "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
       this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
@@ -39,7 +40,7 @@ export default {
         this.mapAddSource()
         this.countrieShap()
         countries.forEach((data) => {
-         this.setMarker(data.name, data.nb, null) 
+         this.setMarker(data.name, data.nb , data) 
         })
       });
     }, 
@@ -253,12 +254,9 @@ export default {
             hoveredStateId = null;
         });
     }, 
-    setMarker(countryName, totalPost, acf) {
-      document.querySelectorAll('#marker-nbre-post').forEach(
-        domElement => domElement.remove()
-      )
+    setMarker(countryName, totalPost, data) {
       const map = this.map
-      
+      const setPub = this.setPub
       this.mapboxClient.geocoding
         .forwardGeocode({
             query: countryName,
@@ -279,13 +277,21 @@ export default {
                     //var url = $("#page-url").val();
                     // url += `/?q=${acf}&v=${countryName}`;
                     // window.location.href = url;
-                    console.log(`?q=${acf}&v=${countryName}`)
+                    console.log('thythy', data)
+                    setPub(data)
                 });
                 var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
                 marker.remove(map);
                 marker.addTo(map);
             }
         });
+    },
+    setPub(data){
+      console.log("laura",data)
+      //redefinir menu
+      this.setMenu(2)
+      // definir les publication
+      this.setSolutionsActive(data.solutions)
     }
   },
   computed: {
@@ -293,8 +299,11 @@ export default {
   },
   watch: {
     countries(){
+      document.querySelectorAll('#marker-nbre-post').forEach(
+        domElement => domElement.remove()
+      )
       this.countries.forEach((data) => {
-         this.setMarker(data.name, data.nb, null) 
+         this.setMarker(data.name, data.nb, data) 
       })
     }
   },

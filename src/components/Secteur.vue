@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex" ;
+import {mapState, mapActions} from "vuex" ;
 import Publications from "./Publications"
 
 export default {
@@ -35,13 +35,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(['secteurs'])
+    ...mapState(['secteurs']),
   },
   methods: {
+    ...mapActions(['setActiveSecteur']), 
     getFromSecteurs(data){
       console.log("secteur cliqué", data)
-      this.secteurActive = true
-      this.solutions = data.solutions
+      this.setActiveSecteur(data.name)
+      //this.secteurActive = true
+      //this.solutions = data.solutions
     },
     secteurInit(){
       this.secteurActive = null

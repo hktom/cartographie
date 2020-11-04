@@ -52,7 +52,8 @@ const state = {
   data : {} ,
   secteurs : [] ,
   countries : [] ,
-  search: [] 
+  search: [] ,
+  activeSecteur : null
 }
 
 const actions = {
@@ -99,7 +100,10 @@ const actions = {
     console.log("je",filtredCountries,filtredSecteurs)
     // return filtredCountries
     commit('SET_COUNTRIES', filtredCountries)
-    commit('SET_SECTEURS', filtredSecteurs)
+    //commit('SET_SECTEURS', filtredSecteurs)
+  },
+  setActiveSecteur({commit}, slug){
+    commit('SET_ACTIVE_SECTEUR', slug)
   }
 }
 
@@ -118,6 +122,9 @@ const mutations = {
   SET_SEARCH(state, data){
     console.log(data)
     state.search = data
+  },
+  SET_ACTIVE_SECTEUR(state, data){
+    state.activeSecteur = data
   }
 }
 

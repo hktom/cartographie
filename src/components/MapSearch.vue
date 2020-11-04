@@ -7,17 +7,23 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
     data() {
         return {
             search : ""          
         }
     },
+    computed: {
+        ...mapState(['activeSecteur']),
+    },
     watch: {
         search(){
             console.log('recherche', this.search)
             this.filtredData(this.search)
+        },
+        activeSecteur(){
+            this.search = this.activeSecteur
         }
     },
     methods: {

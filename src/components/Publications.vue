@@ -7,6 +7,7 @@
             v-for="(data, i) in solutions" :key="i">
             <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
             <span v-html="data.acf.chapeau"></span>
+            <button type="button" class="btn btn-outline-danger">Voir plus</button>
         </li>
       </ul>
   </div>

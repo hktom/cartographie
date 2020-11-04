@@ -2,8 +2,10 @@
   <div>
       <h2>Publications</h2>  
       <ul class="list-group">
-        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-         Je suis Thythy
+        <li class="list-group-item list-group-item-action" 
+            v-for="(data, i) in solutions" :key="i">
+            <span v-html="data.acf.chapeau"></span>
+            <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
         </li>
       </ul>
   </div>
@@ -22,6 +24,15 @@ export default {
       
     }
   },
+methods: {
+    getDate(datePub){
+        const date = new Date(datePub)
+        return date.getDate() + "," + (date.getMonth() + 1) + "," + date.getFullYear()
+        
+    } 
+  },
+
+
 }
 </script>
 

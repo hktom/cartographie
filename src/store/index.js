@@ -71,19 +71,33 @@ const actions = {
     // fonction de filtrage
     let element = state.data.filter((x) => {
       let find = false
-      x._embedded['wp:term'][1].forEach(y => {
+      
+      // filtre sur le pays
+      find = x._embedded['wp:term'][1].some(y => {
         if(y.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(y.name.toLowerCase()) !== -1 ){
-          console.log(1)
-          find = true
+          return true ;
         }
+        return false
       });
+
+      //filtre sur le secteur
+      if(!find){
+        find = x._embedded['wp:term'][2].some(z => {
+          if(z.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(z.name.toLowerCase()) !== -1 ){
+            return true
+          }
+          return false
+        })
+      }
       return find
     })
     console.log(element)
     const filtredCountries = checkCountries(element)
-    console.log("je",filtredCountries)
+    const filtredSecteurs = checkSecteurs(element)
+    console.log("je",filtredCountries,filtredSecteurs)
     // return filtredCountries
     commit('SET_COUNTRIES', filtredCountries)
+    commit('SET_SECTEURS', filtredSecteurs)
   }
 }
 

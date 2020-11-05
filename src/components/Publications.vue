@@ -7,7 +7,7 @@
           <li class="list-group-item list-group-item-action" 
               v-for="(data, i) in solutionsActive" :key="i">
               <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
-              <span v-html="data.acf.chapeau"></span>
+              <span v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
               <button type="button" @click="setTargetPub(data)" class="btn btn-outline-danger">Voir plus</button>
           </li>
         </ul>

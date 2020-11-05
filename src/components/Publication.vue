@@ -1,7 +1,9 @@
 <template>
   <div class="text-left">
       <div>
-        <button type="button" class="btn btn-outline-danger" @click="getButton()">Retour</button>
+        <div class="header-back">
+          <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
+        </div>
         <h2>Toutes les publications</h2>  
         <ul class="list-group">
           <li class="list-group-item list-group-item-action">
@@ -38,7 +40,7 @@ export default {
         const date = new Date(datePub)
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
     },
-    getButton(){
+    goBack(){
       console.log("Button cliqué")
       this.$emit('back')
     },

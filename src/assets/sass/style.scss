@@ -1,4 +1,5 @@
 @import "variables";
+@import 'icons-pictos';
 
 @font-face{
   font-family: "Mont Bold";
@@ -28,4 +29,21 @@ h1{
 
 h2{
   font-family: "Mont Thin";
+}
+a:hover{
+  text-decoration: none;
+}
+.header-back{
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  img{
+    width: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  h2{
+    margin-bottom: 0px;
+    color: $orange;
+  }
 }

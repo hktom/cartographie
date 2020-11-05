@@ -1,32 +1,29 @@
 <template>
   <div class="text-left p-4">
-      <div v-if="targetPublication == null">
+      <div>
         <button type="button" class="btn btn-outline-danger" @click="getButton()">Retour</button>
-        <h2>Publications</h2>  
+        <h2>Toutes les publications</h2>  
         <ul class="list-group">
-          <li class="list-group-item list-group-item-action" 
-              v-for="(data, i) in solutionsActive" :key="i">
-              <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
-              <span v-html="data.acf.chapeau"></span>
-              <button type="button" @click="setTargetPub(data)" class="btn btn-outline-danger">Voir plus</button>
+          <li class="list-group-item list-group-item-action">
+              <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div>
+              <span v-html="pub.acf.chapeau"></span>
+              <span v-html="pub.acf.chapeau"></span>
           </li>
         </ul>
       </div>
-      <Publication :pub="targetPublication" v-else @back="resetPub()"></Publication>
+
   </div>
 
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex" ;
-import Publication from "./Publication"
 export default {
-  components : {
-    Publication
+  props : ['pub'],
+  components : { 
   } ,
   data(){
     return {
-      targetPublication : null
     }
   },
   mounted() {
@@ -43,15 +40,9 @@ export default {
     },
     getButton(){
       console.log("Button cliqué")
-      this.setMenu(1)
+      this.$emit('back')
     },
-    setTargetPub(data){
-      this.targetPublication = data
-    },
-    resetPub(){
-      this.targetPublication = null
-    }
-
+    
   },
 }
 </script>

@@ -4,8 +4,8 @@
         <div class="header-back">
           <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
         </div>
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-action">
+        <div class="card">
+          <div class="card-body">
               <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div>
               <p>
                 <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
@@ -53,8 +53,8 @@
                 <h2 class="">LE LIEN EXTERNE</h2>
                 <p  v-html="pub.acf.liens_ext"></p>
               </div>             
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
   </div>
@@ -98,7 +98,7 @@ export default {
     cursor: pointer;
   }
   h2{
-    font-size: 25px;
+    font-size: 30px;
     color: #FBC026;
   }
 </style>

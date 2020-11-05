@@ -8,7 +8,7 @@
         @click="getFromSecteurs(data)"
       >
         {{data.name}}
-        <span class="badge badge-primary badge-pill">{{data.nb}}</span>
+        <span class="badge badge-nb badge-primary badge-pill">{{data.nb}}</span>
       </li>
     </ul>
   </div>  
@@ -40,5 +40,10 @@ export default {
 <style lang="scss" scoped>
   .list-group-item{
     cursor: pointer;
+    .badge-nb{
+      border-radius: 5px;
+      border-top-right-radius: unset;
+      border-bottom-left-radius: unset;
+    }
   }
 </style>

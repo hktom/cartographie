@@ -311,6 +311,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../assets/sass/_variables.scss";
+
   .map-wrapper{
     width: 100%;
     height: 500px;
@@ -353,9 +355,9 @@ export default {
       border-bottom-color: #007bff;
     }
     &:hover{
-      background-color: #DA4039;
+      background-color: $red;
       &::after{
-        border-bottom-color: #DA4039;
+        border-bottom-color: $red;
       }
     }
   }

@@ -1,0 +1,31 @@
+@import "variables";
+
+@font-face{
+  font-family: "Mont Bold";
+  src : url('../font/Mont-Bold.ttf')
+}
+@font-face{
+  font-family: "Mont Light";
+  src : url('../font/Mont-Light.ttf')
+}
+@font-face{
+  font-family: "Mont Regular";
+  src : url('../font/Mont-Regular.ttf')
+}
+@font-face{
+  font-family: "Mont Thin";
+  src : url('../font/Mont-Thin.ttf')
+}
+
+*{
+  font-family: "Mont Light";
+  font-size: 16px;
+}
+h1{
+  font-family: "Mont Bold";
+  margin-bottom: 30px;
+}
+
+h2{
+  font-family: "Mont Thin";
+}

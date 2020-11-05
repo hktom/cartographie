@@ -1,5 +1,5 @@
 <template>
-  <div class="text-left p-4">
+  <div class="text-left p-3">
       <div v-if="targetPublication == null">
         <button type="button" class="btn btn-outline-danger" @click="getButton()">Retour</button>
         <h2>Publications</h2>  

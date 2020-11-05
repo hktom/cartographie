@@ -3,7 +3,7 @@
       <div v-if="targetPublication == null">
         <div class="header-back">
           <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
-          <h2>Publications</h2>  
+          <h2>Solutions Tech</h2>  
         </div>
         <ul class="list-group">
           <li class="list-group-item list-group-item-action" 

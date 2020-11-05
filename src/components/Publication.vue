@@ -10,48 +10,49 @@
               <p>
                 <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
               </p>
-              <p>
-                <span class="text-muted small">AUTEUR</span><br/>
-                <span v-html="pub.acf.auteur"></span>
-              </p>
-              <p>
-                <span class="text-muted small">L'AUTEUR DE LA CITATION</span><br/>
-                <span v-html="pub.acf.auteur_de_la_citation"></span>
-              </p>
-              <p>
-                <span class="text-muted small">LA CITATION</span><br/>
-                <span v-html="pub.acf.la_citation"></span>
-              </p>
-              <p>
-                <span class="text-muted small">L'ENJEU</span><br/>
-                <span v-html="pub.acf.titre_du_probleme"></span>
-                <span  v-html="pub.acf.le_probleme"></span>
-              </p>
-              <p>
-                <span class="text-muted small">LA SOLUTION</span><br/>
-                <span  v-html="pub.acf.titre_de_la_solution"></span><br/>           
-                <span  v-html="pub.acf.la_solution"></span>
-              <p>
-                <span class="text-muted small">LE REGARD DE DIGITAL AFRICA</span>
-                <span  v-html="pub.acf.le_regard_de_digital_africa"></span>
-              </p>
-              <p>
-                <span class="text-muted small">LES ACTEURS</span>
-                <span  v-html="pub.acf.les_acteurs"></span>
-              </p>
-              <p>
-                <span class="text-muted small">L'IMPACT</span><br/>
-                <span  v-html="pub.acf.titre_de_limpact"></span>
-                <span  v-html="pub.acf.limpact"></span>
-              </p> 
-              <p>
-                <span class="text-muted small">LE LIEN VERS LA SOLUTION</span><br/>
-                <span v-html="pub.acf.lien_vers_la_solution"></span>
-              </p>
-              <p>
-                <span class="text-muted small">LE LIEN EXTERNE</span>
-                <span  v-html="pub.acf.liens_ext"></span>
-              </p>             
+              <div v-if="pub.acf.auteur != ''">
+                <h2 class="">AUTEUR</h2><br/>
+                <p v-html="pub.acf.auteur"></p>
+              </div>
+              <div v-if="pub.acf.auteur_de_la_citation != ''">
+                <h2 class="">L'AUTEUR DE LA CITATION</h2><br/>
+                <p v-html="pub.acf.auteur_de_la_citation"></p>
+              </div>
+              <div v-if="pub.acf.la_citation != ''">
+                <h2 class="">LA CITATION</h2><br/>
+                <p v-html="pub.acf.la_citation"></p>
+              </div>
+              <div v-if="pub.acf.titre_du_probleme || pub.acf.le_probleme != ''" >
+                <h2 class="">L'ENJEU</h2>
+                <p v-html="pub.acf.titre_du_probleme"></p>
+                <p  v-html="pub.acf.le_probleme"></p>
+              </div>
+              <div v-if="pub.acf.titre_de_la_solution || pub.acf.la_solution  != ''">
+                <h2 class="">LA SOLUTION</h2>
+                <p  v-html="pub.acf.titre_de_la_solution"></p>          
+                <p  v-html="pub.acf.la_solution"></p>
+              </div>
+              <div v-if="pub.acf.le_regard_de_digital_africa != ''">
+                <h2 class="">LE REGARD DE DIGITAL AFRICA</h2>
+                <p  v-html="pub.acf.le_regard_de_digital_africa"></p>
+              </div>
+              <div v-if="pub.acf.les_acteurs != ''">
+                <h2 class="">LES ACTEURS</h2>
+                <p  v-html="pub.acf.les_acteurs"></p>
+              </div>
+              <div v-if="pub.acf.titre_de_limpact || pub.acf.limpact != ''">
+                <h2 class="">L'IMPACT</h2>
+                <p  v-html="pub.acf.titre_de_limpact"></p>
+                <p  v-html="pub.acf.limpact"></p>
+              </div> 
+              <div v-if="pub.acf.lien_vers_la_solution != ''">
+                <h2 class="">LE LIEN VERS LA SOLUTION</h2>
+                <p v-html="pub.acf.lien_vers_la_solution"></p>
+              </div>
+              <div v-if="pub.acf.liens_ext != ''">
+                <h2 class="">LE LIEN EXTERNE</h2>
+                <p  v-html="pub.acf.liens_ext"></p>
+              </div>             
           </li>
         </ul>
       </div>
@@ -95,5 +96,9 @@ export default {
 <style lang="scss" scoped>
   .list-group-item{
     cursor: pointer;
+  }
+  h2{
+    font-size: 25px;
+    color: #FBC026;
   }
 </style>

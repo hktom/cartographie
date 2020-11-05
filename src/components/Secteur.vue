@@ -46,4 +46,8 @@ export default {
       border-bottom-left-radius: unset;
     }
   }
+    h2{
+    font-size: 25px;
+    color: #FBC026;
+  }
 </style>

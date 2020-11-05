@@ -1,6 +1,7 @@
 <template>
     <div class="map-search active-cyan-4 mb-4">
-        <font-awesome-icon class="ico-search" icon="search" />
+        <font-awesome-icon v-if="search== ''" class="ico-search" icon="search" />
+        <font-awesome-icon v-else class="ico-search ico-close" icon="times" @click="resetSearch()"/>
         <input class="form-control input-search"  type="text" placeholder="Rechercher un secteur ou un pays" aria-label="Search" 
             v-model="search">
     </div>  
@@ -27,7 +28,10 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['filtredData'])
+        ...mapActions(['filtredData']),
+        resetSearch(){
+            this.search = ''
+        }
     },
 }
 </script>
@@ -54,6 +58,9 @@ export default {
         z-index:5;
         right: 35px;
         top: 22px;
+    }
+    .ico-close{
+        cursor: pointer;
     }
     
 

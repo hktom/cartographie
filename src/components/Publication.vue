@@ -101,4 +101,9 @@ export default {
     font-size: 30px;
     color: #FBC026;
   }
+  .card{
+    overflow-y:scroll ;
+    overflow-x: hidden;
+    height: 420px;
+  }
 </style>

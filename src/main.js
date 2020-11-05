@@ -2,12 +2,12 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 require('./assets/sass/style.scss')
 
-library.add(faSearch)
+library.add(faSearch, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 

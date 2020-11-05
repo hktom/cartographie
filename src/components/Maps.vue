@@ -339,6 +339,7 @@ export default {
     font-size: 9px;
     border-radius: 50%;
     color: white;
+    cursor : pointer ;
     top: 22px;
     &::after{
       width: 5px;
@@ -350,6 +351,12 @@ export default {
       transform: translateX(-50%);
       border: 7px solid transparent;
       border-bottom-color: #007bff;
+    }
+    &:hover{
+      background-color: #DA4039;
+      &::after{
+        border-bottom-color: #DA4039;
+      }
     }
   }
 </style>

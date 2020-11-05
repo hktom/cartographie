@@ -4,8 +4,20 @@ import store from "./store";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import vuescroll from 'vuescroll';
 
 require('./assets/sass/style.scss')
+
+Vue.use(vuescroll, {
+  ops: {
+    // The global config
+    bar: {
+      keepShow: true,
+      background: 'yellow',
+    }
+  },
+  name: 'myScroll' // customize component name, default -> vueScroll
+});
 
 library.add(faSearch, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

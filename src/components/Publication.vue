@@ -8,15 +8,17 @@
           <vuescroll class='vueScroll'>
             <div class="card-body">
                 <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div><br/>
-                <h3>{{pub.slug.replaceAll('-', ' ')}}</h3>
+                <h3 v-html="pub.title.rendered"></h3>
                 <div class="mb-2">
                   <span v-for="(item, id) in pub._embedded['wp:term'][2]" :key="id"> 
                     <span v-if="id != 0">| </span>{{item.name}} 
-                  </span><br/>
+                  </span>
+                  <br/>
                   <span v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
                     <span v-if="id != 0">| </span>{{item.name}} 
                   </span>
                 </div>
+                <img class='image' :src="pub._embedded['wp:featuredmedia'][0]['source_url']">
                 <p>
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
@@ -114,6 +116,10 @@ export default {
   h2{
     font-size: 50px;
     color: #FBC026;
+  }
+  .image{
+    width:100%;
+    margin-bottom: 20px;
   }
   @media screen  and (min-width: 992px){
     .vueScroll{

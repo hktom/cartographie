@@ -7,7 +7,16 @@
         <div class="card">
           <vuescroll class='vueScroll'>
             <div class="card-body">
-                <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div>
+                <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div><br/>
+                <h3>{{pub.slug.replaceAll('-', ' ')}}</h3>
+                <div class="mb-2">
+                  <span v-for="(item, id) in pub._embedded['wp:term'][2]" :key="id"> 
+                    <span v-if="id != 0">| </span>{{item.name}} 
+                  </span><br/>
+                  <span v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
+                    <span v-if="id != 0">| </span>{{item.name}} 
+                  </span>
+                </div>
                 <p>
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>

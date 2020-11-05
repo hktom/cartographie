@@ -13,7 +13,7 @@ Vue.use(vuescroll, {
     // The global config
     bar: {
       keepShow: true,
-      background: 'yellow',
+      background: '#DA4039',
     }
   },
   name: 'myScroll' // customize component name, default -> vueScroll

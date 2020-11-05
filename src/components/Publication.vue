@@ -106,8 +106,10 @@ export default {
     font-size: 50px;
     color: #FBC026;
   }
-  .vueScroll{
-    height:400px !important;
+  @media screen  and (min-width: 992px){
+    .vueScroll{
+      height:400px !important;
+    }
   }
 
 </style>

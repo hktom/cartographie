@@ -272,11 +272,12 @@ export default {
                 var el = document.createElement("div");
                 el.innerHTML = `${totalPost}`;
                 el.id = "marker-nbre-post";
-                el.addEventListener('click', () => {
+                el.addEventListener('click', (e) => {
                     //alert("Marker Clicked. v2");
                     //var url = $("#page-url").val();
                     // url += `/?q=${acf}&v=${countryName}`;
                     // window.location.href = url;
+                    e.target.classList.add('active')
                     console.log('thythy', data)
                     setPub(data)
                 });
@@ -352,7 +353,7 @@ export default {
       border: 7px solid transparent;
       border-bottom-color: #007bff;
     }
-    &:hover{
+    &:hover, &.active{
       background-color: $red;
       &::after{
         border-bottom-color: $red;

@@ -13,7 +13,7 @@
                 <span class="text-muted small" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
                   <span v-if="id != 0">| </span>{{item.name}}
                 </span><br/>
-                <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="id">
+                <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="'pays'+id">
                   <span v-if="id != 0">| </span>{{item.name}}
                 </span>
 

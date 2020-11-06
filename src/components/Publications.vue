@@ -69,6 +69,12 @@ export default {
     }
 
   },
+  watch :{
+    solutionsActive(){
+      console.log('Ged')
+      this.resetPub()
+    }
+  }
 }
 </script>
 

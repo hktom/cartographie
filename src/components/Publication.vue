@@ -14,7 +14,7 @@
                     <span v-if="id != 0">| </span>{{item.name}} 
                   </span>
                   <br/>
-                  <span v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
+                  <span v-for="(item, id) in pub._embedded['wp:term'][1]" :key="'secteur'+id"> 
                     <span v-if="id != 0">| </span>{{item.name}} 
                   </span>
                 </div>

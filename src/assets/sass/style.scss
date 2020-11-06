@@ -17,7 +17,9 @@
   font-family: "Mont Thin";
   src : url('../font/Mont-Thin.ttf')
 }
-
+html {
+  scroll-behavior: smooth !important;
+}
 *{
   font-family: "Mont Light";
   font-size: 16px;

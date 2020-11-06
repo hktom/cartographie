@@ -5,23 +5,25 @@
           <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
           <h2>Solutions Tech</h2>  
         </div>
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
-              v-for="(data, i) in solutionsActive" :key="i">
-              <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
-              <span class="text-muted small" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
-                 <span v-if="id != 0">| </span>{{item.name}}
-              </span><br/>
-              <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="id">
-                 <span v-if="id != 0">| </span>{{item.name}}
-              </span>
+        <vuescroll class='vueScroll'>
+          <ul class="list-group list-item">
+            <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
+                v-for="(data, i) in solutionsActive" :key="i">
+                <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
+                <span class="text-muted small" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
+                  <span v-if="id != 0">| </span>{{item.name}}
+                </span><br/>
+                <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="id">
+                  <span v-if="id != 0">| </span>{{item.name}}
+                </span>
 
-              <span v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
-              <a href="#!" class="more" @click.prevent="setTargetPub(data)">
-                Voir plus <span class="icon-pictos-bridgego color-orange"></span>
-              </a>
-          </li>
-        </ul>
+                <span v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
+                <a href="#!" class="more" @click.prevent="setTargetPub(data)">
+                  Voir plus <span class="icon-pictos-bridgego color-orange"></span>
+                </a>
+            </li>
+          </ul>
+        </vuescroll>
       </div>
       <Publication :pub="targetPublication" v-else @back="resetPub()"></Publication>
   </div>
@@ -31,9 +33,12 @@
 <script>
 import { mapState, mapActions } from "vuex" ;
 import Publication from "./Publication"
+import vuescroll from 'vuescroll';
+
 export default {
   components : {
-    Publication
+    Publication,
+    vuescroll
   } ,
   data(){
     return {
@@ -76,6 +81,14 @@ export default {
       display: flex;
       align-items: center;
       color: $orange ;
+    }
+  }
+  .list-item{
+    margin-bottom: 20px;
+  }
+  @media screen  and (min-width: 992px){
+    .vueScroll{
+      height:400px !important;
     }
   }
   

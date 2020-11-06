@@ -9,7 +9,13 @@
           <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
               v-for="(data, i) in solutionsActive" :key="i">
               <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
-                                
+              <span class="text-muted small" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
+                 <span v-if="id != 0">| </span>{{item.name}}
+              </span><br/>
+              <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="id">
+                 <span v-if="id != 0">| </span>{{item.name}}
+              </span>
+
               <span v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
               <a href="#!" class="more" @click.prevent="setTargetPub(data)">
                 Voir plus <span class="icon-pictos-bridgego color-orange"></span>
@@ -72,4 +78,7 @@ export default {
       color: $orange ;
     }
   }
+  
+  
+
 </style>

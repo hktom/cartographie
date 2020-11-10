@@ -1,7 +1,11 @@
 <template>
   <div class="text-left p-3">
     <h2>Secteurs</h2>  
-
+    <div class="loader-map" v-if="loading">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <ul class="list-group">
       <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
         v-for="(data, i) in secteurs" :key="i"
@@ -25,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['secteurs']),
+    ...mapState(['secteurs','loading']),
   },
   methods: {
     ...mapActions(['setActiveSecteur']), 

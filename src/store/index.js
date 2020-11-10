@@ -57,17 +57,20 @@ const state = {
   search: [] ,
   activeSecteur : null,
   menu: 1,
-  solutionsActive :  [] 
+  solutionsActive :  [] ,
+  loading : false
 }
 
 const actions = {
   loadData({commit}){
+    commit('SET_LOADING', true)
     window.axios.get('https://resilient.digital-africa.co/wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
             console.log(data)
             commit('SET_DATA', data)
             commit('SET_SECTEURS', checkSecteurs(data))
             commit('SET_COUNTRIES', checkCountries(data))
+            commit('SET_LOADING', false)
         }
     )
   },
@@ -141,6 +144,9 @@ const mutations = {
   },
   SET_SOLUTIONS_ACTIVE(state, data){
     state.solutionsActive = data
+  },
+  SET_LOADING(state, data){
+    state.loading = data
   }
 }
 

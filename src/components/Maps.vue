@@ -1,8 +1,12 @@
 <template>
   <div class="map-wrapper">
+    <div class="loader-map" v-if="loading">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <div id="map"></div>
     <div id="geocoder" class="geocoder"></div>
-
   </div>
 </template>
 
@@ -49,7 +53,7 @@ export default {
       //soucres geojson 
       this.map.addSource('states', {
           'type': 'geojson',
-          'data': 'africa-countries.geo.json'
+          'data': window.geo_json || 'https://raw.githubusercontent.com/hktom/assets/master/africa-countries.geo.json'
       });
       this.map.addLayer({
             'id': 'state-fills',
@@ -57,7 +61,7 @@ export default {
             'source': 'states',
             'layout': {},
             'paint': {
-                'fill-color': "red",
+                'fill-color': window.fill_color || "red",
                 'fill-opacity': [
                     'case', ['boolean', ['feature-state', 'hover'], false],
                     0.2,
@@ -71,7 +75,7 @@ export default {
           'source': 'states',
           'layout': {},
           'paint': {
-              'line-color': "transparent",
+              'line-color': window.border_color || "transparent",
               'line-width': 0.5
           }
       });
@@ -141,7 +145,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['countries'])
+    ...mapState(['countries','loading'])
   },
   watch: {
     countries(){
@@ -161,9 +165,11 @@ export default {
 
   .map-wrapper{
     width: 100%;
+    background-color: #eee;
     #map{
       width: 100%;
       height: calc(100vh - 50px);
+      min-width: 300px;
       max-height: 500px;
       z-index: 2;
     }
@@ -176,6 +182,13 @@ export default {
       float: none;
       max-width: none;
     }
+  }
+  .loader-map{
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   #marker-nbre-post{
     line-height: 20px;

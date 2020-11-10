@@ -1,13 +1,13 @@
 <template>
   <div>
-    <secteur v-if="menu == 1" @click="getFromSecteurs(data)"></secteur>
-    <publications v-if="menu == 2" :solutions="solutions" ></publications>    
+    <secteur v-if="menu == 1" @selectSecteur="getFromSecteurs"></secteur>
+    <publications v-if="menu == 2"></publications>    
   </div>
 </template>
 
 <script>
 import {mapState, mapActions} from "vuex" ;
-import Secteur from "./Secteur.vue";
+import Secteur from "./Secteur";
 import Publications from "./Publications"
 
 export default {
@@ -21,10 +21,10 @@ export default {
     ...mapState(['menu']),
   },
   methods: {
-    ...mapActions(['setMenu']), 
+    ...mapActions(['setMenu', 'setSolutionsActive']), 
     getFromSecteurs(data){
-    console.log("secteur cliqué", data)
-    this.setMenu(data.name)
+      this.setMenu(2)
+      this.setSolutionsActive(data.solutions) 
       //this.secteurActive = true
       //this.solutions = data.solutions
     }

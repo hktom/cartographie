@@ -34,7 +34,14 @@ export default {
   methods: {
     ...mapActions(['setActiveSecteur']), 
     getFromSecteurs(data){
-      this.setActiveSecteur(data.name)
+      //this.setActiveSecteur(data.name)
+      this.$emit('selectSecteur', data)
+
+      //remove active marker
+      const active = document.querySelector('.activeMarker')
+      if(active){
+        active.classList.remove('activeMarker')
+      }
     }
   },
 }

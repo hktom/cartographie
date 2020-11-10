@@ -59,7 +59,6 @@ export default {
     }
   },
   mounted() {
-      console.log('nous sommes dans publication component', this.solutions)
   },
   computed: {
     ...mapState(['solutionsActive'])
@@ -84,7 +83,6 @@ export default {
   },
   watch :{
     solutionsActive(){
-      console.log('Ged')
       this.resetPub()
     }
   }

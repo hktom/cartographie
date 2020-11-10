@@ -22,9 +22,6 @@ export default {
         search(){
             console.log('recherche', this.search)
             this.filtredData(this.search)
-        },
-        activeSecteur(){
-            this.search = this.activeSecteur
         }
     },
     methods: {

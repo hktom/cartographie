@@ -42,8 +42,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .list-group{
+    margin-left: 0px;
+  }
   .list-group-item{
     cursor: pointer;
+    margin: 0px;
     .badge-nb{
       border-radius: 5px;
       border-top-right-radius: unset;

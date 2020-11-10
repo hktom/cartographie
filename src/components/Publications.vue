@@ -104,6 +104,10 @@ export default {
   }
   .list-item{
     margin-bottom: 20px;
+    margin-left: 0px;
+    li{
+      margin: 0px;
+    }
   }
   @media screen  and (min-width: 992px){
     .vueScroll{

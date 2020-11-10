@@ -93,11 +93,19 @@ export default {
       // When the mouse leaves the state-fill layer, update the feature state of the
       // previously hovered feature.
       this.map.on('mouseleave', 'state-fills', function() {
-            if (hoveredStateId) {
-                map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
-            }
-            hoveredStateId = null;
-        });
+          if (hoveredStateId) {
+              map.setFeatureState({ source: 'states', id: hoveredStateId }, { hover: false });
+          }
+          hoveredStateId = null;
+      });
+
+      this.map.on('click', 'state-fills', function(e) {
+          console.log('pays cliqué', e.features)
+          const country_name = e.features[0].properties.name.toLowerCase().replaceAll(' ', '')
+          console.log(country_name)
+          const targetMarker = document.querySelector('#marker-nbre-post.' + country_name)
+          if(targetMarker) targetMarker.click()
+      });
     }, 
     setMarker(countryName, totalPost, data) {
       const map = this.map
@@ -117,6 +125,7 @@ export default {
                 var el = document.createElement("div");
                 el.innerHTML = `${totalPost}`;
                 el.id = "marker-nbre-post";
+                el.classList.add(res.body.features[0].place_name.toLowerCase().replaceAll(' ', '')) ;
                 el.addEventListener('click', (e) => {
                     //alert("Marker Clicked. v2");
                     //var url = $("#page-url").val();
@@ -127,7 +136,6 @@ export default {
                       active.classList.remove('activeMarker')
                     }
                     e.target.classList.add('activeMarker')
-                    console.log('thythy', data)
                     setPub(data)
                 });
                 var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
@@ -137,7 +145,6 @@ export default {
         });
     },
     setPub(data){
-      console.log("laura",data)
       //redefinir menu
       this.setMenu(2)
       // definir les publication

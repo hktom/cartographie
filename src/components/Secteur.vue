@@ -50,8 +50,7 @@ export default {
       border-bottom-left-radius: unset;
     }
   }
-    h2{
-    font-size: 25px;
+  h2{
     color: #FBC026;
   }
 </style>

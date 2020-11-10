@@ -31,6 +31,7 @@ h1{
 
 h2{
   font-family: "Mont Thin";
+  font-size: 32px;
 }
 a:hover{
   text-decoration: none;
@@ -47,5 +48,30 @@ a:hover{
   h2{
     margin-bottom: 0px;
     color: $orange;
+    text-align: left;
+  }
+  .ico-back{
+    font-size: 30px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}
+
+.icon-pictos-bridgeback{
+  .l{
+    width: 20px;
+    background-color: $orange;
+    height: 2px;
+    display: block;
+    top: -16px;
+    left: -2px;
+    transform-origin: left;
+    position: relative;
+  }
+  .l1{
+    transform: rotate( 45deg);
+  }
+  .l2{
+    transform: rotate( -45deg);
   }
 }

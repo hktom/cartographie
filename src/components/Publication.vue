@@ -2,7 +2,10 @@
   <div class="text-left">
       <div>
         <div class="header-back">
-          <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
+          <span class="icon-pictos-bridgeback ico-back color-orange" @click="goBack()">
+            <span class="l l1"></span>
+            <span class="l l2"></span>
+          </span>
         </div>
         <div class="card">
           <vuescroll class='vueScroll'>
@@ -10,13 +13,22 @@
                 <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div><br/>
                 <h3 v-html="pub.title.rendered"></h3>
                 <div class="mb-2">
-                  <span v-for="(item, id) in pub._embedded['wp:term'][2]" :key="id"> 
-                    <span v-if="id != 0">| </span>{{item.name}} 
-                  </span>
-                  <br/>
-                  <span v-for="(item, id) in pub._embedded['wp:term'][1]" :key="'secteur'+id"> 
-                    <span v-if="id != 0">| </span>{{item.name}} 
-                  </span>
+
+                  <div v-if="pub._embedded['wp:term'][1].length > 0"
+                    class="d-flex align-items-center">
+                    <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
+                    <span class="mr-1" v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
+                      <span v-if="id != 0"> | </span>{{item.name}} 
+                    </span>
+                  </div>
+
+                  <div v-if="pub._embedded['wp:term'][2].length > 0"
+                    class="d-flex align-items-center">
+                    <span class="icon-pictos-bridgepictos-02 mr-2"></span>
+                    <span class="mr-1" v-for="(item, id) in pub._embedded['wp:term'][2]" :key="'secteur'+id"> 
+                      <span v-if="id != 0"> | </span>{{item.name}} 
+                    </span>
+                  </div>
                 </div>
                 <img class='image' :src="pub._embedded['wp:featuredmedia'][0]['source_url']">
                 <p>

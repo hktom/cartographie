@@ -2,7 +2,10 @@
   <div class="text-left p-3">
       <div v-if="targetPublication == null">
         <div class="header-back">
-          <img src="../assets/ico/back-orange.svg" @click="goBack()" alt="">
+          <span class="icon-pictos-bridgeback ico-back color-orange" @click="goBack()">
+            <span class="l l1"></span>
+            <span class="l l2"></span>
+          </span>
           <h2>Solutions Tech</h2>  
         </div>
         <vuescroll class='vueScroll'>
@@ -10,14 +13,24 @@
             <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
                 v-for="(data, i) in solutionsActive" :key="i">
                 <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
-                <span class="text-muted small" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
-                  <span v-if="id != 0">| </span>{{item.name}}
-                </span><br/>
-                <span class="text-muted small text-pays" v-for="(item, id) in data._embedded['wp:term'][2]" :key="'pays'+id">
-                  <span v-if="id != 0">| </span>{{item.name}}
-                </span>
 
-                <span v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
+                <div v-if="data._embedded['wp:term'][1].length > 0"
+                  class="d-flex align-items-center">
+                  <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
+                  <span class="text-muted small mr-1" v-for="(item, id) in data._embedded['wp:term'][1]" :key="id">
+                    <span v-if="id != 0"> | </span>{{item.name}} 
+                  </span><br/>
+                </div>
+                
+                <div v-if="data._embedded['wp:term'][2].length > 0"
+                  class="d-flex align-items-center">
+                  <span class="icon-pictos-bridgepictos-02 mr-2"></span>
+                  <span class="text-muted small text-pays mr-1" v-for="(item, id) in data._embedded['wp:term'][2]" :key="'pays'+id">
+                    <span v-if="id != 0">&nbsp; | </span>{{item.name}} 
+                  </span>
+                </div>
+
+                <p  class="mt-2" v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></p>
                 <a href="#!" class="more" @click.prevent="setTargetPub(data)">
                   Voir plus <span class="icon-pictos-bridgego color-orange"></span>
                 </a>

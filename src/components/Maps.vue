@@ -24,14 +24,14 @@ export default {
   methods: {
     ...mapActions(['setMenu','setSolutionsActive']),
     initMap(){
-      mapboxgl.accessToken = "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
+      mapboxgl.accessToken = window.access_token || "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
       this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
       
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft", // stylesheet location
-        center:  [35, 5], // starting position [lng, lat]
-        zoom: 2 // starting zoom
+        style: window.map_url_style || "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft", // stylesheet location
+        center:  [window.position_lng || 35, window.position_lat || 5], // starting position [lng, lat]
+        zoom: window.zoom || 2 // starting zoom
       });
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");

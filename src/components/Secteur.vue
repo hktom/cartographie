@@ -34,12 +34,7 @@ export default {
   methods: {
     ...mapActions(['setActiveSecteur']), 
     getFromSecteurs(data){
-      console.log("secteur cliqué", data)
       this.setActiveSecteur(data.name)
-      if(window.location.hash =='#map'){
-        window.location.hash = ''
-      }
-      window.location.hash ='#map' 
     }
   },
 }

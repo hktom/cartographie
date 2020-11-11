@@ -6,13 +6,13 @@
             <span class="l l1"></span>
             <span class="l l2"></span>
           </span>
-          <h2>Solutions Tech</h2>  
+          <h2>{{$t('use-case')}}</h2>  
         </div>
         <vuescroll class='vueScroll'>
           <ul class="list-group list-item" v-if="solutionsActive.length > 0">
             <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
                 v-for="(data, i) in solutionsActive" :key="i">
-                <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
+                <div class="text-muted small">{{$t('last-update')}} : {{getDate(data.modified)}}</div>
 
                 <div v-if="data._embedded['wp:term'][1].length > 0"
                   class="d-flex align-items-center">
@@ -32,12 +32,12 @@
 
                 <p  class="mt-2" v-html="data.acf.chapeau.replace('<p>&nbsp;</p>', '')"></p>
                 <a href="#!" class="more" @click.prevent="setTargetPub(data)">
-                  Voir plus <span class="icon-pictos-bridgego color-orange"></span>
+                  {{$t('more')}} <span class="icon-pictos-bridgego color-orange"></span>
                 </a>
             </li>
           </ul>
           <p v-else class="small text-center text-muted">
-            Aucune solution trouvée
+            {{$t('use-case-not-found')}} 
           </p>
         </vuescroll>
       </div>
@@ -70,7 +70,9 @@ export default {
     ...mapActions(['setMenu']),
     getDate(datePub){
         const date = new Date(datePub)
-        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+        let month = (date.getMonth() + 1)
+        month = month.length > 1 ? month : '0' + month
+        return date.getDate() + "/" + month + "/" + date.getFullYear()
     },
     goBack(){
       console.log("Button cliqué")

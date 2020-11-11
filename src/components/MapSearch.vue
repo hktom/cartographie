@@ -2,7 +2,7 @@
     <div class="map-search active-cyan-4 mb-4">
         <font-awesome-icon v-if="search== ''" class="ico-search" icon="search" />
         <font-awesome-icon v-else class="ico-search ico-close" icon="times" @click="resetSearch()"/>
-        <input class="form-control input-search"  type="text" placeholder="Rechercher un secteur ou un pays" aria-label="Search" 
+        <input class="form-control input-search"  type="text" :placeholder="$t('search-text')" aria-label="Search" 
             v-model="search">
     </div>  
 </template>

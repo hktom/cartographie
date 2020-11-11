@@ -14,7 +14,7 @@
 import MapSearch from '@/components/MapSearch';
 import Maps from "./components/Maps.vue";
 import SideContent from "./components/SideContent.vue";
-import {mapActions} from "vuex" ;
+import {mapActions, mapMutations} from "vuex" ;
 
 export default {
   name: "App",
@@ -24,10 +24,13 @@ export default {
     MapSearch
   },
   mounted() {
+    console.log('lang', this.$i18n.locale)
+    this.SET_LANG(this.$i18n.locale)
     this.loadData()
   },
   methods: {
-    ...mapActions(['loadData'])
+    ...mapActions(['loadData']),
+    ...mapMutations(['SET_LANG'])
   },
 };
 </script>

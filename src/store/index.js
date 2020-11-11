@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+
 Vue.use(Vuex);
 
 function checkCountries(data){
@@ -58,13 +59,17 @@ const state = {
   activeSecteur : null,
   menu: 1,
   solutionsActive :  [] ,
-  loading : false
+  loading : false, 
+  lang : 'fr'
 }
 
 const actions = {
-  loadData({commit}){
+  loadData({commit, state}){
     commit('SET_LOADING', true)
-    window.axios.get('https://resilient.digital-africa.co/wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
+    let lang = ""
+    if(state.lang == "en") lang = "en/"
+
+    window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
             console.log(data)
             commit('SET_DATA', data)
@@ -147,6 +152,9 @@ const mutations = {
   },
   SET_LOADING(state, data){
     state.loading = data
+  },
+  SET_LANG(state, data){
+    state.lang = data
   }
 }
 

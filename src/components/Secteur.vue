@@ -1,9 +1,9 @@
 <template>
   <div class="text-left p-3">
-    <h2>Secteurs</h2>  
+    <h2>{{$t('secteurs')}}</h2>  
     <div class="loader-map" v-if="loading">
       <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only">{{$t('loading')}}</span>
       </div>
     </div>
     <ul class="list-group">

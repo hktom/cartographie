@@ -10,7 +10,7 @@
         <div class="card">
           <vuescroll class='vueScroll'>
             <div class="card-body">
-                <div class="text-muted small">Date de mise à jour : {{getDate(pub.modified)}}</div><br/>
+                <div class="text-muted small">{{$t('last-update')}} : {{getDate(pub.modified)}}</div><br/>
                 <h3 v-html="pub.title.rendered"></h3>
                 <div class="mb-2">
 
@@ -108,8 +108,10 @@ export default {
 	methods: {
     ...mapActions(['setMenu']),
     getDate(datePub){
-        const date = new Date(datePub)
-        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+      const date = new Date(datePub)
+      let month = (date.getMonth() + 1)
+      month = month.length > 1 ? month : '0' + month
+      return date.getDate() + "/" + month + "/" + date.getFullYear()
     },
     goBack(){
       console.log("Button cliqué")

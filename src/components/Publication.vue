@@ -35,7 +35,7 @@
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
                 <div v-if="pub.acf.liens_ext">
-                  <h2 class=""> {{$t('site_web')}}} </h2>
+                  <h2 class=""> {{$t('site_web')}} </h2>
                   <p v-html="pub.acf.liens_ext"></p>
                 </div>
                 <div v-if="pub.acf.auteur_email">
@@ -43,11 +43,11 @@
                   <p v-html="pub.acf.auteur_email"></p>
                 </div>
                 <div v-if="pub.acf.lien_vers_la_solution">
-                  <h2 class="">Linkedin</h2><br/>
+                  <h2 class="">Linkedin</h2>
                   <p v-html="pub.acf.lien_vers_la_solution"></p>
                 </div>
                 <div v-if="pub.acf.pays_enreg_structure">
-                  <h2 class="">{{$t('pays_origine')}}}</h2><br/>
+                  <h2 class="">{{$t('pays_origine')}}}</h2>
                   <p v-html="pub.acf.pays_enreg_structure"></p>
                 </div>
                 <div v-if="pub.acf.pays_solution_deployee">
@@ -55,7 +55,7 @@
                   <p v-html="pub.acf.pays_solution_deployee"></p>
                 </div>
                 <div v-if="pub.acf.annee_creation_entreprise">
-                  <h2 class="">{{$t('annee_creation')}}</h2><br/>
+                  <h2 class="">{{$t('annee_creation')}}</h2>
                   <p v-html="getDate(pub.acf.annee_creation_entreprise)"></p>
                 </div>
                 <div v-if="pub.acf.nombre_employe">
@@ -63,11 +63,11 @@
                   <p v-html="pub.acf.nombre_employe"></p>
                 </div>
                 <div v-if="pub.acf.stade_de_developpement">
-                  <h2 class="">Stade</h2><br/>
+                  <h2 class="">Stade</h2>
                   <p v-html="pub.acf.stade_de_developpement"></p>
                 </div>
                 <!-- <div v-if="pub.acf.type_fonds || pub.acf.montant_fonds">
-                  <h2 class="">Besoin en financement</h2><br/>
+                  <h2 class="">Besoin en financement</h2>
                   <p v-html="pub.acf.type_fonds"></p>
                   <p v-html="pub.acf.montant_fonds"></p>
                 </div> -->

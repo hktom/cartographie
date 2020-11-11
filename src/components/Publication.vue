@@ -34,49 +34,96 @@
                 <p>
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
-                <div v-if="pub.acf.auteur != ''">
-                  <h2 class="">AUTEUR</h2><br/>
-                  <p v-html="pub.acf.auteur"></p>
+                <div v-if="pub.acf.liens_ext">
+                  <h2 class=""> {{$t('site_web')}}} </h2>
+                  <p v-html="pub.acf.liens_ext"></p>
                 </div>
-                <div v-if="pub.acf.auteur_de_la_citation != ''">
-                  <h2 class="">L'AUTEUR DE LA CITATION</h2><br/>
-                  <p v-html="pub.acf.auteur_de_la_citation"></p>
+                <div v-if="pub.acf.auteur_email">
+                  <h2 class="">Mail contact</h2>
+                  <p v-html="pub.acf.auteur_email"></p>
                 </div>
-                <div v-if="pub.acf.la_citation != ''">
-                  <h2 class="">LA CITATION</h2><br/>
-                  <p v-html="pub.acf.la_citation"></p>
-                </div>
-                <div v-if="pub.acf.titre_du_probleme || pub.acf.le_probleme != ''" >
-                  <h2 class="">L'ENJEU</h2>
-                  <p v-html="pub.acf.titre_du_probleme"></p>
-                  <p  v-html="pub.acf.le_probleme"></p>
-                </div>
-                <div v-if="pub.acf.titre_de_la_solution || pub.acf.la_solution  != ''">
-                  <h2 class="">LA SOLUTION</h2>
-                  <p  v-html="pub.acf.titre_de_la_solution"></p>          
-                  <p  v-html="pub.acf.la_solution"></p>
-                </div>
-                <div v-if="pub.acf.le_regard_de_digital_africa != ''">
-                  <h2 class="">LE REGARD DE DIGITAL AFRICA</h2>
-                  <p  v-html="pub.acf.le_regard_de_digital_africa"></p>
-                </div>
-                <div v-if="pub.acf.les_acteurs != ''">
-                  <h2 class="">LES ACTEURS</h2>
-                  <p  v-html="pub.acf.les_acteurs"></p>
-                </div>
-                <div v-if="pub.acf.titre_de_limpact || pub.acf.limpact != ''">
-                  <h2 class="">L'IMPACT</h2>
-                  <p  v-html="pub.acf.titre_de_limpact"></p>
-                  <p  v-html="pub.acf.limpact"></p>
-                </div> 
-                <div v-if="pub.acf.lien_vers_la_solution != ''">
-                  <h2 class="">LE LIEN VERS LA SOLUTION</h2>
+                <div v-if="pub.acf.lien_vers_la_solution">
+                  <h2 class="">Linkedin</h2><br/>
                   <p v-html="pub.acf.lien_vers_la_solution"></p>
                 </div>
-                <div v-if="pub.acf.liens_ext != ''">
-                  <h2 class="">LE LIEN EXTERNE</h2>
-                  <p  v-html="pub.acf.liens_ext"></p>
-                </div>             
+                <div v-if="pub.acf.pays_enreg_structure">
+                  <h2 class="">{{$t('pays_origine')}}}</h2><br/>
+                  <p v-html="pub.acf.pays_enreg_structure"></p>
+                </div>
+                <div v-if="pub.acf.pays_solution_deployee">
+                  <h2 class="">{{$t('pays_deploiement')}}</h2>
+                  <p v-html="pub.acf.pays_solution_deployee"></p>
+                </div>
+                <div v-if="pub.acf.annee_creation_entreprise">
+                  <h2 class="">{{$t('annee_creation')}}</h2><br/>
+                  <p v-html="getDate(pub.acf.annee_creation_entreprise)"></p>
+                </div>
+                <div v-if="pub.acf.nombre_employe">
+                  <h2 class="">{{$t('nbre_employee')}}</h2>
+                  <p v-html="pub.acf.nombre_employe"></p>
+                </div>
+                <div v-if="pub.acf.stade_de_developpement">
+                  <h2 class="">Stade</h2><br/>
+                  <p v-html="pub.acf.stade_de_developpement"></p>
+                </div>
+                <!-- <div v-if="pub.acf.type_fonds || pub.acf.montant_fonds">
+                  <h2 class="">Besoin en financement</h2><br/>
+                  <p v-html="pub.acf.type_fonds"></p>
+                  <p v-html="pub.acf.montant_fonds"></p>
+                </div> -->
+                <div v-if="pub.acf.nature_et_structure_capital || 
+                   pub.acf.levee_fonds || pub.acf.type_fonds || pub.acf.montant_fonds ">
+                  <h2 class="">{{$t('investisseur')}}</h2>
+                  <div v-if="pub.acf.nature_et_structure_capital">
+                    <span class="small text-muted">
+                       {{$t('nature_et_structure_capital')}} 
+                    </span>
+                    <p v-html="pub.acf.nature_et_structure_capital"></p>
+                  </div>
+                  <div v-if="pub.acf.levee_fonds">
+                    <span class="small text-muted">
+                       {{$t('levee_fonds')}} 
+                    </span>
+                    <p v-html="pub.acf.levee_fonds"></p>
+                  </div>
+                  <div v-if="pub.acf.type_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
+                    <span class="small text-muted">
+                       {{$t('type_fonds')}} 
+                    </span>
+                    <p v-html="pub.acf.type_fonds"></p>
+                  </div>
+                  <div v-if="pub.acf.montant_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
+                    <span class="small text-muted">
+                       {{$t('montant_fonds')}} 
+                    </span>
+                    <p v-html="pub.acf.montant_fonds"></p>
+                  </div>
+                </div>                
+
+                <div v-if="pub.acf.suivie_structure">
+                  <h2 class="">{{$t('accompagnement')}}</h2>
+                  <div v-if="pub.acf.suivie_structure">
+                    <span class="small text-muted">
+                       {{$t('suivie_structure')}} 
+                    </span>
+                    <p v-html="pub.acf.suivie_structure"></p>
+                  </div>
+
+                  <div v-if="pub.acf.suivie_structure_oui && 
+                    pub.acf.suivie_structure_oui.toLowerCase() == 'oui'">
+                    <span class="small text-muted">
+                       {{$t('suivie_structure_oui')}} 
+                    </span>
+                    <p v-html="pub.acf.suivie_structure_oui"></p>
+                  </div>
+                </div>
+                <div v-if="pub.acf.solution_prix">
+                  <h2 class="">{{$t('solution_prix')}}</h2>
+                  <p v-html="pub.acf.solution_prix"></p>
+                </div> 
+
+
+
             </div>
           </vuescroll>
         </div>

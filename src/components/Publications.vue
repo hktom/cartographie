@@ -9,7 +9,7 @@
           <h2>Solutions Tech</h2>  
         </div>
         <vuescroll class='vueScroll'>
-          <ul class="list-group list-item">
+          <ul class="list-group list-item" v-if="solutionsActive.length > 0">
             <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
                 v-for="(data, i) in solutionsActive" :key="i">
                 <div class="text-muted small">Date de mise à jour : {{getDate(data.modified)}}</div>
@@ -36,6 +36,9 @@
                 </a>
             </li>
           </ul>
+          <p v-else class="small text-center text-muted">
+            Aucune solution trouvée
+          </p>
         </vuescroll>
       </div>
       <Publication :pub="targetPublication" v-else @back="resetPub()"></Publication>

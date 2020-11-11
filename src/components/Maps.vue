@@ -50,6 +50,8 @@ export default {
     countrieShap(){
       let hoveredStateId = this.hoveredStateId 
       const map = this.map
+      const setPub = this.setPub
+
       //soucres geojson 
       this.map.addSource('states', {
           'type': 'geojson',
@@ -101,10 +103,17 @@ export default {
 
       this.map.on('click', 'state-fills', function(e) {
           console.log('pays cliqué', e.features)
-          const country_name = e.features[0].properties.name.toLowerCase().replaceAll(' ', '')
+          const country_name = e.features[0].properties.admin.toLowerCase().replaceAll(' ', '')
           console.log(country_name)
           const targetMarker = document.querySelector('#marker-nbre-post.' + country_name)
           if(targetMarker) targetMarker.click()
+          else{
+            setPub([])
+            const active = document.querySelector('.activeMarker')
+            if(active){
+              active.classList.remove('activeMarker')
+            }
+          }
       });
     }, 
     setMarker(countryName, totalPost, data) {
@@ -148,7 +157,11 @@ export default {
       //redefinir menu
       this.setMenu(2)
       // definir les publication
-      this.setSolutionsActive(data.solutions)
+      if(data.solutions){
+        this.setSolutionsActive(data.solutions)
+      }else{
+        this.setSolutionsActive([])
+      }
     }
   },
   computed: {

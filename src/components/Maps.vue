@@ -19,7 +19,8 @@ export default {
     return {
       map : null,
       hoveredStateId : null ,
-      mapboxClient : null
+      mapboxClient : null ,
+      markerClick : false
     }
   },
   mounted() {
@@ -41,16 +42,17 @@ export default {
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
       const countries = this.countries
       this.map.on("load", () => {
-        this.countrieShap()
         countries.forEach((data) => {
-         this.setMarker(data.name, data.nb , data) 
+          this.setMarker(data.name, data.nb , data) 
         })
+        this.countrieShap()
       });
     },
     countrieShap(){
       let hoveredStateId = this.hoveredStateId 
       const map = this.map
       const setPub = this.setPub
+      const markerClick = this.getMarkerClick
 
       //soucres geojson 
       this.map.addSource('states', {
@@ -102,16 +104,18 @@ export default {
       });
 
       this.map.on('click', 'state-fills', function(e) {
-          console.log('pays cliqué', e.features)
-          const country_name = e.features[0].properties.admin.toLowerCase().replaceAll(' ', '')
-          console.log(country_name)
-          const targetMarker = document.querySelector('#marker-nbre-post.' + country_name)
-          if(targetMarker) targetMarker.click()
-          else{
-            setPub([])
-            const active = document.querySelector('.activeMarker')
-            if(active){
-              active.classList.remove('activeMarker')
+          console.log(e.target)
+          if(!markerClick()){
+            const country_name = e.features[0].properties.admin.toLowerCase().replaceAll(' ', '')
+            console.log(country_name)
+            const targetMarker = document.querySelector('#marker-nbre-post.' + country_name)
+            if(targetMarker) targetMarker.click()
+            else{
+              setPub([])
+              const active = document.querySelector('.activeMarker')
+              if(active){
+                active.classList.remove('activeMarker')
+              }
             }
           }
       });
@@ -119,6 +123,7 @@ export default {
     setMarker(countryName, totalPost, data) {
       const map = this.map
       const setPub = this.setPub
+      const setMarkerClick = this.setMarkerClick
       this.mapboxClient.geocoding
         .forwardGeocode({
             query: countryName,
@@ -136,17 +141,20 @@ export default {
                 el.id = "marker-nbre-post";
                 el.classList.add(res.body.features[0].place_name.toLowerCase().replaceAll(' ', '')) ;
                 el.addEventListener('click', (e) => {
+                    setMarkerClick(true)
                     //alert("Marker Clicked. v2");
                     //var url = $("#page-url").val();
                     // url += `/?q=${acf}&v=${countryName}`;
                     // window.location.href = url;
-                    console.log('marker')
                     const active = document.querySelector('.activeMarker')
                     if(active){
                       active.classList.remove('activeMarker')
                     }
                     e.target.classList.add('activeMarker')
                     setPub(data)
+                    setTimeout(() => {
+                      setMarkerClick(false)
+                    }, 100);
                 });
                 var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
                 marker.remove(map);
@@ -163,6 +171,12 @@ export default {
       }else{
         this.setSolutionsActive([])
       }
+    },
+    setMarkerClick(val){
+      this.markerClick = val
+    },
+    getMarkerClick(){
+      return this.markerClick 
     }
   },
   computed: {

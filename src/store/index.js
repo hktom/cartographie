@@ -68,7 +68,7 @@ const actions = {
     commit('SET_LOADING', true)
     let lang = ""
     if(state.lang == "en") lang = "en/"
-
+    //http://localhost/elementor-map/
     window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
             console.log(data)

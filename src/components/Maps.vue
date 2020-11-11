@@ -140,6 +140,7 @@ export default {
                     //var url = $("#page-url").val();
                     // url += `/?q=${acf}&v=${countryName}`;
                     // window.location.href = url;
+                    console.log('marker')
                     const active = document.querySelector('.activeMarker')
                     if(active){
                       active.classList.remove('activeMarker')

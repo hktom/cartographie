@@ -147,7 +147,7 @@ export default {
     }
   },
   mounted() {
-      console.log('nous sommes dans publication component', this.solutions)
+    // mounted
   },
   computed: {
     ...mapState(['solutionsActive'])
@@ -161,7 +161,6 @@ export default {
       return date.getDate() + "/" + month + "/" + date.getFullYear()
     },
     goBack(){
-      console.log("Button cliqué")
       this.$emit('back')
     },
     

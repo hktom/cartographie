@@ -20,7 +20,6 @@ export default {
     },
     watch: {
         search(){
-            console.log('recherche', this.search)
             this.filtredData(this.search)
         }
     },

@@ -71,7 +71,6 @@ const actions = {
     //http://192.168.1.123/elementor-map/
     window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
-            console.log(data)
             commit('SET_DATA', data)
             commit('SET_SECTEURS', checkSecteurs(data))
             commit('SET_COUNTRIES', checkCountries(data))
@@ -80,8 +79,6 @@ const actions = {
     )
   },
   filtredData({state, commit}, slug){
-    console.log('state data', state.data)
-    console.log('search text', slug)
     slug=slug.toLowerCase()
     // fonction de filtrage
     let element = state.data.filter((x) => {
@@ -106,10 +103,9 @@ const actions = {
       }
       return find
     })
-    console.log(element)
+    
     const filtredCountries = checkCountries(element)
     const filtredSecteurs = checkSecteurs(element)
-    console.log("je",filtredCountries,filtredSecteurs)
     // return filtredCountries
     commit('SET_COUNTRIES', filtredCountries)
     //commit('SET_SECTEURS', filtredSecteurs)
@@ -130,15 +126,12 @@ const mutations = {
     state.data = data
   },
   SET_SECTEURS(state, data){
-    console.log(data)
     state.secteurs = data
   },
   SET_COUNTRIES(state, data){
-    console.log(data)
     state.countries = data
   },
   SET_SEARCH(state, data){
-    console.log(data)
     state.search = data
   },
   SET_ACTIVE_SECTEUR(state, data){

@@ -104,10 +104,8 @@ export default {
       });
 
       this.map.on('click', 'state-fills', function(e) {
-          console.log(e.target)
           if(!markerClick()){
             const country_name = e.features[0].properties.admin.toLowerCase().replaceAll(' ', '')
-            console.log(country_name)
             const targetMarker = document.querySelector('#marker-nbre-post.' + country_name)
             if(targetMarker) targetMarker.click()
             else{
@@ -133,7 +131,6 @@ export default {
         .send()
         .then(function(res) {
           if (res && res.body && res.body.features && res.body.features.length) {
-            console.log(res)
                 var feature = res.body.features[0];
                 // create DOM element for the marker
                 var el = document.createElement("div");

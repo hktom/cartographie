@@ -24,7 +24,6 @@ export default {
     MapSearch
   },
   mounted() {
-    console.log('lang', this.$i18n.locale)
     this.SET_LANG(this.$i18n.locale)
     this.loadData()
   },

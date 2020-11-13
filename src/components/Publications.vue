@@ -75,7 +75,6 @@ export default {
         return date.getDate() + "/" + month + "/" + date.getFullYear()
     },
     goBack(){
-      console.log("Button cliqué")
       this.setMenu(1)
     },
     setTargetPub(data){

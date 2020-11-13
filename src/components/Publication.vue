@@ -30,21 +30,26 @@
                     </span>
                   </div>
                 </div>
-                <img class='image' :src="pub._embedded['wp:featuredmedia'][0]['source_url']">
-                <p>
+                <img class='image' 
+                  v-if="pub._embedded['wp:featuredmedia'][0]['source_url']" 
+                  :src="pub._embedded['wp:featuredmedia'][0]['source_url']"
+                >
+                <p v-if="pub.acf.chapeau" >
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
-                <div v-if="pub.acf.liens_ext">
+                <div v-if="pub.acf.lien_vers_la_solution">
                   <h2 class=""> {{$t('site_web')}} </h2>
-                  <p v-html="pub.acf.liens_ext"></p>
+                  <a :href="pub.acf.lien_vers_la_solution" target="_blank">
+                    <span v-html="pub.acf.lien_vers_la_solution"></span>
+                  </a>
                 </div>
                 <div v-if="pub.acf.auteur_email">
                   <h2 class="">Mail contact</h2>
                   <p v-html="pub.acf.auteur_email"></p>
                 </div>
-                <div v-if="pub.acf.lien_vers_la_solution">
-                  <h2 class="">Linkedin</h2>
-                  <p v-html="pub.acf.lien_vers_la_solution"></p>
+                <div v-if="pub.acf.liens_ext">
+                  <h2 class="">{{$t('autre_lien')}}</h2>
+                  <p v-html="pub.acf.liens_ext"></p>
                 </div>
                 <div v-if="pub.acf.pays_enreg_structure">
                   <h2 class="">{{$t('pays_origine')}}}</h2>
@@ -110,7 +115,7 @@
                   </div>
 
                   <div v-if="pub.acf.suivie_structure_oui && 
-                    pub.acf.suivie_structure_oui.toLowerCase() == 'oui'">
+                    pub.acf.suivie_structure.toLowerCase() == 'oui'">
                     <span class="small text-muted">
                        {{$t('suivie_structure_oui')}} 
                     </span>

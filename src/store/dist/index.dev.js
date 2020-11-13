@@ -82,6 +82,7 @@ var actions = {
 
     window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
       var data = _ref2.data;
+      console.log(data);
       commit('SET_DATA', data);
       commit('SET_SECTEURS', checkSecteurs(data));
       commit('SET_COUNTRIES', checkCountries(data));
@@ -116,8 +117,8 @@ var actions = {
 
       return find;
     });
-    var filtredCountries = checkCountries(element);
-    var filtredSecteurs = checkSecteurs(element); // return filtredCountries
+    var filtredCountries = checkCountries(element); //const filtredSecteurs = checkSecteurs(element)
+    // return filtredCountries
 
     commit('SET_COUNTRIES', filtredCountries); //commit('SET_SECTEURS', filtredSecteurs)
   },

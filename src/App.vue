@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="row m-0">
-      <div class="col-12 col-lg-8 p-0">
+      <div class="col-12 col-lg-8 position-relative">
         <map-search class="search"></map-search>
       </div>
       <Maps class="col-12 col-lg-8 p-0"></Maps>

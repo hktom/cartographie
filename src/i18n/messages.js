@@ -21,6 +21,7 @@ const messages = {
     'investisseur' : 'Investor',
     'accompagnement' : 'Support by a structure',
     'solution_prix' : 'Awards and Recognition',
+    'autre_lien' : 'Other links',
   }, 
   fr : {
     'secteurs' : 'Secteurs',
@@ -44,6 +45,7 @@ const messages = {
     'investisseur' : 'Investisseur',
     'accompagnement' : 'Accompagnement par une structure',
     'solution_prix' : 'Prix et distinctions',
+    'autre_lien' : 'Autres liens',
   }
 }
 export default messages ;

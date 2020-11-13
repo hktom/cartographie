@@ -224,13 +224,14 @@ export default {
   }
   #marker-nbre-post{
     line-height: 20px;
-    background-color: #007bff;
+    background-color: $red;
     width: 22px;
     height: 22px;
     font-size: 9px;
     border-radius: 50%;
     color: white;
     cursor : pointer ;
+    font-weight: bold;
     top: 22px;
     &::after{
       width: 5px;
@@ -241,12 +242,12 @@ export default {
       top: -32px;
       transform: translateX(-50%);
       border: 7px solid transparent;
-      border-bottom-color: #007bff;
+      border-bottom-color: $red;
     }
     &:hover, &.activeMarker{
-      background-color: $red;
+      background-color: black;
       &::after{
-        border-bottom-color: $red;
+        border-bottom-color: black;
       }
     }
   }

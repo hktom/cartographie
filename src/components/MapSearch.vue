@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 
-    .active-cyan-4{
+    .map-search{
         position: absolute;;
         z-index:5;
         width:100%;

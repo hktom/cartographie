@@ -71,6 +71,7 @@ const actions = {
     //http://192.168.1.123/elementor-map/
     window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
+            console.log(data)
             commit('SET_DATA', data)
             commit('SET_SECTEURS', checkSecteurs(data))
             commit('SET_COUNTRIES', checkCountries(data))
@@ -105,7 +106,7 @@ const actions = {
     })
     
     const filtredCountries = checkCountries(element)
-    const filtredSecteurs = checkSecteurs(element)
+    //const filtredSecteurs = checkSecteurs(element)
     // return filtredCountries
     commit('SET_COUNTRIES', filtredCountries)
     //commit('SET_SECTEURS', filtredSecteurs)

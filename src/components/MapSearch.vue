@@ -39,6 +39,7 @@ export default {
         z-index:5;
         width:100%;
         padding: 10px 20px;
+        left: 0px;
     }
     .input-search{
         padding-right: 45px;

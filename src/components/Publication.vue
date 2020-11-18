@@ -13,19 +13,17 @@
                 <div class="text-muted small">{{$t('last-update')}} : {{getDate(pub.modified)}}</div><br/>
                 <h3 v-html="pub.title.rendered"></h3>
                 <div class="mb-2">
-
-                  <div v-if="pub._embedded['wp:term'][1].length > 0"
-                    class="d-flex align-items-center">
-                    <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
-                    <span class="mr-1" v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
-                      <span v-if="id != 0"> | </span>{{item.name}} 
-                    </span>
-                  </div>
-
                   <div v-if="pub._embedded['wp:term'][2].length > 0"
                     class="d-flex align-items-center">
                     <span class="icon-pictos-bridgepictos-02 mr-2"></span>
                     <span class="mr-1" v-for="(item, id) in pub._embedded['wp:term'][2]" :key="'secteur'+id"> 
+                      <span v-if="id != 0"> | </span>{{item.name}} 
+                    </span>
+                  </div>
+                  <div v-if="pub._embedded['wp:term'][1].length > 0"
+                    class="d-flex align-items-center">
+                    <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
+                    <span class="mr-1" v-for="(item, id) in pub._embedded['wp:term'][1]" :key="id"> 
                       <span v-if="id != 0"> | </span>{{item.name}} 
                     </span>
                   </div>
@@ -37,27 +35,27 @@
                 <p v-if="pub.acf.chapeau" >
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
-                <div v-if="pub.acf.lien_vers_la_solution" class="mb-2 text-center">
+
+                <div v-if="pub.acf.lien_vers_la_solution" class="mb-2">
                   <a :href="pub.acf.lien_vers_la_solution" class="link-btn" target="_blank">
                     {{$t('site_web.textes')}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
                   </a>
                 </div>
-                <div v-if="pub.acf.auteur_email" class="mb-2 text-center">
+
+                <div v-if="pub.acf.auteur_email" class="mb-2">
                   <a :href="'mailto:' + pub.acf.auteur_email" class="link-btn">
                     {{pub.acf.auteur_email}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
                   </a>
                 </div>
-                <div v-if="pub.acf.liens_ext">
-                  <h2 class="">{{$t('autre_lien')}}</h2>
-                  <p v-html="pub.acf.liens_ext"></p>
-                </div>
-                <div v-if="pub.acf.pays_enreg_structure">
-                  <h2 class="">{{$t('pays_origine')}}}</h2>
-                  <p v-html="pub.acf.pays_enreg_structure"></p>
-                </div>
+
                 <div v-if="pub.acf.pays_solution_deployee">
                   <h2 class="">{{$t('pays_deploiement')}}</h2>
                   <p v-html="pub.acf.pays_solution_deployee"></p>
+                </div>
+
+                <div v-if="pub.acf.liens_ext">
+                  <h2 class="">{{$t('autre_lien')}}</h2>
+                  <p v-html="pub.acf.liens_ext"></p>
                 </div>
                 <div v-if="pub.acf.annee_creation_entreprise">
                   <h2 class="">{{$t('annee_creation')}}</h2>
@@ -103,8 +101,7 @@
                     </span>
                     <p v-html="pub.acf.montant_fonds"></p>
                   </div>
-                </div>                
-
+                </div>             
                 <div v-if="pub.acf.suivie_structure">
                   <h2 class="">{{$t('accompagnement')}}</h2>
                   <div v-if="pub.acf.suivie_structure">
@@ -113,7 +110,6 @@
                     </span>
                     <p v-html="pub.acf.suivie_structure"></p>
                   </div>
-
                   <div v-if="pub.acf.suivie_structure_oui && 
                     pub.acf.suivie_structure.toLowerCase() == 'oui'">
                     <span class="small text-muted">
@@ -125,10 +121,7 @@
                 <div v-if="pub.acf.solution_prix">
                   <h2 class="">{{$t('solution_prix')}}</h2>
                   <p v-html="pub.acf.solution_prix"></p>
-                </div> 
-
-
-
+                </div>
             </div>
           </vuescroll>
         </div>

@@ -9,10 +9,14 @@
             </div>
             <div class="container-filtre">
                 <select class="custom-select">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected>{{$t('pays_origine')}}</option>
+                    <option value="1">{{$t('pays_deploiement')}}</option>
+                    <option value="2">{{$t('annee_creation')}}</option>
+                    <option value="3">{{$t('nbre_employee')}}</option>
+                    <option value="4">Stade</option>
+                    <option value="5">{{$t('besoin_financement')}}</option>
+                    <option value="6">{{$t('etiquette')}}</option>
+                    <option value="7">{{$t('tous_champs')}}</option>
                 </select>
             </div>
         </div>

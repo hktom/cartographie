@@ -77,3 +77,16 @@ a:hover{
     transform: rotate( -45deg);
   }
 }
+
+.link-btn{
+  display: inline-block;
+  padding: 12px 24px;
+  color: white;
+  font-size: 15px;
+  background-color: $maroon ;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background-color: black ;
+    color: white;
+  }
+}

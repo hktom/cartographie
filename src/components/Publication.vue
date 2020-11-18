@@ -8,7 +8,7 @@
           </span>
         </div>
         <div class="card">
-          <vuescroll class='vueScroll'>
+          <vuescroll class="vueScroll">
             <div class="card-body">
                 <div class="text-muted small">{{$t('last-update')}} : {{getDate(pub.modified)}}</div><br/>
                 <h3 v-html="pub.title.rendered"></h3>
@@ -37,15 +37,15 @@
                 <p v-if="pub.acf.chapeau" >
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
-                <div v-if="pub.acf.lien_vers_la_solution">
-                  <h2 class=""> {{$t('site_web')}} </h2>
-                  <a :href="pub.acf.lien_vers_la_solution" target="_blank">
-                    <span v-html="pub.acf.lien_vers_la_solution"></span>
+                <div v-if="pub.acf.lien_vers_la_solution" class="mb-2 text-center">
+                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn" target="_blank">
+                    {{$t('site_web.textes')}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
                   </a>
                 </div>
-                <div v-if="pub.acf.auteur_email">
-                  <h2 class="">Mail contact</h2>
-                  <p v-html="pub.acf.auteur_email"></p>
+                <div v-if="pub.acf.auteur_email" class="mb-2 text-center">
+                  <a :href="'mailto:' + pub.acf.auteur_email" class="link-btn">
+                    {{pub.acf.auteur_email}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                  </a>
                 </div>
                 <div v-if="pub.acf.liens_ext">
                   <h2 class="">{{$t('autre_lien')}}</h2>
@@ -186,9 +186,15 @@ export default {
     width:100%;
     margin-bottom: 20px;
   }
+
   @media screen  and (min-width: 992px){
     .vueScroll{
       height:400px !important;
+      
+      ::v-deep .__view{
+        width: auto !important;
+      }
+
     }
   }
 

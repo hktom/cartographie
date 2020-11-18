@@ -27,7 +27,8 @@ var messages = {
     'investisseur': 'Investor',
     'accompagnement': 'Support by a structure',
     'solution_prix': 'Awards and Recognition',
-    'autre_lien': 'Other links'
+    'autre_lien': 'Other links',
+    'site_web.textes': 'Site de la solution'
   },
   fr: {
     'secteurs': 'Secteurs',
@@ -51,7 +52,8 @@ var messages = {
     'investisseur': 'Investisseur',
     'accompagnement': 'Accompagnement par une structure',
     'solution_prix': 'Prix et distinctions',
-    'autre_lien': 'Autres liens'
+    'autre_lien': 'Autres liens',
+    'site_web.textes': 'Site de la solution'
   }
 };
 var _default = messages;

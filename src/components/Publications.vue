@@ -8,7 +8,7 @@
           </span>
           <h2>{{$t('use-case')}}</h2>  
         </div>
-        <vuescroll class='vueScroll'>
+        <vuescroll class="vueScroll">
           <ul class="list-group list-item" v-if="solutionsActive.length > 0">
             <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
                 v-for="(data, i) in solutionsActive" :key="i">

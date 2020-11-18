@@ -48,6 +48,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/sass/_variables.scss";
+
   .list-group{
     margin-left: 0px;
   }
@@ -58,9 +60,10 @@ export default {
       border-radius: 5px;
       border-top-right-radius: unset;
       border-bottom-left-radius: unset;
+      background-color: $red;
     }
   }
   h2{
-    color: #FBC026;
+    color: $yellow;
   }
 </style>

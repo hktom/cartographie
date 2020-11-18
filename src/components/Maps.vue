@@ -38,12 +38,16 @@ export default {
         center:  [window.position_lng || 35, window.position_lat || 5], // starting position [lng, lat]
         zoom: window.zoom || 2 // starting zoom
       });
+
+ 
+
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
       const countries = this.countries
       this.map.on("load", () => {
+        this.map.setLayoutProperty('country-label', 'text-field', ['get','name_' + this.lang]);
         countries.forEach((data) => {
-          this.setMarker(data.name, data.nb , data) 
+          this.setMarker(data.name, data.nb , data)
         })
         this.countrieShap()
       });
@@ -177,7 +181,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['countries','loading'])
+    ...mapState(['countries','loading','lang'])
   },
   watch: {
     countries(){

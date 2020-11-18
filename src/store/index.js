@@ -76,6 +76,7 @@ const actions = {
             commit('SET_SECTEURS', checkSecteurs(data))
             commit('SET_COUNTRIES', checkCountries(data))
             commit('SET_LOADING', false)
+            
         }
     )
   },

@@ -81,7 +81,7 @@ var actions = {
     if (state.lang == "en") lang = "en/"; //http://192.168.1.123/elementor-map/
     //https://resilient.digital-africa.co/
 
-    window.axios.get('http://192.168.1.123/elementor-map/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
+    window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
       var data = _ref2.data;
       console.log(data);
       commit('SET_DATA', data);
@@ -90,30 +90,51 @@ var actions = {
       commit('SET_LOADING', false);
     });
   },
-  filtredData: function filtredData(_ref3, slug) {
+  filtredData: function filtredData(_ref3, _ref4) {
     var state = _ref3.state,
         commit = _ref3.commit;
-    slug = slug.toLowerCase(); // fonction de filtrage
+    var search = _ref4.search,
+        filtre = _ref4.filtre;
+    search = search.toLowerCase(); // fonction de filtrage
 
     var element = state.data.filter(function (x) {
       var find = false; // filtre sur le pays
 
-      find = x._embedded['wp:term'][1].some(function (y) {
-        if (y.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(y.name.toLowerCase()) !== -1) {
-          return true;
-        }
-
-        return false;
-      }); //filtre sur le secteur
-
-      if (!find) {
-        find = x._embedded['wp:term'][2].some(function (z) {
-          if (z.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(z.name.toLowerCase()) !== -1) {
+      if (filtre == "pays" || filtre == "") {
+        find = x._embedded['wp:term'][1].some(function (y) {
+          if (y.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(y.name.toLowerCase()) !== -1) {
             return true;
           }
 
           return false;
         });
+      } //filtre sur le secteur
+
+
+      if (filtre == "secteur" || filtre == "") {
+        if (!find) {
+          find = x._embedded['wp:term'][2].some(function (z) {
+            if (z.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(z.name.toLowerCase()) !== -1) {
+              return true;
+            }
+
+            return false;
+          });
+        }
+      } //filtre sur le nombre employe
+
+
+      if (filtre == "nbre_employee" || filtre == "") {
+        if (!find) {
+          find = x.acf.nombre_employe == search ? true : false;
+        }
+      } //filtre sur le employe
+
+
+      if (filtre == "annee_creation" || filtre == "") {
+        if (!find) {
+          find = x.acf.annee_creation_entreprise == search ? true : false;
+        }
       }
 
       return find;
@@ -123,16 +144,16 @@ var actions = {
 
     commit('SET_COUNTRIES', filtredCountries); //commit('SET_SECTEURS', filtredSecteurs)
   },
-  setActiveSecteur: function setActiveSecteur(_ref4, slug) {
-    var commit = _ref4.commit;
+  setActiveSecteur: function setActiveSecteur(_ref5, slug) {
+    var commit = _ref5.commit;
     commit('SET_ACTIVE_SECTEUR', slug);
   },
-  setMenu: function setMenu(_ref5, slug) {
-    var commit = _ref5.commit;
+  setMenu: function setMenu(_ref6, slug) {
+    var commit = _ref6.commit;
     commit('SET_MENU', slug);
   },
-  setSolutionsActive: function setSolutionsActive(_ref6, data) {
-    var commit = _ref6.commit;
+  setSolutionsActive: function setSolutionsActive(_ref7, data) {
+    var commit = _ref7.commit;
     commit('SET_SOLUTIONS_ACTIVE', data);
   }
 };

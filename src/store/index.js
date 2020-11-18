@@ -81,28 +81,46 @@ const actions = {
         }
     )
   },
-  filtredData({state, commit}, slug){
-    slug=slug.toLowerCase()
+  filtredData({state, commit}, {search , filtre}){
+    search=search.toLowerCase()
     // fonction de filtrage
     let element = state.data.filter((x) => {
       let find = false
       
       // filtre sur le pays
-      find = x._embedded['wp:term'][1].some(y => {
-        if(y.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(y.name.toLowerCase()) !== -1 ){
-          return true ;
-        }
-        return false
-      });
-
-      //filtre sur le secteur
-      if(!find){
-        find = x._embedded['wp:term'][2].some(z => {
-          if(z.name.toLowerCase().indexOf(slug) !== -1 || slug.indexOf(z.name.toLowerCase()) !== -1 ){
-            return true
+      if(filtre == "pays" || filtre == ""){
+        find = x._embedded['wp:term'][1].some(y => {
+          if(y.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(y.name.toLowerCase()) !== -1 ){
+            return true ;
           }
           return false
-        })
+        });
+      }
+
+      //filtre sur le secteur
+      if(filtre == "secteur" || filtre == ""){
+        if(!find){
+          find = x._embedded['wp:term'][2].some(z => {
+            if(z.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(z.name.toLowerCase()) !== -1 ){
+              return true
+            }
+            return false
+          })
+        }
+      }
+
+      //filtre sur le nombre employe
+      if(filtre == "nbre_employee" || filtre == ""){
+        if(!find){
+          find = x.acf.nombre_employe == search ? true : false 
+        }
+      }
+      
+      //filtre sur le employe
+      if(filtre == "annee_creation" || filtre == ""){
+        if(!find){
+          find = x.acf.annee_creation_entreprise == search ? true : false 
+        }
       }
       return find
     })

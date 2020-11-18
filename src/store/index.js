@@ -109,10 +109,17 @@ const actions = {
         }
       }
 
-      //filtre sur le employe
-      if(filtre == "nbre_empl" || filtre == ""){
+      //filtre sur le nombre employe
+      if(filtre == "nbre_employee" || filtre == ""){
         if(!find){
           find = x.acf.nombre_employe == search ? true : false 
+        }
+      }
+      
+      //filtre sur le employe
+      if(filtre == "annee_creation" || filtre == ""){
+        if(!find){
+          find = x.acf.annee_creation_entreprise == search ? true : false 
         }
       }
       return find

@@ -17,6 +17,7 @@
                 <select class="custom-select" v-model="filtre">
                     <option value="">Tous</option>
                     <option value="pays" selected>{{$t('pays_origine')}}</option>
+                    <option value="secteur" selected>{{$t('secteur')}}</option>
                     <option value="pays_deploiement">{{$t('pays_deploiement')}}</option>
                     <option value="annee_creation">{{$t('annee_creation')}}</option>
                     <option value="nbre_employee">{{$t('nbre_employee')}}</option>
@@ -46,7 +47,7 @@ export default {
             else return false
         },
         filtreEmpl(){
-            if(this.filtre == "nbre_empl") 
+            if(this.filtre == "nbre_employee" || this.filtre == "annee_creation") 
                 return true
             else return false
         }

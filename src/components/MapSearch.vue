@@ -16,10 +16,13 @@
             <div class="container-filtre">
                 <select class="custom-select" v-model="filtre">
                     <option value="">Tous</option>
-                    <option value="pays" selected>Pays</option>
-                    <option value="secteur">Secteur</option>
-                    <option value="nbre_empl">Employee</option>
-                    <option value="stade">stade</option>
+                    <option value="pays" selected>{{$t('pays_origine')}}</option>
+                    <option value="pays_deploiement">{{$t('pays_deploiement')}}</option>
+                    <option value="annee_creation">{{$t('annee_creation')}}</option>
+                    <option value="nbre_employee">{{$t('nbre_employee')}}</option>
+                    <option value="stade">Stade</option>
+                    <option value="besoin_financement">{{$t('besoin_financement')}}</option>
+                    <option value="etiquette">{{$t('etiquette')}}</option>
                 </select>
             </div>
         </div>

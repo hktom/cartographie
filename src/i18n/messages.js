@@ -23,6 +23,10 @@ const messages = {
     'solution_prix' : 'Awards and Recognition',
     'site_web.textes' : 'Site de la solution' ,
     'autre_lien' : 'External link',
+    'Pays_origine':'Native country',
+    'etiquette':'Label',
+    'tous_champs':'All fields',
+    'besoin_financement':'Financing need'
   }, 
   fr : {
     'secteurs' : 'Secteurs',
@@ -48,6 +52,9 @@ const messages = {
     'solution_prix' : 'Prix et distinctions',
     'site_web.textes' : 'Site de la solution' ,
     'autre_lien' : 'Lien externe',
+    'etiquette':'Etiquette',
+    'tous_champs':'Tous les champs',
+    'besoin_financement':'Besoin en financement'
   }
 }
 export default messages ;

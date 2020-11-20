@@ -37,17 +37,26 @@
                 </p>
 
                 <div  class="mb-2">
-                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn mr-2" target="_blank"
+                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn-ico mr-2" target="_blank"
                     :title="$t('site_web.textes')"  
                     v-if="pub.acf.lien_vers_la_solution"
                   >
-                    <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                    <font-awesome-icon class="color-white" icon="globe" />
                   </a>
+                  
                   <a :href="'mailto:' + pub.acf.auteur_email" 
-                    v-if="pub.acf.auteur_email" class="link-btn"
-                    :title="pub.acf.auteur_email"   
+                    v-if="pub.acf.auteur_email" class="link-btn-ico mr-2"
+                    :title="'mailto : ' + pub.acf.auteur_email"   
                   >
-                    <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                    <font-awesome-icon class="color-white" icon="envelope" />
+                  </a>
+
+                  <a :href="pub.acf.liens_ext" 
+                    v-if="pub.acf.liens_ext" class="link-btn-ico"
+                    :title="$t('autre_lien')"   
+                    target="_blank"
+                  >
+                    <span class="icon-pictos-bridgeexternal-link color-white"></span>
                   </a>
                 </div>
 
@@ -176,7 +185,7 @@ export default {
     cursor: pointer;
   }
   h2{
-    font-size: 50px;
+    font-size: 30px;
     color: #FBC026;
   }
   .image{

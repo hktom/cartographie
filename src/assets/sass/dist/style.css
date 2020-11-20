@@ -247,3 +247,19 @@ a:hover {
   background-color: black;
   color: white;
 }
+
+.link-btn-ico {
+  width: 45px;
+  height: 45px;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  background-color: #AF2825;
+  transition: all 0.2s ease-in-out;
+}
+.link-btn-ico:hover {
+  background-color: black;
+  color: white;
+}

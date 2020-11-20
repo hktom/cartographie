@@ -64,7 +64,7 @@ export default {
         return {
             search : "" , 
             search2 : "" , 
-            searchArray : [] , 
+            searchArray : [""] , 
             filtre :  "pays"         
         }
     },

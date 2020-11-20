@@ -1,11 +1,13 @@
 <template>
   <div class="text-left p-3">
     <h2>{{$t('secteurs')}}</h2>  
+    <!--
     <div class="loader-map" v-if="loading">
       <div class="spinner-border" role="status">
         <span class="sr-only">{{$t('loading')}}</span>
       </div>
     </div>
+    -->
     <ul class="list-group">
       <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
         v-for="(data, i) in secteurs" :key="i"
@@ -29,7 +31,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['secteurs','loading']),
+    ...mapState(['secteurs']),
   },
   methods: {
     ...mapActions(['setActiveSecteur']), 
@@ -65,5 +67,9 @@ export default {
   }
   h2{
     color: $yellow;
+    transform: scale(1);
+    @media (min-width: 992px){
+      transform: scale(0);
+    }
   }
 </style>

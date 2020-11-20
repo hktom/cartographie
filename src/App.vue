@@ -4,8 +4,8 @@
       <div class="col-12 col-lg-8 position-relative">
         <map-search class="search"></map-search>
       </div>
-      <Maps class="col-12 col-lg-8 p-0"></Maps>
-      <side-content class="col-12 col-lg-4 p-0"></side-content>
+      <Maps class="col-12 p-0"></Maps>
+      <side-content class="col-12 col-lg-4 p-0 side-content"></side-content>
     </div>
   </div>
 </template>
@@ -43,4 +43,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+@media (min-width: 992px){
+    .side-content{
+      position: absolute;
+      right: 35px;
+      top: -6px;
+      z-index: 5;
+    }
+  }
 </style>

@@ -199,6 +199,24 @@ a:hover {
   cursor: pointer;
   margin-right: 10px;
 }
+@media (min-width: 992px) {
+  .header-back .ico-back {
+    width: 48px;
+    text-align: center;
+    height: 48px;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  }
+  .header-back .ico-back:hover {
+    background-color: #DA4039;
+    color: white;
+  }
+  .header-back .ico-back:hover .l {
+    background-color: white;
+  }
+}
 
 .icon-pictos-bridgeback .l {
   width: 20px;

@@ -28,7 +28,13 @@ var messages = {
     'accompagnement': 'Support by a structure',
     'solution_prix': 'Awards and Recognition',
     'site_web.textes': 'Site de la solution',
-    'autre_lien': 'External link'
+    'autre_lien': 'External link',
+    'Pays_origine': 'Native country',
+    'etiquette': 'Label',
+    'tous_champs': 'All fields',
+    'besoin_financement': 'Financing need',
+    'montant': 'Amount',
+    'tous': 'All'
   },
   fr: {
     'secteurs': 'Secteurs',
@@ -53,7 +59,12 @@ var messages = {
     'accompagnement': 'Accompagnement par une structure',
     'solution_prix': 'Prix et distinctions',
     'site_web.textes': 'Site de la solution',
-    'autre_lien': 'Lien externe'
+    'autre_lien': 'Lien externe',
+    'etiquette': 'Etiquette',
+    'tous_champs': 'Tous les champs',
+    'besoin_financement': 'Besoin en financement',
+    'montant': 'Montant',
+    'tous': 'Tous'
   }
 };
 var _default = messages;

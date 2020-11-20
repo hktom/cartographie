@@ -26,7 +26,9 @@ const messages = {
     'Pays_origine':'Native country',
     'etiquette':'Label',
     'tous_champs':'All fields',
-    'besoin_financement':'Financing need'
+    'besoin_financement':'Financing need',
+    'montant':'Amount',
+    'tous':'All',
   }, 
   fr : {
     'secteurs' : 'Secteurs',
@@ -54,7 +56,9 @@ const messages = {
     'autre_lien' : 'Lien externe',
     'etiquette':'Etiquette',
     'tous_champs':'Tous les champs',
-    'besoin_financement':'Besoin en financement'
+    'besoin_financement':'Besoin en financement',
+    'montant':'Montant',
+    'tous':'Tous',
   }
 }
 export default messages ;

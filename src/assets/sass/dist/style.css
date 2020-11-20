@@ -1,0 +1,231 @@
+@charset "UTF-8";
+.color-orange {
+  color: #F18E3F;
+}
+
+.color-white {
+  color: white;
+}
+
+@font-face {
+  font-family: "pictos-bridge";
+  src: url("../font/pictos-bridge.eot?q5w8wq");
+  src: url("../font/pictos-bridge.eot?q5w8wq#iefix") format("embedded-opentype"), url("../font/pictos-bridge.ttf?q5w8wq") format("truetype"), url("../font/pictos-bridge.woff?q5w8wq") format("woff"), url("../font/pictos-bridge.svg?q5w8wq#pictos-bridge") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=icon-pictos-bridge],
+[class^=icon-pictos-bridge] *,
+[class*=" icon-pictos-bridge"],
+[class*=" icon-pictos-bridge"] * {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "pictos-bridge" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pictos-bridgeback:before {
+  content: "";
+}
+
+.icon-pictos-bridgego:before {
+  content: "";
+}
+
+.icon-pictos-bridgeexternal-link:before {
+  content: "";
+}
+
+.icon-pictos-bridgeAjouter:before {
+  content: "";
+}
+
+.icon-pictos-bridgeAvantages:before {
+  content: "";
+}
+
+.icon-pictos-bridgeCheck:before {
+  content: "";
+}
+
+.icon-pictos-bridgeClarification:before {
+  content: "";
+}
+
+.icon-pictos-bridgeInfo:before {
+  content: "";
+}
+
+.icon-pictos-bridgePrecision .path1:before {
+  content: "";
+  color: white;
+}
+
+.icon-pictos-bridgePrecision .path2:before {
+  content: "";
+  margin-left: -1em;
+  color: black;
+}
+
+.icon-pictos-bridgePrecision .path3:before {
+  content: "";
+  margin-left: -1em;
+  color: white;
+}
+
+.icon-pictos-bridgePrecision .path4:before {
+  content: "";
+  margin-left: -1em;
+  color: black;
+}
+
+.icon-pictos-bridgePrecision .path5:before {
+  content: "";
+  margin-left: -1em;
+  color: white;
+}
+
+.icon-pictos-bridgePrecision .path6:before {
+  content: "";
+  margin-left: -1em;
+  color: black;
+}
+
+.icon-pictos-bridgePrecision .path7:before {
+  content: "";
+  margin-left: -1em;
+  color: white;
+}
+
+.icon-pictos-bridgePrecision .path8:before {
+  content: "";
+  margin-left: -1em;
+  color: black;
+}
+
+.icon-pictos-bridgePrecision .path9:before {
+  content: "";
+  margin-left: -1em;
+  color: white;
+}
+
+.icon-pictos-bridgePrecision .path10:before {
+  content: "";
+  margin-left: -1em;
+  color: black;
+}
+
+.icon-pictos-bridgepictos_Plan-de-travail-1:before {
+  content: "";
+  color: #c8378c;
+}
+
+.icon-pictos-bridgepictos-02:before {
+  content: "";
+  color: #c8378c;
+}
+
+.icon-pictos-bridgepictos-03:before {
+  content: "";
+  color: #c8378c;
+}
+
+@font-face {
+  font-family: "Mont Bold";
+  src: url("../font/Mont-Bold.ttf");
+}
+@font-face {
+  font-family: "Mont Light";
+  src: url("../font/Mont-Light.ttf");
+}
+@font-face {
+  font-family: "Mont Regular";
+  src: url("../font/Mont-Regular.ttf");
+}
+@font-face {
+  font-family: "Mont Thin";
+  src: url("../font/Mont-Thin.ttf");
+}
+html {
+  scroll-behavior: smooth !important;
+}
+
+* {
+  font-family: "Mont Light";
+  font-size: 16px;
+}
+
+h1 {
+  font-family: "Mont Bold";
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-family: "Mont Thin";
+  font-size: 32px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.header-back {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-left: 10px;
+}
+.header-back img {
+  width: 30px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.header-back h2 {
+  margin-bottom: 0px;
+  color: #F18E3F;
+  text-align: left;
+  margin: 0px;
+}
+.header-back .ico-back {
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.icon-pictos-bridgeback .l {
+  width: 20px;
+  background-color: #F18E3F;
+  height: 2px;
+  display: block;
+  top: -16px;
+  left: -2px;
+  transform-origin: left;
+  position: relative;
+}
+.icon-pictos-bridgeback .l1 {
+  transform: rotate(45deg);
+}
+.icon-pictos-bridgeback .l2 {
+  transform: rotate(-45deg);
+}
+
+.link-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  color: white;
+  font-size: 15px;
+  background-color: #AF2825;
+  transition: all 0.2s ease-in-out;
+}
+.link-btn:hover {
+  background-color: black;
+  color: white;
+}

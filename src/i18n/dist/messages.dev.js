@@ -7,6 +7,7 @@ exports["default"] = void 0;
 var messages = {
   en: {
     'secteurs': 'Sectors',
+    'secteur': 'Sector',
     'loading': 'Loading...',
     'search-text': 'Enter the desired value...',
     'use-case': 'Use Cases',
@@ -38,6 +39,7 @@ var messages = {
   },
   fr: {
     'secteurs': 'Secteurs',
+    'secteur': 'Secteur',
     'loading': 'Chargement...',
     'search-text': 'Taper la valeur rechercher...',
     'use-case': 'Solutions Tech',

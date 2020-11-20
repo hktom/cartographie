@@ -1,6 +1,7 @@
 const messages = {
   en : {
     'secteurs' : 'Sectors',
+    'secteur' : 'Sector',
     'loading' : 'Loading...',
     'search-text' : 'Enter the desired value...',
     'use-case' : 'Use Cases',
@@ -32,6 +33,7 @@ const messages = {
   }, 
   fr : {
     'secteurs' : 'Secteurs',
+    'secteur' : 'Secteur',
     'loading' : 'Chargement...',
     'search-text' : 'Taper la valeur rechercher...',
     'use-case' : 'Solutions Tech',

@@ -46,7 +46,6 @@ export default {
       const countries = this.countries
       this.map.on("load", () => {
         this.map.setLayoutProperty('country-label', 'text-field', ['get','name_' + this.lang]);
-        console.log(countries)
         countries.forEach((data) => {
           this.setMarker(data.name, data.nb , data)
         })

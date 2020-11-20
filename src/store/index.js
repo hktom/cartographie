@@ -81,48 +81,85 @@ const actions = {
         }
     )
   },
-  filtredData({state, commit}, {search , filtre}){
+  filtredData({state, commit}, {search , filtre, search2, searchArray}){
     search=search.toLowerCase()
+    search2=search2.toLowerCase()
+    
     // fonction de filtrage
     let element = state.data.filter((x) => {
-      let find = false
       
+      //filtre sur le nombre employe
+      if(filtre == "nbre_employee" || filtre == ""){
+        if(x.acf.nombre_employe == search) return true  
+      }
+      
+      //filtre sur l'année de création
+      if(filtre == "annee_creation" || filtre == ""){
+        if(x.acf.annee_creation_entreprise == search) return true
+      }
+
+      // filtre sur le pays de deploiement
+      if(filtre == "pays_deploiement" || filtre == ""){
+        const lwc = x.acf.pays_solution_deployee.toLowerCase()
+        if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ) return true
+      }
+
       // filtre sur le pays
       if(filtre == "pays" || filtre == ""){
-        find = x._embedded['wp:term'][1].some(y => {
-          if(y.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(y.name.toLowerCase()) !== -1 ){
+        const find = x._embedded['wp:term'][1].some(y => {
+          const lwc = y.name.toLowerCase()
+          if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
             return true ;
           }
           return false
         });
+        if (find) return true
       }
 
       //filtre sur le secteur
       if(filtre == "secteur" || filtre == ""){
-        if(!find){
-          find = x._embedded['wp:term'][2].some(z => {
-            if(z.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(z.name.toLowerCase()) !== -1 ){
-              return true
-            }
-            return false
-          })
+        const find = x._embedded['wp:term'][2].some(z => {
+          const lwc = z.name.toLowerCase()
+          if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
+            return true
+          }
+          return false
+        })
+        if (find) return true
+      }
+
+      // filtre sur l'etiquette
+      if(filtre == "etiquette" || filtre == ""){
+        if(!x.acf.etiquette && filtre == "etiquette") return false
+        else if(x.acf.etiquette){
+          const lwc = x.acf.etiquette.toLowerCase()
+          if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ) return true
+        } 
+      }
+
+      //filtre sur le besoin en financement
+      if(filtre == "besoin_financement" || filtre == ""){
+        if(search != ""){
+          const lwc = x.acf.type_fonds.toLowerCase()
+          if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ) return true
+        }
+
+        const montantSearch = filtre == "" ? search : search2
+        if(x.acf.montant_fonds == montantSearch) return true
+      }
+
+      //filtre sur le stade
+      if(filtre == "stade" || filtre == ""){
+        if(filtre == ""){
+          if(x.acf.stade_de_developpement == search) return true
+        }else{
+          if(searchArray.includes("")) return true
+          const find = searchArray.includes(x.acf.stade_de_developpement.toLowerCase())
+          if(find) return true
         }
       }
 
-      //filtre sur le nombre employe
-      if(filtre == "nbre_employee" || filtre == ""){
-        if(!find){
-          find = x.acf.nombre_employe == search ? true : false 
-        }
-      }
-      
-      //filtre sur le employe
-      if(filtre == "annee_creation" || filtre == ""){
-        if(!find){
-          find = x.acf.annee_creation_entreprise == search ? true : false 
-        }
-      }
-      return find
+      return false
     })
     
     const filtredCountries = checkCountries(element)

@@ -16,7 +16,7 @@
                     <input type="number" v-model="search">
                 </div>
                 <div v-if="filtreStade" class="range-wrapper range-wrapper-multi-select">
-                    <select class="custom-select" multiple>
+                    <select class="custom-select" multiple v-model="searchArray">
                         <option value="">{{$t('tous')}}</option>
                         <option value="pre-seed">Pre-seed</option>
                         <option value="seed">Seed</option>
@@ -63,7 +63,8 @@ export default {
     data() {
         return {
             search : "" , 
-            search2 : null , 
+            search2 : "" , 
+            searchArray : [] , 
             filtre :  "pays"         
         }
     },
@@ -94,8 +95,13 @@ export default {
         search(){
             this.runSearch()
         }, 
+        search2(){
+            this.runSearch()
+        }, 
+        searchArray(){
+            this.runSearch()
+        },
         filtre(){
-            this.search2 == null
             this.runSearch()
         }
     },
@@ -105,7 +111,8 @@ export default {
             this.search = ''
         },
         runSearch(){
-            this.filtredData({search : this.search , filtre : this.filtre})
+            this.filtredData({search : this.search , filtre : this.filtre, 
+                search2 : this.search2, searchArray : this.searchArray })
         }
     },
 }

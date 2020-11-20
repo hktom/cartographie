@@ -75,29 +75,30 @@
                   <p v-html="pub.acf.montant_fonds"></p>
                 </div> -->
                 <div v-if="pub.acf.nature_et_structure_capital || 
-                   pub.acf.levee_fonds || pub.acf.type_fonds || pub.acf.montant_fonds ">
+                  pub.acf.levee_fonds || pub.acf.type_fonds || pub.acf.montant_fonds "
+                >
                   <h2 class="">{{$t('investisseur')}}</h2>
                   <div v-if="pub.acf.nature_et_structure_capital">
                     <span class="small text-muted">
-                       {{$t('nature_et_structure_capital')}} 
+                      {{$t('nature_et_structure_capital')}} 
                     </span>
                     <p v-html="pub.acf.nature_et_structure_capital"></p>
                   </div>
                   <div v-if="pub.acf.levee_fonds">
                     <span class="small text-muted">
-                       {{$t('levee_fonds')}} 
+                      {{$t('levee_fonds')}} 
                     </span>
                     <p v-html="pub.acf.levee_fonds"></p>
                   </div>
                   <div v-if="pub.acf.type_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('type_fonds')}} 
+                      {{$t('type_fonds')}} 
                     </span>
                     <p v-html="pub.acf.type_fonds"></p>
                   </div>
                   <div v-if="pub.acf.montant_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('montant_fonds')}} 
+                      {{$t('montant_fonds')}} 
                     </span>
                     <p v-html="pub.acf.montant_fonds"></p>
                   </div>
@@ -106,14 +107,14 @@
                   <h2 class="">{{$t('accompagnement')}}</h2>
                   <div v-if="pub.acf.suivie_structure">
                     <span class="small text-muted">
-                       {{$t('suivie_structure')}} 
+                      {{$t('suivie_structure')}} 
                     </span>
                     <p v-html="pub.acf.suivie_structure"></p>
                   </div>
                   <div v-if="pub.acf.suivie_structure_oui && 
                     pub.acf.suivie_structure.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('suivie_structure_oui')}} 
+                      {{$t('suivie_structure_oui')}} 
                     </span>
                     <p v-html="pub.acf.suivie_structure_oui"></p>
                   </div>

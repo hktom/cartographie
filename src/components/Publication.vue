@@ -36,15 +36,18 @@
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
 
-                <div v-if="pub.acf.lien_vers_la_solution" class="mb-2">
-                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn" target="_blank">
-                    {{$t('site_web.textes')}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                <div  class="mb-2">
+                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn mr-2" target="_blank"
+                    :title="$t('site_web.textes')"  
+                    v-if="pub.acf.lien_vers_la_solution"
+                  >
+                    <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
                   </a>
-                </div>
-
-                <div v-if="pub.acf.auteur_email" class="mb-2">
-                  <a :href="'mailto:' + pub.acf.auteur_email" class="link-btn">
-                    {{pub.acf.auteur_email}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                  <a :href="'mailto:' + pub.acf.auteur_email" 
+                    v-if="pub.acf.auteur_email" class="link-btn"
+                    :title="pub.acf.auteur_email"   
+                  >
+                    <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
                   </a>
                 </div>
 

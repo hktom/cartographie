@@ -39,13 +39,14 @@ export default {
         zoom: window.zoom || 2 // starting zoom
       });
 
- 
+
 
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
       const countries = this.countries
       this.map.on("load", () => {
         this.map.setLayoutProperty('country-label', 'text-field', ['get','name_' + this.lang]);
+        console.log(countries)
         countries.forEach((data) => {
           this.setMarker(data.name, data.nb , data)
         })
@@ -126,11 +127,13 @@ export default {
       const map = this.map
       const setPub = this.setPub
       const setMarkerClick = this.setMarkerClick
+      
       this.mapboxClient.geocoding
         .forwardGeocode({
             query: countryName,
             autocomplete: false,
             limit: 1,
+            language: ["fr", "en"]
         })
         .send()
         .then(function(res) {
@@ -189,7 +192,7 @@ export default {
         domElement => domElement.remove()
       )
       this.countries.forEach((data) => {
-         this.setMarker(data.name, data.nb, data) 
+        this.setMarker(data.name, data.nb, data) 
       })
     }
   },

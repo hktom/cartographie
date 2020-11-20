@@ -81,7 +81,7 @@ var actions = {
     if (state.lang == "en") lang = "en/"; //http://192.168.1.123/elementor-map/
     //https://resilient.digital-africa.co/
 
-    window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
+    window.axios.get('http://localhost/elementor-map/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
       var data = _ref2.data;
       console.log(data);
       commit('SET_DATA', data);
@@ -94,50 +94,94 @@ var actions = {
     var state = _ref3.state,
         commit = _ref3.commit;
     var search = _ref4.search,
-        filtre = _ref4.filtre;
-    search = search.toLowerCase(); // fonction de filtrage
+        filtre = _ref4.filtre,
+        search2 = _ref4.search2,
+        searchArray = _ref4.searchArray;
+    search = search.toLowerCase();
+    search2 = search2.toLowerCase(); // fonction de filtrage
 
     var element = state.data.filter(function (x) {
-      var find = false; // filtre sur le pays
+      //filtre sur le nombre employe
+      if (filtre == "nbre_employee" || filtre == "") {
+        if (x.acf.nombre_employe == search) return true;
+      } //filtre sur l'année de création
+
+
+      if (filtre == "annee_creation" || filtre == "") {
+        if (x.acf.annee_creation_entreprise == search) return true;
+      } // filtre sur le pays de deploiement
+
+
+      if (filtre == "pays_deploiement" || filtre == "") {
+        var lwc = x.acf.pays_solution_deployee.toLowerCase();
+        if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) return true;
+      } // filtre sur le pays
+
 
       if (filtre == "pays" || filtre == "") {
-        find = x._embedded['wp:term'][1].some(function (y) {
-          if (y.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(y.name.toLowerCase()) !== -1) {
+        var find = x._embedded['wp:term'][1].some(function (y) {
+          var lwc = y.name.toLowerCase();
+
+          if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) {
             return true;
           }
 
           return false;
         });
+
+        if (find) return true;
       } //filtre sur le secteur
 
 
       if (filtre == "secteur" || filtre == "") {
-        if (!find) {
-          find = x._embedded['wp:term'][2].some(function (z) {
-            if (z.name.toLowerCase().indexOf(search) !== -1 || search.indexOf(z.name.toLowerCase()) !== -1) {
-              return true;
-            }
+        var _find = x._embedded['wp:term'][2].some(function (z) {
+          var lwc = z.name.toLowerCase();
 
-            return false;
-          });
+          if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) {
+            return true;
+          }
+
+          return false;
+        });
+
+        if (_find) return true;
+      } // filtre sur l'etiquette
+
+
+      if (filtre == "etiquette" || filtre == "") {
+        if (!x.acf.etiquette && filtre == "etiquette") return false;else if (x.acf.etiquette) {
+          var _lwc = x.acf.etiquette.toLowerCase();
+
+          if (_lwc.indexOf(search) !== -1 || search.indexOf(_lwc) !== -1) return true;
         }
-      } //filtre sur le nombre employe
+      } //filtre sur le besoin en financement
 
 
-      if (filtre == "nbre_employee" || filtre == "") {
-        if (!find) {
-          find = x.acf.nombre_employe == search ? true : false;
+      if (filtre == "besoin_financement" || filtre == "") {
+        if (search != "") {
+          var _lwc2 = x.acf.type_fonds.toLowerCase();
+
+          if (_lwc2.indexOf(search) !== -1 || search.indexOf(_lwc2) !== -1) return true;
         }
-      } //filtre sur le employe
+
+        var montantSearch = filtre == "" ? search : search2;
+        if (x.acf.montant_fonds == montantSearch) return true;
+      } //filtre sur le stade
 
 
-      if (filtre == "annee_creation" || filtre == "") {
-        if (!find) {
-          find = x.acf.annee_creation_entreprise == search ? true : false;
+      if (filtre == "stade" || filtre == "") {
+        if (filtre == "") {
+          if (x.acf.stade_de_developpement == search) return true;
+        } else {
+          if (searchArray.includes("")) return true;
+
+          var _find2 = searchArray.includes(x.acf.stade_de_developpement.toLowerCase());
+
+          if (_find2) return true;
         }
       }
 
-      return find;
+      return false;
     });
     var filtredCountries = checkCountries(element); //const filtredSecteurs = checkSecteurs(element)
     // return filtredCountries

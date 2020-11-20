@@ -114,9 +114,13 @@ export default {
   @media screen  and (min-width: 992px){
     .vueScroll{
       height:400px !important;
+      background-color: white;
     }
   }
-  
-  
-
+  h2{
+    transform: scale(1);
+    @media (min-width: 992px){
+      transform: scale(0);
+    }
+  }
 </style>

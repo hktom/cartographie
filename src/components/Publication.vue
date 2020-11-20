@@ -36,15 +36,27 @@
                   <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
                 </p>
 
-                <div v-if="pub.acf.lien_vers_la_solution" class="mb-2">
-                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn" target="_blank">
-                    {{$t('site_web.textes')}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                <div  class="mb-2">
+                  <a :href="pub.acf.lien_vers_la_solution" class="link-btn-ico mr-2" target="_blank"
+                    :title="$t('site_web.textes')"  
+                    v-if="pub.acf.lien_vers_la_solution"
+                  >
+                    <font-awesome-icon class="color-white" icon="globe" />
                   </a>
-                </div>
+                  
+                  <a :href="'mailto:' + pub.acf.auteur_email" 
+                    v-if="pub.acf.auteur_email" class="link-btn-ico mr-2"
+                    :title="'mailto : ' + pub.acf.auteur_email"   
+                  >
+                    <font-awesome-icon class="color-white" icon="envelope" />
+                  </a>
 
-                <div v-if="pub.acf.auteur_email" class="mb-2">
-                  <a :href="'mailto:' + pub.acf.auteur_email" class="link-btn">
-                    {{pub.acf.auteur_email}} <span class="icon-pictos-bridgeexternal-link color-white ml-1"></span>
+                  <a :href="pub.acf.liens_ext" 
+                    v-if="pub.acf.liens_ext" class="link-btn-ico"
+                    :title="$t('autre_lien')"   
+                    target="_blank"
+                  >
+                    <span class="icon-pictos-bridgeexternal-link color-white"></span>
                   </a>
                 </div>
 
@@ -75,29 +87,30 @@
                   <p v-html="pub.acf.montant_fonds"></p>
                 </div> -->
                 <div v-if="pub.acf.nature_et_structure_capital || 
-                   pub.acf.levee_fonds || pub.acf.type_fonds || pub.acf.montant_fonds ">
+                  pub.acf.levee_fonds || pub.acf.type_fonds || pub.acf.montant_fonds "
+                >
                   <h2 class="">{{$t('investisseur')}}</h2>
                   <div v-if="pub.acf.nature_et_structure_capital">
                     <span class="small text-muted">
-                       {{$t('nature_et_structure_capital')}} 
+                      {{$t('nature_et_structure_capital')}} 
                     </span>
                     <p v-html="pub.acf.nature_et_structure_capital"></p>
                   </div>
                   <div v-if="pub.acf.levee_fonds">
                     <span class="small text-muted">
-                       {{$t('levee_fonds')}} 
+                      {{$t('levee_fonds')}} 
                     </span>
                     <p v-html="pub.acf.levee_fonds"></p>
                   </div>
                   <div v-if="pub.acf.type_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('type_fonds')}} 
+                      {{$t('type_fonds')}} 
                     </span>
                     <p v-html="pub.acf.type_fonds"></p>
                   </div>
                   <div v-if="pub.acf.montant_fonds && pub.acf.levee_fonds.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('montant_fonds')}} 
+                      {{$t('montant_fonds')}} 
                     </span>
                     <p v-html="pub.acf.montant_fonds"></p>
                   </div>
@@ -106,14 +119,14 @@
                   <h2 class="">{{$t('accompagnement')}}</h2>
                   <div v-if="pub.acf.suivie_structure">
                     <span class="small text-muted">
-                       {{$t('suivie_structure')}} 
+                      {{$t('suivie_structure')}} 
                     </span>
                     <p v-html="pub.acf.suivie_structure"></p>
                   </div>
                   <div v-if="pub.acf.suivie_structure_oui && 
                     pub.acf.suivie_structure.toLowerCase() == 'oui'">
                     <span class="small text-muted">
-                       {{$t('suivie_structure_oui')}} 
+                      {{$t('suivie_structure_oui')}} 
                     </span>
                     <p v-html="pub.acf.suivie_structure_oui"></p>
                   </div>
@@ -172,7 +185,7 @@ export default {
     cursor: pointer;
   }
   h2{
-    font-size: 50px;
+    font-size: 30px;
     color: #FBC026;
   }
   .image{

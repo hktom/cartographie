@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sidebar">
     <secteur v-if="menu == 1" @selectSecteur="getFromSecteurs"></secteur>
     <publications v-if="menu == 2"></publications>    
   </div>
@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style lang="scss">
-  
+ 
 </style>

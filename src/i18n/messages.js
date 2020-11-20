@@ -1,6 +1,7 @@
 const messages = {
   en : {
     'secteurs' : 'Sectors',
+    'secteur' : 'Sector',
     'loading' : 'Loading...',
     'search-text' : 'Enter the desired value...',
     'use-case' : 'Use Cases',
@@ -21,15 +22,18 @@ const messages = {
     'investisseur' : 'Investor',
     'accompagnement' : 'Support by a structure',
     'solution_prix' : 'Awards and Recognition',
-    'site_web.textes' : 'Site de la solution' ,
-    'autre_lien' : 'External link',
+    'site_web.textes' : 'Solution website' ,
+    'autre_lien' : 'Other link',
     'Pays_origine':'Native country',
     'etiquette':'Label',
     'tous_champs':'All fields',
-    'besoin_financement':'Financing need'
+    'besoin_financement':'Financing need',
+    'montant':'Amount',
+    'tous':'All',
   }, 
   fr : {
     'secteurs' : 'Secteurs',
+    'secteur' : 'Secteur',
     'loading' : 'Chargement...',
     'search-text' : 'Taper la valeur rechercher...',
     'use-case' : 'Solutions Tech',
@@ -50,11 +54,13 @@ const messages = {
     'investisseur' : 'Investisseur',
     'accompagnement' : 'Accompagnement par une structure',
     'solution_prix' : 'Prix et distinctions',
-    'site_web.textes' : 'Site de la solution' ,
-    'autre_lien' : 'Lien externe',
+    'site_web.textes' : 'Site internet de la solution' ,
+    'autre_lien' : 'Autre lien',
     'etiquette':'Etiquette',
     'tous_champs':'Tous les champs',
-    'besoin_financement':'Besoin en financement'
+    'besoin_financement':'Besoin en financement',
+    'montant':'Montant',
+    'tous':'Tous',
   }
 }
 export default messages ;

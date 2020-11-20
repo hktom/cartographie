@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faGlobe, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vuescroll from 'vuescroll';
 import VueI18n from 'vue-i18n'
@@ -29,7 +29,7 @@ const i18n = new VueI18n({
   messages : messages // set locale messages
 })
 
-library.add(faSearch, faTimes)
+library.add(faSearch, faTimes, faGlobe, faEnvelope)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 

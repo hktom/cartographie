@@ -200,7 +200,12 @@ export default {
 
 <style lang="scss">
   @import "../assets/sass/_variables.scss";
-
+  .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+      display: none;
+  }
+  a.mapboxgl-ctrl-logo {
+      display: none;
+  }
   .map-wrapper{
     width: 100%;
     background-color: #eee;

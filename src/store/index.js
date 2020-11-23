@@ -70,7 +70,7 @@ const actions = {
     if(state.lang == "en") lang = "en/"
     //http://192.168.1.123/elementor-map/
     //https://resilient.digital-africa.co/
-    window.axios.get('http://localhost/elementor-map/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
+    window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/use_case?_embed=author,wp:term,wp:featuredmedia').then(
         ({data}) => {
             console.log(data)
             commit('SET_DATA', data)

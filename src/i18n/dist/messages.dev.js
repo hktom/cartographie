@@ -7,6 +7,7 @@ exports["default"] = void 0;
 var messages = {
   en: {
     'secteurs': 'Sectors',
+    'categories': 'Categories',
     'secteur': 'Sector',
     'loading': 'Loading...',
     'search-text': 'Enter the desired value...',
@@ -39,6 +40,7 @@ var messages = {
   },
   fr: {
     'secteurs': 'Secteurs',
+    'categories': 'Categories',
     'secteur': 'Secteur',
     'loading': 'Chargement...',
     'search-text': 'Taper la valeur rechercher...',

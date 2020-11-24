@@ -16,7 +16,7 @@ function checkCountries(data){
         countries.push(
           {
             id : pays,
-            name : pub._embedded["wp:term"][1][index]['name'] ,
+            name : pub._embedded["wp:term"][3][index]['name'] ,
             nb : 1,
             solutions : [pub]
           }
@@ -27,33 +27,53 @@ function checkCountries(data){
   return countries
 }
 
-function checkSecteurs(data){
-  let secteurs = []
+// function checkSecteurs(data){
+//   let secteurs = []
+//   data.forEach(pub => {
+//     pub.secteur.forEach((secteur, index) => {
+//       const exist = secteurs.findIndex(x => x.id == secteur) 
+//       if(exist != -1){
+//         secteurs[exist].nb++
+//         secteurs[exist].solutions.push(pub)
+//       }else{
+//         secteurs.push(
+//           {
+//             id : secteur,
+//             name : pub._embedded["wp:term"][4][index]['name'] ,
+//             nb : 1 ,
+//             solutions : [pub]
+//           }
+//         )
+//       }
+//     })
+//   });
+
+//   return secteurs
+// }
+
+function checkCategories(data){
+  let categories = []
   data.forEach(pub => {
-    pub.secteur.forEach((secteur, index) => {
-      const exist = secteurs.findIndex(x => x.id == secteur) 
-      if(exist != -1){
-        secteurs[exist].nb++
-        secteurs[exist].solutions.push(pub)
-      }else{
-        secteurs.push(
-          {
-            id : secteur,
-            name : pub._embedded["wp:term"][2][index]['name'] ,
-            nb : 1 ,
-            solutions : [pub]
-          }
-        )
-      }
-    })
+    const exist = categories.findIndex(x => x.name == pub.acf.categorie_solution) 
+    if(exist != -1){
+      categories[exist].nb++
+      categories[exist].solutions.push(pub)
+    }else{
+      categories.push({
+        name : pub.acf.categorie_solution,
+        solutions : [pub],
+        nb : 1
+      })
+    }
   });
 
-  return secteurs
+  return categories
 }
 
 const state = {
   data : {} ,
   secteurs : [] ,
+  categories : [] ,
   countries : [] ,
   search: [] ,
   activeSecteur : null,
@@ -74,7 +94,8 @@ const actions = {
         ({data}) => {
             console.log(data)
             commit('SET_DATA', data)
-            commit('SET_SECTEURS', checkSecteurs(data))
+            // commit('SET_SECTEURS', checkSecteurs(data))
+            commit('SET_CATEGORIES', checkCategories(data))
             commit('SET_COUNTRIES', checkCountries(data))
             commit('SET_LOADING', false)
             
@@ -185,6 +206,9 @@ const mutations = {
   },
   SET_SECTEURS(state, data){
     state.secteurs = data
+  },
+  SET_CATEGORIES(state, data){
+    state.categories = data
   },
   SET_COUNTRIES(state, data){
     state.countries = data

@@ -27,7 +27,7 @@ function checkCountries(data) {
       } else {
         countries.push({
           id: pays,
-          name: pub._embedded["wp:term"][1][index]['name'],
+          name: pub._embedded["wp:term"][3][index]['name'],
           nb: 1,
           solutions: [pub]
         });
@@ -35,35 +35,55 @@ function checkCountries(data) {
     });
   });
   return countries;
-}
+} // function checkSecteurs(data){
+//   let secteurs = []
+//   data.forEach(pub => {
+//     pub.secteur.forEach((secteur, index) => {
+//       const exist = secteurs.findIndex(x => x.id == secteur) 
+//       if(exist != -1){
+//         secteurs[exist].nb++
+//         secteurs[exist].solutions.push(pub)
+//       }else{
+//         secteurs.push(
+//           {
+//             id : secteur,
+//             name : pub._embedded["wp:term"][4][index]['name'] ,
+//             nb : 1 ,
+//             solutions : [pub]
+//           }
+//         )
+//       }
+//     })
+//   });
+//   return secteurs
+// }
 
-function checkSecteurs(data) {
-  var secteurs = [];
+
+function checkCategories(data) {
+  var categories = [];
   data.forEach(function (pub) {
-    pub.secteur.forEach(function (secteur, index) {
-      var exist = secteurs.findIndex(function (x) {
-        return x.id == secteur;
-      });
-
-      if (exist != -1) {
-        secteurs[exist].nb++;
-        secteurs[exist].solutions.push(pub);
-      } else {
-        secteurs.push({
-          id: secteur,
-          name: pub._embedded["wp:term"][2][index]['name'],
-          nb: 1,
-          solutions: [pub]
-        });
-      }
+    var exist = categories.findIndex(function (x) {
+      return x.name == pub.acf.categorie_solution;
     });
+
+    if (exist != -1) {
+      categories[exist].nb++;
+      categories[exist].solutions.push(pub);
+    } else {
+      categories.push({
+        name: pub.acf.categorie_solution,
+        solutions: [pub],
+        nb: 1
+      });
+    }
   });
-  return secteurs;
+  return categories;
 }
 
 var state = {
   data: {},
   secteurs: [],
+  categories: [],
   countries: [],
   search: [],
   activeSecteur: null,
@@ -84,8 +104,9 @@ var actions = {
     window.axios.get('https://resilient.digital-africa.co/' + lang + 'wp-json/wp/v2/mini_fiche?_embed=author,wp:term,wp:featuredmedia').then(function (_ref2) {
       var data = _ref2.data;
       console.log(data);
-      commit('SET_DATA', data);
-      commit('SET_SECTEURS', checkSecteurs(data));
+      commit('SET_DATA', data); // commit('SET_SECTEURS', checkSecteurs(data))
+
+      commit('SET_CATEGORIES', checkCategories(data));
       commit('SET_COUNTRIES', checkCountries(data));
       commit('SET_LOADING', false);
     });
@@ -207,6 +228,9 @@ var mutations = {
   },
   SET_SECTEURS: function SET_SECTEURS(state, data) {
     state.secteurs = data;
+  },
+  SET_CATEGORIES: function SET_CATEGORIES(state, data) {
+    state.categories = data;
   },
   SET_COUNTRIES: function SET_COUNTRIES(state, data) {
     state.countries = data;

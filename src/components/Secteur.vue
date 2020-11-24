@@ -1,6 +1,6 @@
 <template>
   <div class="text-left p-3">
-    <h2>{{$t('secteurs')}}</h2>  
+    <h2>{{$t('categories')}}</h2>  
     <!--
     <div class="loader-map" v-if="loading">
       <div class="spinner-border" role="status">
@@ -8,22 +8,28 @@
       </div>
     </div>
     -->
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
-        v-for="(data, i) in secteurs" :key="i"
-        @click="getFromSecteurs(data)"
-      >
-        {{data.name}}
-        <span class="badge badge-nb badge-primary badge-pill">{{data.nb}}</span>
-      </li>
-    </ul>
+    <vuescroll class="vueScroll">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+          v-for="(data, i) in categories" :key="i"
+          @click="getFromSecteurs(data)"
+        >
+          <span v-html="data.name"></span>
+          <span class="badge badge-nb badge-primary badge-pill">{{data.nb}}</span>
+        </li>
+      </ul>
+    </vuescroll>
   </div>  
 </template>
 
 <script>
 import {mapState, mapActions} from "vuex" ;
+import vuescroll from 'vuescroll';
 
 export default {
+  components : {
+    vuescroll
+  } ,
   data(){
     return {
       secteurActive : null ,
@@ -31,7 +37,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['secteurs']),
+    ...mapState(['categories']),
+  },
+  mounted() {
+    console.log(this.categories)
   },
   methods: {
     ...mapActions(['setActiveSecteur']), 
@@ -70,6 +79,11 @@ export default {
     transform: scale(1);
     @media (min-width: 992px){
       transform: scale(0);
+    }
+  }
+  @media screen  and (min-width: 992px){
+    .vueScroll{
+      height:400px !important;
     }
   }
 </style>

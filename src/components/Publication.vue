@@ -32,9 +32,6 @@
                   v-if="pub._embedded['wp:featuredmedia'][0]['source_url']" 
                   :src="pub._embedded['wp:featuredmedia'][0]['source_url']"
                 >
-                <p v-if="pub.acf.chapeau" >
-                  <span v-html="pub.acf.chapeau.replace('<p>&nbsp;</p>', '')"></span>
-                </p>
 
                 <div  class="mb-2">
                   <a :href="pub.acf.lien_vers_la_solution" class="link-btn-ico mr-2" target="_blank"

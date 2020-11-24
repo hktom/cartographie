@@ -263,7 +263,3 @@ a:hover {
   background-color: black;
   color: white;
 }
-
-.mapboxgl-ctrl-attrib-inner {
-  display: none;
-}

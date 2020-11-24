@@ -14,7 +14,7 @@ const messages = {
     'type_fonds' : 'If yes, what kind?',
     'montant_fonds' : 'And for what amount in dollars (August 2020: 1 Euro = 1.18 Dollar)',
     'suivie_structure' : 'Is it followed by one or more support structures?',
-    'suivie_structure_oui' : 'If so, when and by whom?',
+    'suivie_structure_oui' : 'When and by whom?',
     'site_web' : 'Website',
     'pays_origine' : 'Native country',
     'pays_deploiement' : 'Country of deployment',
@@ -31,6 +31,8 @@ const messages = {
     'besoin_financement':'Financing need',
     'montant':'Amount',
     'tous':'All',
+    'description':'Description',
+    'type':'Type',
   }, 
   fr : {
     'secteurs' : 'Secteurs',
@@ -47,7 +49,7 @@ const messages = {
     'type_fonds' : 'Si oui, de quel type ?',
     'montant_fonds' : 'et pour quel montant en dollars (Août 2020 : 1 Euro = 1,18 Dollar)',
     'suivie_structure' : 'Est-elle suivie par une ou des structures d’accompagnement ?',
-    'suivie_structure_oui' : 'Si oui, quand et par qui ?',
+    'suivie_structure_oui' : 'Quand et par qui ?',
     'site_web' : 'Site Web',
     'pays_origine' : 'Pays  d\'origine',
     'pays_deploiement' : 'Pays de déploiement',
@@ -63,6 +65,8 @@ const messages = {
     'besoin_financement':'Besoin en financement',
     'montant':'Montant',
     'tous':'Tous',
+    'description':'Description',
+    'type':'Type',
   }
 }
 export default messages ;

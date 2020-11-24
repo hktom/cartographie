@@ -127,19 +127,29 @@ const actions = {
 
       // filtre sur le pays
       if(filtre == "pays" || filtre == ""){
-        const find = x._embedded['wp:term'][1].some(y => {
-          const lwc = y.name.toLowerCase()
-          if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
-            return true ;
-          }
-          return false
-        });
-        if (find) return true
+        const lwc = x.acf.pays_enreg_structure.toLowerCase()
+        if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ) return true
+      }
+      // if(filtre == "pays" || filtre == ""){
+      //   const find = x._embedded['wp:term'][1].some(y => {
+      //     const lwc = y.name.toLowerCase()
+      //     if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
+      //       return true ;
+      //     }
+      //     return false
+      //   });
+      //   if (find) return true
+      // }
+
+      // filtre sur la catégorie
+      if(filtre == "categorie" || filtre == ""){
+        const lwc = x.acf.categorie_solution.toLowerCase()
+        if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ) return true
       }
 
       //filtre sur le secteur
       if(filtre == "secteur" || filtre == ""){
-        const find = x._embedded['wp:term'][2].some(z => {
+        const find = x._embedded['wp:term'][4].some(z => {
           const lwc = z.name.toLowerCase()
           if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
             return true

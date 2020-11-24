@@ -44,6 +44,7 @@
                 <select class="custom-select" v-model="filtre">
                     <option value="">{{$t('tous')}}</option>
                     <option value="pays" selected>{{$t('pays_origine')}}</option>
+                    <option value="categorie">{{$t('categorie')}}</option>
                     <option value="secteur" selected>{{$t('secteur')}}</option>
                     <option value="pays_deploiement">{{$t('pays_deploiement')}}</option>
                     <option value="annee_creation">{{$t('annee_creation')}}</option>
@@ -71,7 +72,7 @@ export default {
     computed: {
         ...mapState(['activeSecteur']),
         filtreTexte(){
-            if(["", "pays", "secteur", "pays_deploiement", "etiquette"].includes(this.filtre)) 
+            if(["", "pays", "secteur", "pays_deploiement", "etiquette", "categorie"].includes(this.filtre)) 
                 return true
             else return false
         },

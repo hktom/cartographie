@@ -140,22 +140,31 @@ var actions = {
 
 
       if (filtre == "pays" || filtre == "") {
-        var find = x._embedded['wp:term'][1].some(function (y) {
-          var lwc = y.name.toLowerCase();
+        var _lwc = x.acf.pays_enreg_structure.toLowerCase();
 
-          if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) {
-            return true;
-          }
+        if (_lwc.indexOf(search) !== -1 || search.indexOf(_lwc) !== -1) return true;
+      } // if(filtre == "pays" || filtre == ""){
+      //   const find = x._embedded['wp:term'][1].some(y => {
+      //     const lwc = y.name.toLowerCase()
+      //     if(lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1 ){
+      //       return true ;
+      //     }
+      //     return false
+      //   });
+      //   if (find) return true
+      // }
+      // filtre sur la catégorie
 
-          return false;
-        });
 
-        if (find) return true;
+      if (filtre == "categorie" || filtre == "") {
+        var _lwc2 = x.acf.categorie_solution.toLowerCase();
+
+        if (_lwc2.indexOf(search) !== -1 || search.indexOf(_lwc2) !== -1) return true;
       } //filtre sur le secteur
 
 
       if (filtre == "secteur" || filtre == "") {
-        var _find = x._embedded['wp:term'][2].some(function (z) {
+        var find = x._embedded['wp:term'][4].some(function (z) {
           var lwc = z.name.toLowerCase();
 
           if (lwc.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) {
@@ -165,24 +174,24 @@ var actions = {
           return false;
         });
 
-        if (_find) return true;
+        if (find) return true;
       } // filtre sur l'etiquette
 
 
       if (filtre == "etiquette" || filtre == "") {
         if (!x.acf.etiquette && filtre == "etiquette") return false;else if (x.acf.etiquette) {
-          var _lwc = x.acf.etiquette.toLowerCase();
+          var _lwc3 = x.acf.etiquette.toLowerCase();
 
-          if (_lwc.indexOf(search) !== -1 || search.indexOf(_lwc) !== -1) return true;
+          if (_lwc3.indexOf(search) !== -1 || search.indexOf(_lwc3) !== -1) return true;
         }
       } //filtre sur le besoin en financement
 
 
       if (filtre == "besoin_financement" || filtre == "") {
         if (search != "") {
-          var _lwc2 = x.acf.type_fonds.toLowerCase();
+          var _lwc4 = x.acf.type_fonds.toLowerCase();
 
-          if (_lwc2.indexOf(search) !== -1 || search.indexOf(_lwc2) !== -1) return true;
+          if (_lwc4.indexOf(search) !== -1 || search.indexOf(_lwc4) !== -1) return true;
         }
 
         var montantSearch = filtre == "" ? search : search2;
@@ -196,9 +205,9 @@ var actions = {
         } else {
           if (searchArray.includes("")) return true;
 
-          var _find2 = searchArray.includes(x.acf.stade_de_developpement.toLowerCase());
+          var _find = searchArray.includes(x.acf.stade_de_developpement.toLowerCase());
 
-          if (_find2) return true;
+          if (_find) return true;
         }
       }
 

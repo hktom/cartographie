@@ -22,8 +22,8 @@ Vue.use(vuescroll, {
 });
 Vue.use(VueI18n)
 
-let local_lang = document.querySelector('html')?.lang || null
-local_lang = local_lang == "en-EN" || local_lang == "en"  ? 'en' : 'fr'
+let local_lang = document.querySelector('html')?.lang.toLowerCase() || null
+local_lang = local_lang == "en-en" || local_lang == "en"  ? 'en' : 'fr'
 const i18n = new VueI18n({
   locale: local_lang, // set locale
   messages : messages // set locale messages

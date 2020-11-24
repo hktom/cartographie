@@ -36,7 +36,7 @@
                 </a>
             </li>
           </ul>
-          <p v-else class="small text-center text-muted">
+          <p v-else class="small text-center text-muted p-4">
             {{$t('use-case-not-found')}} 
           </p>
         </vuescroll>

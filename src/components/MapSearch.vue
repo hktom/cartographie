@@ -140,7 +140,7 @@ export default {
         width: 100%;
     }
     .container-search{
-        box-shadow: 0px 0px 20px rgba(0,0,0, 0.05);
+        box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
         background-color: white;
         border-radius: 30px;
         padding: 5px;

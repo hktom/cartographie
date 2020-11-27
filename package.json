@@ -14,9 +14,11 @@
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@mapbox/mapbox-sdk": "^0.11.0",
     "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.19.0",
     "core-js": "^3.6.5",
     "mapbox-gl": "^1.12.0",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-i18n": "^8.22.1",
     "vuescroll": "^4.16.1",
     "vuex": "^3.4.0"

@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require("mapbox-gl");"
+import mapboxgl from "mapbox-gl"; 
 import {mapActions, mapState} from "vuex" ;
-//const mapboxSdk  = require('@mapbox/mapbox-sdk');
+
 export default {
   data() {
     return {
@@ -201,7 +201,7 @@ export default {
 <style lang="scss">
   @import "../assets/sass/_variables.scss";
   .map-wrapper{
-    width: 100%;
+    width: 101%;
     background-color: #eee;
     #map{
       width: 100%;

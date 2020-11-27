@@ -142,7 +142,7 @@ export default {
     .container-search{
         box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
         background-color: white;
-        border-radius: 30px;
+        border-radius: 0px;
         padding: 5px;
         display: flex;
         height: 48px;

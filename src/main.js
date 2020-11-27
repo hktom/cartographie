@@ -1,44 +1,59 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { faEnvelope, faGlobe, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+//require('./assets/sass/style.scss')
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faGlobe, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vuescroll from 'vuescroll';
 import VueI18n from 'vue-i18n'
 import messages from './i18n/messages'
-
-require('./assets/sass/style.scss')
+import "./assets/sass/style.scss"
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(vuescroll, {
-  ops: {
-    // The global config
-    bar: {
-      keepShow: true,
-      background: '#DA4039',
-    }
-  },
-  name: 'myScroll' // customize component name, default -> vueScroll
+    ops: {
+        bar: {
+            keepShow: true,
+            background: '#DA4039',
+        }
+    },
+    name: 'myScroll'
 });
+
 Vue.use(VueI18n)
-
-let local_lang = document.querySelector('html')?.lang.toLowerCase() || null
-local_lang = local_lang == "en-en" || local_lang == "en"  ? 'en' : 'fr'
-const i18n = new VueI18n({
-  locale: local_lang, // set locale
-  messages : messages // set locale messages
-})
-
-library.add(faSearch, faTimes, faGlobe, faEnvelope)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+library.add(fas);
 Vue.config.productionTip = false
-
 window.axios = require("axios").default;
-
 Vue.config.productionTip = false;
 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('MapSearch', require('./components/MapSearch.vue').default)
+Vue.component('Maps', require('./components/Maps.vue').default)
+Vue.component('SideContent', require('./components/SideContent.vue').default)
+
+
+let local_lang = null;
+if (document.querySelector('html'))
+    local_lang = document.querySelector('html').lang.toLowerCase();
+
+local_lang = local_lang == "en-en" || local_lang == "en" ? 'en' : 'fr'
+
+const i18n = new VueI18n({
+    locale: local_lang, // set locale
+    messages: messages // set locale messages
+})
+
+
 new Vue({
-  store,
-  i18n,
-  render: h => h(App)
+    store,
+    i18n,
+    render: h => h(App)
 }).$mount("#app");

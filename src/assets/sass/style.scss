@@ -1,123 +1,135 @@
 @import "variables";
 @import 'icons-pictos';
+@font-face {
+    font-family: "Mont Bold";
+    src: url('../font/Mont-Bold.ttf')
+}
 
-@font-face{
-  font-family: "Mont Bold";
-  src : url('../font/Mont-Bold.ttf')
+@font-face {
+    font-family: "Mont Light";
+    src: url('../font/Mont-Light.ttf')
 }
-@font-face{
-  font-family: "Mont Light";
-  src : url('../font/Mont-Light.ttf')
+
+@font-face {
+    font-family: "Mont Regular";
+    src: url('../font/Mont-Regular.ttf')
 }
-@font-face{
-  font-family: "Mont Regular";
-  src : url('../font/Mont-Regular.ttf')
+
+@font-face {
+    font-family: "Mont Thin";
+    src: url('../font/Mont-Thin.ttf')
 }
-@font-face{
-  font-family: "Mont Thin";
-  src : url('../font/Mont-Thin.ttf')
-}
+
 html {
-  scroll-behavior: smooth !important;
-}
-*{
-  font-family: "Mont Light";
-  font-size: 16px;
-}
-h1{
-  font-family: "Mont Bold";
-  margin-bottom: 30px;
+    scroll-behavior: smooth !important;
 }
 
-h2{
-  font-family: "Mont Thin";
-  font-size: 32px;
+* {
+    font-family: "Mont Light";
+    font-size: 16px;
 }
-a:hover{
-  text-decoration: none;
+
+h1 {
+    font-family: "Mont Bold";
+    margin-bottom: 30px;
 }
-.header-back{
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-left: 10px;
-  img{
-    width: 30px;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  h2{
-    margin-bottom: 0px;
-    color: $orange;
-    text-align: left;
-    margin: 0px;
-  }
-  .ico-back{
-    font-size: 30px;
-    cursor: pointer;
-    margin-right: 10px;
-    @media (min-width: 992px) {
-      width: 48px;
-      text-align: center;
-      height: 48px;
-      border-radius: 30px;
-      padding: 10px;
-      background-color: white;
-      box-shadow: 0px 0px 20px rgba(0,0,0, 0.2);
-      &:hover{
-        background-color: $red;
-        color: white;
-        & .l{
-          background-color: white;
-        }
-      }
+
+h2 {
+    font-family: "Mont Thin";
+    font-size: 32px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.header-back {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    img {
+        width: 30px;
+        margin-right: 20px;
+        cursor: pointer;
     }
-  }
+    h2 {
+        margin-bottom: 0px;
+        color: $orange;
+        text-align: left;
+        margin: 0px;
+    }
+    .ico-back {
+        font-size: 30px;
+        cursor: pointer;
+        margin-right: 10px;
+        @media (min-width: 992px) {
+            width: 48px;
+            text-align: center;
+            height: 48px;
+            border-radius: 30px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            &:hover {
+                background-color: $red;
+                color: white;
+                & .l {
+                    background-color: white;
+                }
+            }
+        }
+    }
 }
 
-.icon-pictos-bridgeback{
-  .l{
-    width: 20px;
-    background-color: $orange;
-    height: 2px;
-    display: block;
-    top: -16px;
-    left: -2px;
-    transform-origin: left;
-    position: relative;
-  }
-  .l1{
-    transform: rotate( 45deg);
-  }
-  .l2{
-    transform: rotate( -45deg);
-  }
+.icon-pictos-bridgeback {
+    .l {
+        width: 20px;
+        background-color: $orange;
+        height: 2px;
+        display: block;
+        top: -16px;
+        left: -2px;
+        transform-origin: left;
+        position: relative;
+    }
+    .l1 {
+        transform: rotate( 45deg);
+    }
+    .l2 {
+        transform: rotate( -45deg);
+    }
 }
 
-.link-btn{
-  display: inline-block;
-  padding: 12px 24px;
-  color: white;
-  font-size: 15px;
-  background-color: $maroon ;
-  transition: all 0.2s ease-in-out;
-  &:hover{
-    background-color: black ;
+.link-btn {
+    display: inline-block;
+    padding: 12px 24px;
     color: white;
-  }
+    font-size: 15px;
+    background-color: $maroon;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
 }
-.link-btn-ico{
-  width: 45px;
-  height: 45px;
-  justify-content: center;
-  display: inline-flex;
-  align-items: center;
-  color: white;
-  font-size: 15px;
-  background-color: #AF2825;
-  transition: all 0.2s ease-in-out;
-  &:hover{
-    background-color: black ;
+
+.link-btn-ico {
+    width: 45px;
+    height: 45px;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
     color: white;
-  }
+    font-size: 15px;
+    background-color: #AF2825;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+}
+
+.box-shadow {
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.2);
 }

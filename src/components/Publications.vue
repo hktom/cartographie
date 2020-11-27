@@ -1,5 +1,5 @@
 <template>
-  <div class="text-left p-3">
+  <div class="text-left">
       <div v-if="targetPublication == null">
         <div class="header-back">
           <span class="icon-pictos-bridgeback ico-back color-orange" @click="goBack()">
@@ -9,13 +9,13 @@
           <h2>{{$t('use-case')}}</h2>  
         </div>
         <vuescroll class="vueScroll">
-          <ul class="list-group list-item" v-if="solutionsActive.length > 0">
-            <li class="list-group-item list-group-item-action" @click.prevent="setTargetPub(data)"
+          <b-list-group v-if="solutionsActive.length > 0">
+            <b-list-group-item @click.prevent="setTargetPub(data)"
                 v-for="(data, i) in solutionsActive" :key="i">
+                <!-- list item -->
                 <div class="text-muted small">{{$t('last-update')}} : {{getDate(data.modified)}}</div>
-
                 <h3 class="mb-2">{{data.acf.titre_de_la_solution}}</h3>
-
+                <!-- Structure Pays -->
                 <div v-if="data.acf.pays_enreg_structure"
                   class="d-flex align-items-center">
                   <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
@@ -23,7 +23,9 @@
                   {{data.acf.pays_enreg_structure}} 
                   </span>
                 </div>
-                
+                <!-- Structure Pays -->
+
+                <!-- Structure embed Solution -->
                 <div v-if="data._embedded['wp:term'][4].length > 0"
                   class="d-flex align-items-baseline mt-2">
                   <span class="icon-pictos-bridgepictos-02 mr-2"></span>
@@ -37,13 +39,19 @@
                     </div>
                   </div>
                 </div>
+                <!-- Structure embed Solution -->
 
+                <!-- Button -->
                 <p class="mt-3" v-html="resume(data.acf.description_solution)"></p>
                 <a href="#!" class="more" @click.prevent="setTargetPub(data)">
                   {{$t('more')}} <span class="icon-pictos-bridgego color-orange"></span>
                 </a>
-            </li>
-          </ul>
+                <!-- Button -->
+
+                <!-- list item -->
+                </b-list-group-item>
+          </b-list-group>
+
           <p v-else class="small text-center text-muted p-4">
             {{$t('use-case-not-found')}} 
           </p>

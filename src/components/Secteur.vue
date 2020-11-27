@@ -1,5 +1,5 @@
 <template>
-  <div class="text-left p-3">
+  <div class="text-left">
     <h2>{{$t('categories')}}</h2>  
     <!--
     <div class="loader-map" v-if="loading">
@@ -9,7 +9,15 @@
     </div>
     -->
     <vuescroll class="vueScroll">
-      <ul class="list-group">
+      <b-list-group v-for="(data, i) in categories" :key="i"
+          @click="getFromSecteurs(data)" class="box-shadow" style="border-radius:0px">
+        <b-list-group-item class="d-flex justify-content-between align-items-center">
+          <span v-html="data.name"></span>
+          <span class="badge badge-nb badge-primary badge-pill">{{data.nb}}</span>
+        </b-list-group-item>
+      </b-list-group>
+
+      <!-- <ul class="list-group">
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
           v-for="(data, i) in categories" :key="i"
           @click="getFromSecteurs(data)"
@@ -17,7 +25,7 @@
           <span v-html="data.name"></span>
           <span class="badge badge-nb badge-primary badge-pill">{{data.nb}}</span>
         </li>
-      </ul>
+      </ul> -->
     </vuescroll>
   </div>  
 </template>
@@ -76,14 +84,14 @@ export default {
   }
   h2{
     color: $yellow;
-    transform: scale(1);
+    display: block;
     @media (min-width: 992px){
-      transform: scale(0);
+      display: none;
     }
   }
   @media screen  and (min-width: 992px){
     .vueScroll{
-      height:400px !important;
+      max-height:400px !important;
     }
   }
 </style>

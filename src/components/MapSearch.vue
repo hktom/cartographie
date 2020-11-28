@@ -2,16 +2,10 @@
   <div class="map-search active-cyan-4 mb-4">
     <div class="container-search">
       <div class="container-input position-relative">
-        <!-- Search Bar -->
         <search v-if="filtreTexte" />
-
-        <!-- Select by employee number, by year fundation and by financement-->
         <select-range v-if="filtreRange" :filtre="filtre" />
-
-        <!-- Filter by Stade -->
         <select-stade v-if="filtreStade" />
       </div>
-
       <!-- Filter -->
       <select-filter />
     </div>
@@ -28,9 +22,6 @@ export default {
   components: { selectFilter, Search, SelectRange, SelectStade },
   data() {
     return {
-      search: "",
-      search2: "",
-      searchArray: [""],
       filtre: "",
     };
   },

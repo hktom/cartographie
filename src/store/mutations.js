@@ -1,4 +1,7 @@
 export const mutations = {
+    SET_FILTER(state, data) {
+        state.sub_filter = data
+    },
     SET_DATA(state, data) {
         state.data = data
     },

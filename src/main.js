@@ -12,9 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vuescroll from 'vuescroll';
 import VueI18n from 'vue-i18n'
 import messages from './i18n/messages'
+import vSelect from 'vue-select'
+import VueSimpleRangeSlider from 'vue-simple-range-slider';
 import "./assets/sass/style.scss"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vue-select/dist/vue-select.css';
 
 Vue.use(vuescroll, {
     ops: {
@@ -38,6 +41,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('MapSearch', require('./components/MapSearch.vue').default)
 Vue.component('Maps', require('./components/Maps.vue').default)
 Vue.component('SideContent', require('./components/SideContent.vue').default)
+Vue.component('v-select', vSelect)
+Vue.component('VueSimpleRangeSlider', VueSimpleRangeSlider)
 
 
 let local_lang = null;

@@ -145,10 +145,6 @@ export default {
                 el.classList.add(res.body.features[0].place_name.toLowerCase().replaceAll(' ', '')) ;
                 el.addEventListener('click', (e) => {
                     setMarkerClick(true)
-                    //alert("Marker Clicked. v2");
-                    //var url = $("#page-url").val();
-                    // url += `/?q=${acf}&v=${countryName}`;
-                    // window.location.href = url;
                     const active = document.querySelector('.activeMarker')
                     if(active){
                       active.classList.remove('activeMarker')

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="filtre == 'nbre_employee'">
+    <div v-if="filter == main_filter_options[4]">
       <VueSimpleRangeSlider
         style="width: 100%"
         :min="0"
@@ -10,22 +10,23 @@
       />
     </div>
 
-    <div v-if="filtre == 'annee_creation'">
+    <div v-if="filter == main_filter_options[3]">
       <VueSimpleRangeSlider
         style="width: 100%"
-        :min="1990"
+        :min="1989"
         :max="2020"
-        v-model="years"
+        v-model="year"
       />
     </div>
 
-    <div v-if="filtre == 'financement'">
+    <div v-if="filter == main_filter_options[6]">
       <b-col cols="6">
         <v-select
-          :options="options"
           :searchable="false"
           :placeholder="`Type de financement`"
-          v-model="search"
+          :value="$store.state.selected_filter_options"
+          :options="$store.state.financement_type_list"
+          @input="select_filter"
         ></v-select>
       </b-col>
       <b-col cols="6">
@@ -42,80 +43,23 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 export default {
-  props: ["filtre"],
+  props: ["filter"],
   data() {
     return {
-      search: "",
-      search2: "",
-      searchArray: [""],
       range: [20, 1000],
       year: 1990,
-      options: [
-        "Financement par dettes",
-        "Financement par fonds propres",
-        "Subventions publiques",
-        "Crédits commerciaux",
-      ],
     };
   },
   computed: {
-    ...mapState(["activeSecteur"]),
-    filtreTexte() {
-      if (
-        [
-          "",
-          "pays",
-          "secteur",
-          "pays_deploiement",
-          "etiquette",
-          "categorie",
-        ].includes(this.filtre)
-      )
-        return true;
-      else return false;
-    },
-    filtreRange() {
-      if (["nbre_employee", "annee_creation"].includes(this.filtre))
-        return true;
-      else return false;
-    },
-    filtreRangeTexte() {
-      if (["besoin_financement"].includes(this.filtre)) return true;
-      else return false;
-    },
-    filtreStade() {
-      if (["stade"].includes(this.filtre)) return true;
-      else return false;
+    main_filter_options() {
+      return this.$store.state.main_filter_options;
     },
   },
-  watch: {
-    search() {
-      this.runSearch();
-    },
-    search2() {
-      this.runSearch();
-    },
-    searchArray() {
-      this.runSearch();
-    },
-    filtre() {
-      this.runSearch();
-    },
-  },
+  watch: {},
   methods: {
-    ...mapActions(["filtredData"]),
-    resetSearch() {
-      this.search = "";
-    },
-    runSearch() {
-      this.filtredData({
-        search: this.search,
-        filtre: this.filtre,
-        search2: this.search2,
-        searchArray: this.searchArray,
-      });
+    select_filter(val) {
+      console.log("selected", val);
     },
   },
 };

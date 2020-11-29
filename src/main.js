@@ -2,10 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { faEnvelope, faGlobe, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-//require('./assets/sass/style.scss')
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -18,6 +14,7 @@ import "./assets/sass/style.scss"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';
+import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css'
 
 Vue.use(vuescroll, {
     ops: {

@@ -1,7 +1,27 @@
-export const mutations = {
-    SET_FILTER(state, data) {
-        state.sub_filter = data
+const filter_mutation = {
+
+    SET_FILTER_OPTIONS(state, data) {
+        state.filter_options = data;
+        state.filter_search = { value: null, active: false };
+        state.filter_range = { active: false, value: null };
     },
+    SET_FILTER_RANGE(state, data) {
+        state.filter_range = data;
+        state.filter_options = { active: false, value: null, placeholder: null, options: [] };
+        state.filter_search = { value: null, active: false };
+    },
+    SET_FILTER_SEARCH(state, data) {
+        state.filter_options = { active: false, value: null, placeholder: null, options: [] };
+        state.filter_range = { active: false, value: null };
+        state.filter_search = data;
+    },
+    SET_FILTER(state, data) {
+        state.main_filter_options_selected = data;
+    },
+}
+
+export const mutations = {
+    ...filter_mutation,
     SET_DATA(state, data) {
         state.data = data
     },

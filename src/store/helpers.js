@@ -1,67 +1,42 @@
-export const filterSearch = (data, search, filter = null) => {
-    let result = data.filter((item) => {
-        // secteur 
-        let wp_terms = item._embedded["wp:term"][4].some((wp_term) => {
-            let term = wp_term.name.toLowerCase();
-            if (term.indexOf(search) !== -1 || search.indexOf(lwc) !== -1) {
-                return true;
-            }
-            return false;
-        });
+export const filterSearch = (data, filter, options) => {
 
-        let stade_found = false;
-        if (filter == "stade") {
-            stade_found = search.includes(
-                data.acf.stade_de_developpement.toLowerCase()
-            )
-        }
+    let result = data;
 
-        switch (item) {
-            case item.title == search:
-                return true
-                break;
+    // let result = data.filter((item) => {
+    //     // secteur 
+    //     let wp_terms = item._embedded["wp:term"][4].some((wp_term) => {
+    //         let term = wp_term.name.toLowerCase();
+    //         if (term.indexOf(search) !== -1 || search.indexOf(term) !== -1) {
+    //             return true;
+    //         }
+    //         return false;
+    //     });
+    // });
 
-            case item.acf.nombre_employe == search || filter == "nbre_employee":
-                return true
-                break;
+    if (filter == options[0]) {
+        result = data.filter((item) => item.acf.pays_enreg_structure == filter);
+    }
+    if (filter == options[1]) {
+        result = data.filter((item) => item.acf.categorie_solution == filter);
+    }
+    if (filter == options[4]) {
+        result = data.filter((item) => item.acf.annee_creation_entreprise == filter);
+    }
+    if (filter == options[5]) {
+        result = data.filter((item) => item.acf.nombre_employe == filter);
+    }
+    if (filter == options[6]) {
+        result = data.filter((item) => filter.includes(
+            item.acf.stade_de_developpement.toLowerCase()
+        ));
+    }
+    if (filter == options[8]) {
+        result = data.filter((item) => item.acf.etiquette == filter);
+    }
+    if (filter == options[7]) {
+        result = data.filter((item) => item.acf.type_fonds == filter);
+    }
 
-            case item.acf.annee_creation_entreprise == search || filter == "annee_creation":
-                return true
-                break;
-
-            case item.acf.pays_solution_deployee.toLowerCase() == search || filter == "pays_deploiement":
-                return true
-                break;
-
-            case item.acf.pays_enreg_structure.toLowerCase() == search || filter == "pays":
-                return true
-                break;
-
-            case item.acf.categorie_solution.toLowerCase() == search || filter == "categorie":
-                return true
-                break;
-
-            case item.acf.etiquette.toLowerCase() == search || filter == "etiquette":
-                return true
-                break;
-
-            case item.acf.type_fonds.toLowerCase() == search || filter == "besoin_financement":
-                return true
-                break;
-
-            case stade_found || filter == "stade":
-                return true
-                break;
-
-            case wp_terms || filter == "secteur":
-                return true
-                break;
-
-            default:
-                return false
-                break;
-        }
-    });
     return result;
 }
 

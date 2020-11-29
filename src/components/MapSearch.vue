@@ -2,9 +2,9 @@
   <div class="map-search active-cyan-4 mb-4">
     <div class="container-search">
       <div class="container-input position-relative">
-        <search v-if="filtreTexte" />
-        <select-range v-if="filtreRange" :filtre="filtre" />
-        <select-stade v-if="filtreStade" />
+        <search v-if="filter_search.active" />
+        <select-range v-if="filter_range.active" :filter="filter_range.value" />
+        <select-option v-if="filter_options.active" :filter="filter_options"/>
       </div>
       <!-- Filter -->
       <select-filter />
@@ -13,57 +13,33 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import Search from "./mapSearch/search.vue";
+import search from "./mapSearch/search.vue";
 import selectFilter from "./mapSearch/selectFilter.vue";
-import SelectRange from "./mapSearch/selectRange.vue";
-import SelectStade from "./mapSearch/selectStade.vue";
+import selectRange from "./mapSearch/selectRange.vue";
+import selectOption from "./mapSearch/selectOption.vue";
+
 export default {
-  components: { selectFilter, Search, SelectRange, SelectStade },
+  components: { selectFilter, search, selectRange, selectOption },
   data() {
     return {
-      filtre: "",
     };
   },
   computed: {
-    ...mapState(["activeSecteur"]),
-    filtreTexte() {
-      return this.filtre == "" ? true : false;
+    filter_search(){
+      return this.$store.state.filter_search
     },
-    filtreRange() {
-      return this.filtre == "range" ? true : false;
+    filter_range(){
+      return this.$store.state.filter_range
     },
-    filtreStade() {
-      return this.filtre == "stade" ? true : false;
-    },
+    filter_options(){
+      return this.$store.state.filter_options
+    }
   },
   watch: {
-    search() {
-      this.runSearch();
-    },
-    search2() {
-      this.runSearch();
-    },
-    searchArray() {
-      this.runSearch();
-    },
-    filtre() {
-      this.runSearch();
-    },
+    
   },
   methods: {
-    ...mapActions(["filtredData"]),
-    resetSearch() {
-      this.search = "";
-    },
-    runSearch() {
-      this.filtredData({
-        search: this.search,
-        filtre: this.filtre,
-        search2: this.search2,
-        searchArray: this.searchArray,
-      });
-    },
+  
   },
 };
 </script>

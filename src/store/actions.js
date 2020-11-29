@@ -24,24 +24,22 @@ export const actions = {
     // Search Key
     searchKey({ state, commit }, payload) {
         let search = payload.search.toLowerCase();
-        let result = filterSearch(state.data, search);
+        let result = filterSearch(state.data, search, state);
         const filtredCountries = checkCountries(result);
         commit("SET_COUNTRIES", filtredCountries);
+
     },
 
     // Filter By Criteria
     filterBy({ state, commit }, payload) {
-        let filter_type = payload.filter_type.toLowerCase();
-        let filter_value = payload.filter_value.toLowerCase();
-        let result = filterSearch(state.data, filter_type, filter_value);
+        let filter = payload.filter;
+        let result = filterSearch(state.data, filter, state.main_filter_options);
         const filtredCountries = checkCountries(result);
         commit("SET_COUNTRIES", filtredCountries);
+        commit("SET_FILTER", filter);
+        console.log("COUNTRIES", result);
     },
 
-    loadFilter({ state, commit }, payload) {
-        let filter_type = payload.filter_type.toLowerCase();
-        commit("SET_FILTER", filter_type);
-    },
 
     setActiveSecteur({ commit }, slug) {
         commit("SET_ACTIVE_SECTEUR", slug);

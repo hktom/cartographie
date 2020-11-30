@@ -10,7 +10,7 @@
       <side-content></side-content>
       </div>
     </b-col>
-      <!-- <Maps class="maps-position"></Maps> -->
+      <Maps class="maps-position"></Maps>
    
 
     <b-col cols="6" style="margin-top:10px" class="d-block d-lg-none px-5 mb-5">

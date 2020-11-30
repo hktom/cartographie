@@ -33,10 +33,13 @@ export const actions = {
     // Filter By Criteria
     filterBy({ state, commit }, payload) {
         let filter = payload.filter;
-        let result = filterSearch(state.data, filter, state.main_filter_options);
+        let main_options = state.main_filter_options;
+        let filter_selected = payload.filter_selected;
+
+        let result = filterSearch(state.data, filter, main_options, filter_selected);
         const filtredCountries = checkCountries(result);
         commit("SET_COUNTRIES", filtredCountries);
-        commit("SET_FILTER", filter);
+        // commit("SET_FILTER", filter);
         console.log("COUNTRIES", result);
     },
 

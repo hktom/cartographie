@@ -42,8 +42,7 @@ export const state = {
         "Année de création",
         "Nombre d'employé",
         "Stade",
-        "Besoin de financement",
-        "Etiquette",
+        "Besoin de financement"
     ],
     country_list: [
         "Afrique du Sud",

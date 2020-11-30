@@ -77,6 +77,9 @@ export default {
       if (val == this.main_filter_options[1]) {
         return { options: this.secteurs_list, placeholder: "Secteur" };
       }
+      if (val == this.main_filter_options[5]) {
+        return { options: this.stade_list, placeholder: "Stade" };
+      }
     },
     // filter_action(val){
     //   if (

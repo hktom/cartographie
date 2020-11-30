@@ -1,6 +1,10 @@
-export const filterSearch = (data, filter, options) => {
+export const filterSearch = (data, filter_value, main_options, filter_selected) => {
 
     let result = data;
+
+    if (filter_value == null) {
+        return result;
+    }
 
     // let result = data.filter((item) => {
     //     // secteur 
@@ -13,28 +17,28 @@ export const filterSearch = (data, filter, options) => {
     //     });
     // });
 
-    if (filter == options[0]) {
-        result = data.filter((item) => item.acf.pays_enreg_structure == filter);
+    if (filter_selected == main_options[0]) {
+        result = data.filter((item) => item.acf.pays_enreg_structure == filter_value);
     }
-    if (filter == options[1]) {
-        result = data.filter((item) => item.acf.categorie_solution == filter);
+    if (filter_selected == main_options[1]) {
+        result = data.filter((item) => item.acf.categorie_solution == filter_value);
     }
-    if (filter == options[4]) {
-        result = data.filter((item) => item.acf.annee_creation_entreprise == filter);
+    if (filter_selected == main_options[3]) {
+        result = data.filter((item) => item.acf.annee_creation_entreprise == filter_value);
     }
-    if (filter == options[5]) {
-        result = data.filter((item) => item.acf.nombre_employe == filter);
+    if (filter_selected == main_options[4]) {
+        result = data.filter((item) => filter_value.includes(item.acf.nombre_employe));
     }
-    if (filter == options[6]) {
-        result = data.filter((item) => filter.includes(
+    if (filter_selected == main_options[5]) {
+        result = data.filter((item) => filter_value.includes(
             item.acf.stade_de_developpement.toLowerCase()
         ));
     }
-    if (filter == options[8]) {
-        result = data.filter((item) => item.acf.etiquette == filter);
-    }
-    if (filter == options[7]) {
-        result = data.filter((item) => item.acf.type_fonds == filter);
+    // if (filter_selected==main_options[8]) {
+    //     result = data.filter((item) => item.acf.etiquette == filter_value);
+    // }
+    if (filter_selected == main_options[6]) {
+        result = data.filter((item) => item.acf.type_fonds == filter_value);
     }
 
     return result;

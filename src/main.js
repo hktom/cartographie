@@ -10,11 +10,13 @@ import VueI18n from 'vue-i18n'
 import messages from './i18n/messages'
 import vSelect from 'vue-select'
 import VueSimpleRangeSlider from 'vue-simple-range-slider';
+import VueSlider from 'vue-slider-component'
 import "./assets/sass/style.scss"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';
 import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css'
+import 'vue-slider-component/theme/antd.css'
 
 Vue.use(vuescroll, {
     ops: {
@@ -40,6 +42,7 @@ Vue.component('Maps', require('./components/Maps.vue').default)
 Vue.component('SideContent', require('./components/SideContent.vue').default)
 Vue.component('v-select', vSelect)
 Vue.component('VueSimpleRangeSlider', VueSimpleRangeSlider)
+Vue.component('VueSlider', VueSlider)
 
 
 let local_lang = null;

@@ -1,6 +1,8 @@
-import { checkCategories } from './helpers'
+//import { checkCategories } from './helpers'
 import { checkCountries } from './helpers'
 import { filterSearch } from './helpers'
+import { sectorReducer } from './helpers'
+import { filterPost } from './helpers'
 
 export const actions = {
 
@@ -13,11 +15,18 @@ export const actions = {
         window.axios
             .get(state.uri.url + lang + state.uri.api)
             .then(({ data }) => {
-                console.log(data);
                 commit("SET_DATA", data);
-                commit("SET_CATEGORIES", checkCategories(data));
-                commit("SET_COUNTRIES", checkCountries(data));
                 commit("SET_LOADING", false);
+            });
+    },
+
+    loadSectors({ commit, state }) {
+        commit("SET_LOADING_SECTOR", true);
+        window.axios
+            .get(state.uri.url + state.uri.secteur_api)
+            .then(({ data }) => {
+                commit("SET_SECTORS", sectorReducer(data));
+                commit("SET_LOADING_SECTOR", false);
             });
     },
 
@@ -29,7 +38,9 @@ export const actions = {
         commit("SET_COUNTRIES", filtredCountries);
 
     },
-
+    listPosts({ state, commit }, playload) {
+        commit("LIST_POSTS", filterPost(state.data, playload));
+    },
     // Filter By Criteria
     filterBy({ state, commit }, payload) {
         let filter = payload.filter;
@@ -39,8 +50,8 @@ export const actions = {
         let result = filterSearch(state.data, filter, main_options, filter_selected);
         const filtredCountries = checkCountries(result);
         commit("SET_COUNTRIES", filtredCountries);
-        // commit("SET_FILTER", filter);
         console.log("COUNTRIES", result);
+        // commit("SET_FILTER", filter);
     },
 
 

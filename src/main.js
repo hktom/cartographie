@@ -25,12 +25,13 @@ Vue.use(vuescroll, {
             background: '#DA4039',
         }
     },
-    name: 'myScroll'
+    name: 'vuescroll'
 });
 
 Vue.use(VueI18n)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+    //Vue.use(vuescroll, { ops: {}, name: 'vuescroll' });
 library.add(fas);
 Vue.config.productionTip = false
 window.axios = require("axios").default;

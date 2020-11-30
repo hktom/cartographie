@@ -1,20 +1,8 @@
-export const state = {
-    uri: {
-        url: "https://resilient.digital-africa.co/",
-        api: "/wp-json/wp/v2/mini_fiche?_embed=author,wp:term,wp:featuredmedia&per_page=100",
-    },
-    filter: null,
-    sub_filter: null,
-    search: [],
-    data: {},
-    secteurs: [],
-    categories: [],
-    countries: [],
-    activeSecteur: null,
-    menu: 1,
-    solutionsActive: [],
-    loading: false,
-    // news state
+const new_state = {
+    side_content: null,
+    posts: [],
+    post: [],
+    sectors: [],
     filter_search: {
         value: null,
         active: true
@@ -109,12 +97,38 @@ export const state = {
         "Série C",
     ],
     secteurs_list: [
-        "Education, formation professionnelle & emploi",
+        "Agriculture",
         "Agriculture & FoodTech",
+        "AgriTech",
+        "Data science",
+        "E-santé",
+        "Drone",
+        "Education, formation professionnelle & emploi",
         "Services financiers & Paiements",
         "E-commerce & Vente au détail",
         "Logistique & Chaînes d'approvisionnement",
         "Nouvelles mobilités & Transports",
+        "Autre",
     ],
+};
+
+export const state = {
+    uri: {
+        url: "https://resilient.digital-africa.co/",
+        api: "/wp-json/wp/v2/mini_fiche?_embed=author,wp:term,wp:featuredmedia&per_page=100",
+        secteur_api: "wp-json/wp/v2/secteur",
+    },
+    filter: null,
+    sub_filter: null,
+    search: [],
+    data: {},
+    secteurs: [],
+    categories: [],
+    countries: [],
+    activeSecteur: null,
+    menu: 1,
+    solutionsActive: [],
+    loading: false,
     lang: "fr",
+    ...new_state
 };

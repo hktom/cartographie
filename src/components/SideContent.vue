@@ -1,33 +1,29 @@
 <template>
   <div class="sidebar">
-    <secteur v-if="menu == 1" @selectSecteur="getFromSecteurs"></secteur>
-    <publications v-if="menu == 2"></publications>    
+    <secteur v-if="side_content == 'list_sectors'"></secteur>
+    <publications v-if="side_content == 'list_posts'"></publications>    
+    <publication v-if="side_content == 'show_pos'"></publication>    
   </div>
 </template>
 
 <script>
-import {mapState, mapActions} from "vuex" ;
 import Secteur from "./Secteur";
 import Publications from "./Publications"
+import Publication from "./Publication"
 
 export default {
-  components : { Secteur , Publications} ,
+  components : { Secteur , Publications, Publication} ,
   data() {
     return {
       solutions : []
     }
   },
   computed: {
-    ...mapState(['menu']),
+    side_content(){
+      return this.$store.state.side_content;
+    }
   },
   methods: {
-    ...mapActions(['setMenu', 'setSolutionsActive']), 
-    getFromSecteurs(data){
-      this.setMenu(2)
-      this.setSolutionsActive(data.solutions) 
-      //this.secteurActive = true
-      //this.solutions = data.solutions
-    }
   },
 }
 

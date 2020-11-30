@@ -20,11 +20,40 @@ const filter_mutation = {
     },
 }
 
-export const mutations = {
-    ...filter_mutation,
+const post_mutations = {
+    LIST_POSTS(state, data) {
+        state.posts = data;
+        state.side_content = "list_posts";
+    },
+    SHOW_POST(state, data) {
+        state.post = data;
+        state.side_content = "show_post";
+    },
+}
+
+const load_mutation = {
     SET_DATA(state, data) {
         state.data = data
     },
+    SET_LOADING(state, data) {
+        state.loading = data;
+    },
+    SET_LOADING_SECTOR(state, data) {
+        state.loading_sector = data;
+        state.side_content = "list_sectors";
+    },
+    SET_SECTORS(state, data) {
+        state.sectors = data;
+    },
+    SHOW_LIST_SECTORS(state, data) {
+        state.side_content = data;
+    }
+}
+
+export const mutations = {
+    ...filter_mutation,
+    ...load_mutation,
+    ...post_mutations,
     SET_SECTEURS(state, data) {
         state.secteurs = data
     },
@@ -45,9 +74,6 @@ export const mutations = {
     },
     SET_SOLUTIONS_ACTIVE(state, data) {
         state.solutionsActive = data
-    },
-    SET_LOADING(state, data) {
-        state.loading = data
     },
     SET_LANG(state, data) {
         state.lang = data

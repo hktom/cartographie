@@ -26,20 +26,17 @@
 </template>
 
 <script>
-import {mapActions, mapMutations} from "vuex" ;
-
 export default {
   name: "App",
   components: {
     
   },
   mounted() {
-    this.SET_LANG(this.$i18n.locale)
-    this.loadData()
+    this.$store.commit('SET_LANG', this.$i18n.locale)
+    this.$store.dispatch('loadData');
+    this.$store.dispatch('loadSectors');
   },
   methods: {
-    ...mapActions(['loadData']),
-    ...mapMutations(['SET_LANG'])
   },
 };
 </script>

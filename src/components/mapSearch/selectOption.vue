@@ -2,7 +2,7 @@
   <div lass="range-wrapper range-wrapper-multi-select">
     <v-select
      ref="dropdown"
-      :multiple="main_filter_options_selected==main_filter_options[1] || main_filter_options_selected==main_filter_options[2]"
+      :multiple="main_filter_options_selected==main_filter_options[1] || main_filter_options_selected==main_filter_options[2] || main_filter_options_selected==main_filter_options[5]"
       :autoscroll="true"
       :searchable="true"
       :options="filter.options"
@@ -33,8 +33,7 @@ export default {
   watch: {},
   methods: {
     select_filter(val){
-      console.log("selected", val);
-      return this.$store.dispatch("filterBy", {filter:val});
+      return this.$store.dispatch("filterBy", val);
     }
   },
 };

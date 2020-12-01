@@ -10,45 +10,33 @@ export const filterSearch = (
         return result;
     }
 
-    // let result = data.filter((item) => {
-    //     // secteur
-    //     let wp_terms = item._embedded["wp:term"][4].some((wp_term) => {
-    //         let term = wp_term.name.toLowerCase();
-    //         if (term.indexOf(search) !== -1 || search.indexOf(term) !== -1) {
-    //             return true;
-    //         }
-    //         return false;
-    //     });
-    // });
-
     if (filter_selected == main_options[0]) {
         result = data.filter(
-            (item) => item.acf.pays_enreg_structure == filter_value
-        );
+            (item) => item.acf.pays_enreg_structure == filter_value);
     }
     if (filter_selected == main_options[1]) {
-        result = data.filter((item) => item.acf.categorie_solution == filter_value);
+        result = data.filter((item) => filter_value.includes(item.acf.categorie_solution));
+    }
+    if (filter_selected == main_options[2]) {
+        result = data.filter(
+            (item) => item.acf.pays_solution_deployee.some((country) => filter_value.includes(country)));
     }
     if (filter_selected == main_options[3]) {
         result = data.filter(
-            (item) => item.acf.annee_creation_entreprise == filter_value
-        );
+            (item) => item.acf.annee_creation_entreprise == filter_value);
     }
     if (filter_selected == main_options[4]) {
-        result = data.filter((item) =>
-            filter_value.includes(item.acf.nombre_employe)
-        );
+        result = data.filter((item) => item.acf.nombre_employe <= filter_value[0] && item.acf.nombre_employe <= filter_value[1]);
     }
     if (filter_selected == main_options[5]) {
         result = data.filter((item) =>
             filter_value.includes(item.acf.stade_de_developpement)
         );
     }
-    // if (filter_selected==main_options[8]) {
-    //     result = data.filter((item) => item.acf.etiquette == filter_value);
-    // }
+
     if (filter_selected == main_options[6]) {
-        result = data.filter((item) => item.acf.type_fonds == filter_value);
+        result = data.filter((item) => item.acf.type_fonds == filter_value.type && (item.acf.montant_fonds <= filter_value.amount[0] && item.acf.montant_fonds <= filter_value.amount[1]));
+        console.log("financement", result);
     }
 
     return result;
@@ -130,4 +118,20 @@ export const reducerPostData = (data) => {
 
     });
     return data;
+}
+
+export const acfFilterReducer = (field, main_options) => {
+    if (field == main_options[0]) return { acf: "pays_enreg_structure", conditon: 'equal' };
+
+    if (field == main_options[1]) return { acf: "categorie_solution", condition: 'includes' };
+
+    if (field == main_options[2]) return { acf: "pays_solution_deployee", condition: 'includes' };
+
+    if (field == main_options[3]) return { acf: "annee_creation_entreprise", condition: 'equal' };
+
+    if (field == main_options[4]) return { acf: "nombre_employe", condition: 'range' };
+
+    if (field == main_options[5]) return { acf: "stade_de_developpement", condition: 'includes' };
+
+    if (field == main_options[6]) return { acf: ["type_fonds", "montant_fonds"], conditon: 'range_equal' };
 }

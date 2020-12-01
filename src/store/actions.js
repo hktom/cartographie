@@ -3,6 +3,8 @@ import { sectorReducer } from './helpers'
 import { filterPost } from './helpers'
 import { reducerCountries } from './helpers'
 import { reducerPostData } from './helpers'
+import { acfFilterReducer } from './helpers'
+
 
 export const actions = {
 
@@ -47,14 +49,21 @@ export const actions = {
     },
     // Filter By Criteria
     filterBy({ state, commit }, payload) {
-        let filter = payload.filter;
+        let filter = payload;
+        console.log("FILTER BY", payload);
+        if (!filter || filter.length <= 0) {
+            commit("SET_COUNTRY", reducerCountries(state.data, "pays_solution_deployee", null, 'default'));
+            return false;
+
+        }
+
+        console.log("Filter by force");
+        let filter_selected = state.main_filter_options_selected;
         let main_options = state.main_filter_options;
-        let filter_selected = payload.filter_selected;
         let result = filterSearch(state.data, filter, main_options, filter_selected);
-        commit("SET_COUNTRIES", result);
-        console.log("COUNTRIES", result);
-        //const filtredCountries = checkCountries(result);
-        // commit("SET_FILTER", filter);
+
+        let acf = acfFilterReducer(filter_selected, main_options);
+        commit("SET_COUNTRY", reducerCountries(result, acf.acf, filter, acf.condition));
     },
 
 

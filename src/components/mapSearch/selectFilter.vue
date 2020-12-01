@@ -27,8 +27,8 @@ export default {
     stade_list() {
       return this.$store.state.stade_list;
     },
-    secteurs_list() {
-      return this.$store.state.secteurs_list;
+    category_list() {
+      return this.$store.state.category_list;
     },
   },
   watch: {},
@@ -75,7 +75,7 @@ export default {
       }
 
       if (val == this.main_filter_options[1]) {
-        return { options: this.secteurs_list, placeholder: "Secteur" };
+        return { options: this.category_list, placeholder: "Categories" };
       }
       if (val == this.main_filter_options[5]) {
         return { options: this.stade_list, placeholder: "Stade" };

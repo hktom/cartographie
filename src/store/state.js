@@ -97,6 +97,15 @@ const new_state = {
         "Série C",
     ],
     secteurs_list: [],
+    category_list: [
+        "E-santé et bien-être",
+        "Éducation, formation professionnelle et emploi",
+        "Agriculture et technologie alimentaire",
+        "Services financiers et paiements",
+        "Commerce électronique et vente au détail",
+        "Logistique et chaînes d'approvisionnement",
+        "Nouvelles mobilités et transports"
+    ],
 };
 
 export const state = {
@@ -109,12 +118,12 @@ export const state = {
     sub_filter: null,
     search: [],
     data: {},
-    secteurs: [],
-    categories: [],
     countries: [],
-    activeSecteur: null,
-    menu: 1,
-    solutionsActive: [],
+    //secteurs: [],
+    //categories: [],
+    //activeSecteur: null,
+    //menu: 1,
+    //solutionsActive: [],
     loading: false,
     lang: "fr",
     ...new_state

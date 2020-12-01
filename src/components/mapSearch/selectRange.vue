@@ -12,13 +12,6 @@
             :tooltip="'always'"
             :tooltip-placement="['top', 'bottom']"
           ></vue-slider>
-          <!-- <VueSimpleRangeSlider
-        style="width: 100%"
-        :min="0"
-        :max="1000"
-        :logarithmic="true"
-        v-model="range"
-      /> -->
         </b-col>
       </b-row>
     </div>
@@ -34,12 +27,6 @@
             :min="1989"
             :max="2020"
           ></vue-slider>
-          <!-- <VueSimpleRangeSlider
-        style="width: 100%"
-        :min="1989"
-        :max="2020"
-        v-model="year"
-      /> -->
         </b-col>
       </b-row>
     </div>
@@ -59,18 +46,12 @@
           Montant en dollars (1 Euro = 1,18 Dollar)
           <vue-slider
             :min="0"
-            :max="100"
-            :interval="10"
-            v-model="range"
+            :max="5000"
+            :interval="100"
+            v-model="range_amount"
             :tooltip="'always'"
             :tooltip-placement="['top', 'bottom']"
           ></vue-slider>
-          <!-- <VueSimpleRangeSlider
-          style="width: 100%"
-          :min="2"
-          :max="1000"
-          v-model="range"
-        /> -->
         </b-col>
       </b-row>
     </div>
@@ -83,6 +64,7 @@ export default {
   data() {
     return {
       range: [10, 50],
+      range_amount: [0, 500],
       year: 1990,
     };
   },
@@ -91,10 +73,17 @@ export default {
       return this.$store.state.main_filter_options;
     },
   },
-  watch: {},
+  watch: {
+    year(){
+      return this.$store.dispatch("filterBy", this.year);
+    },
+    range(){
+      return this.$store.dispatch("filterBy", this.range);
+    }
+  },
   methods: {
     select_filter(val) {
-      console.log("selected", val);
+       return this.$store.dispatch("filterBy", {type:val, amount:this.range_amount});
     },
   },
 };

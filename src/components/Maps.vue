@@ -5,15 +5,16 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+    <div v-else>
     <div id="map"></div>
-    <div id="geocoder" class="geocoder"></div>
+    <!-- <div id="geocoder" class="geocoder"></div> -->
+     {{countries}}
+    </div>
   </div>
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl"; 
-import {mapActions, mapState} from "vuex" ;
-
 export default {
   data() {
     return {
@@ -23,11 +24,18 @@ export default {
       markerClick : false
     }
   },
+  computed:{
+    countries(){
+      return this.$store.state.countries;
+    },
+    loading(){
+      return this.$store.state.loading;
+    }
+  },
   mounted() {
-    this.initMap()
+    //this.initMap();
   },
   methods: {
-    ...mapActions(['setMenu','setSolutionsActive']),
     initMap(){
       mapboxgl.accessToken = window.access_token || "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
       this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
@@ -178,18 +186,15 @@ export default {
       return this.markerClick 
     }
   },
-  computed: {
-    ...mapState(['countries','loading','lang'])
-  },
   watch: {
-    countries(){
-      document.querySelectorAll('#marker-nbre-post').forEach(
-        domElement => domElement.remove()
-      )
-      this.countries.forEach((data) => {
-        this.setMarker(data.name, data.nb, data) 
-      })
-    }
+    // countries(){
+    //   document.querySelectorAll('#marker-nbre-post').forEach(
+    //     domElement => domElement.remove()
+    //   )
+    //   this.countries.forEach((data) => {
+    //     this.setMarker(data.name, data.nb, data) 
+    //   })
+    // }
   },
 }
 </script>

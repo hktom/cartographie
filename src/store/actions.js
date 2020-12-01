@@ -1,8 +1,8 @@
-//import { checkCategories } from './helpers'
-import { checkCountries } from './helpers'
 import { filterSearch } from './helpers'
 import { sectorReducer } from './helpers'
 import { filterPost } from './helpers'
+import { reducerCountries } from './helpers'
+import { reducerPostData } from './helpers'
 
 export const actions = {
 
@@ -15,7 +15,10 @@ export const actions = {
         window.axios
             .get(state.uri.url + lang + state.uri.api)
             .then(({ data }) => {
-                commit("SET_DATA", data);
+                let posts = reducerPostData(data);
+                let acf = "pays_solution_deployee";
+                commit("SET_DATA", posts);
+                commit("SET_COUNTRY", reducerCountries(posts, acf, null, 'default'));
                 commit("SET_LOADING", false);
             });
     },
@@ -25,7 +28,8 @@ export const actions = {
         window.axios
             .get(state.uri.url + state.uri.secteur_api)
             .then(({ data }) => {
-                commit("SET_SECTORS", sectorReducer(data));
+                commit("SET_SECTORS", sectorReducer(data).sectors);
+                commit("SET_SECTORS_LIST", sectorReducer(data).options);
                 commit("SET_LOADING_SECTOR", false);
             });
     },
@@ -34,8 +38,8 @@ export const actions = {
     searchKey({ state, commit }, payload) {
         let search = payload.search.toLowerCase();
         let result = filterSearch(state.data, search, state);
-        const filtredCountries = checkCountries(result);
-        commit("SET_COUNTRIES", filtredCountries);
+        //const filtredCountries = checkCountries(result);
+        commit("SET_COUNTRIES", result);
 
     },
     listPosts({ state, commit }, playload) {
@@ -46,11 +50,10 @@ export const actions = {
         let filter = payload.filter;
         let main_options = state.main_filter_options;
         let filter_selected = payload.filter_selected;
-
         let result = filterSearch(state.data, filter, main_options, filter_selected);
-        const filtredCountries = checkCountries(result);
-        commit("SET_COUNTRIES", filtredCountries);
+        commit("SET_COUNTRIES", result);
         console.log("COUNTRIES", result);
+        //const filtredCountries = checkCountries(result);
         // commit("SET_FILTER", filter);
     },
 

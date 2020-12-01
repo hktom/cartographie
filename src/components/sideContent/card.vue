@@ -4,27 +4,28 @@
     <div class="text-muted small">
       {{ $t("last-update") }} : {{ getDate(data.modified) }}
     </div>
-    <h3 class="mb-2">{{ data.acf.titre_de_la_solution }}</h3>
+    <h3 class="mb-2">{{ acf.titre_de_la_solution }}</h3>
     <!-- Structure Pays -->
-    <div v-if="data.acf.pays_enreg_structure" class="d-flex align-items-center">
+    <div v-if="acf.pays_enreg_structure" class="d-flex align-items-center">
       <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
       <span class="small mr-1">
-        {{ data.acf.pays_enreg_structure }}
+        {{ acf.pays_enreg_structure }}
       </span>
     </div>
     <!-- Structure Pays -->
     <!-- Structure embed Solution -->
-    <div
-      v-if="data._embedded['wp:term'][4].length > 0"
-      class="d-flex align-items-baseline mt-2"
-    >
+    <div v-if="terms.length > 0" class="d-flex align-items-baseline mt-2">
       <span class="icon-pictos-bridgepictos-02 mr-2"></span>
       <div>
-        <div class="small" v-html="data.acf.categorie_solution"></div>
+        <div
+          class="small"
+          v-if="acf.categorie_solution != `- Select a category `"
+          v-html="acf.categorie_solution"
+        ></div>
         <div style="margin-top:-5px">
           <span
             class="text-pays mr-1 mt-n1"
-            v-for="(item, id) in data._embedded['wp:term'][4]"
+            v-for="(item, id) in terms[0]"
             :key="'pays' + id"
           >
             <span v-if="id != 0" class="small"> | </span>
@@ -36,8 +37,8 @@
     <!-- Structure embed Solution -->
 
     <!-- Button -->
-    <p class="mt-3" v-html="resume(data.acf.description_solution)"></p>
-    <a href="#!" class="more">
+    <p class="mt-3" v-html="resume(acf.description_solution)"></p>
+    <a href="#!" class="more" @click="showPost(data)">
       {{ $t("more") }} <span class="icon-pictos-bridgego color-orange"></span>
     </a>
     <!-- Button -->
@@ -50,15 +51,28 @@
 export default {
   props: ["data"],
   data() {
-    return {};
+    return {
+      acf: {},
+      terms: [],
+    };
+  },
+  mounted() {
+    this.acf = this.data.acf;
+    this.terms = this.data._embedded?this.data._embedded["wp:term"]:[];
   },
   computed: {},
   methods: {
-    showPost() {
-      return this.$store.dispatch("SHOW_POST", this.data);
+    showPost(data) {
+      return this.$store.commit("SHOW_POST", data);
     },
     resume(slug) {
-      return slug.substr(0, 130) + "...";
+      if(slug){
+        return slug.substr(0, 130) + "...";
+      }
+      else
+      {
+        return "";
+      }
     },
     getDate(datePub) {
       const date = new Date(datePub);

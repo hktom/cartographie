@@ -13,43 +13,33 @@
       </div>
       <vuescroll class="vueScroll">
         <b-list-group>
-          <b-list-group-item
-            @click.prevent="setTargetPub(data)"
-            v-for="(data, i) in posts"
-            :key="i"
-          >
-            <card :data="data" />
+          <b-list-group-item v-for="(post, i) in posts" :key="i">
+            <card :data="post"></card>
           </b-list-group-item>
         </b-list-group>
       </vuescroll>
     </div>
-    <!-- <Publication :pub="targetPublication" v-else @back="resetPub()"></Publication> -->
   </div>
 </template>
 
 <script>
-//import { mapState, mapActions } from "vuex" ;
-//import Publication from "./Publication"
 import vuescroll from "vuescroll";
-import Card from "./card/card.vue";
+import Card from "./card";
 
 export default {
-  props:['data'],
+  props: ["data"],
   components: {
-    //  Publication,
     vuescroll,
     Card,
   },
   data() {
-    return {
-      //targetPublication : null
-    };
+    return {};
   },
   mounted() {},
   computed: {
-    posts(){
+    posts() {
       return this.$store.state.posts;
-    }
+    },
   },
   methods: {
     goBack() {
@@ -61,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/sass/_variables.scss";
+@import "../../assets/sass/_variables.scss";
 .list-group-item {
   cursor: pointer;
   .more {

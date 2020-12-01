@@ -1,18 +1,18 @@
 <template>
   <div class="sidebar">
     <secteur v-if="side_content == 'list_sectors'"></secteur>
-    <publications v-if="side_content == 'list_posts'"></publications>    
-    <publication v-if="side_content == 'show_pos'"></publication>    
+    <list-posts v-if="side_content == 'list_posts'"></list-posts>
+    <single-post v-if="side_content == 'show_post'"></single-post>
   </div>
 </template>
 
 <script>
-import Secteur from "./Secteur";
-import Publications from "./Publications"
-import Publication from "./Publication"
+import Secteur from "./sideContent/Secteur";
+import ListPosts from './sideContent/ListPosts.vue';
+import SinglePost from './sideContent/SinglePost.vue';
 
 export default {
-  components : { Secteur , Publications, Publication} ,
+  components : { Secteur , SinglePost, ListPosts} ,
   data() {
     return {
       solutions : []

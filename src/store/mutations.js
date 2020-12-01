@@ -45,7 +45,13 @@ const load_mutation = {
     SET_SECTORS(state, data) {
         state.sectors = data;
     },
+    SET_SECTORS_LIST(state, data) {
+        state.secteurs_list = data;
+    },
     SHOW_LIST_SECTORS(state, data) {
+        state.side_content = data;
+    },
+    SHOW_LIST_POSTS(state, data) {
         state.side_content = data;
     }
 }
@@ -54,27 +60,30 @@ export const mutations = {
     ...filter_mutation,
     ...load_mutation,
     ...post_mutations,
-    SET_SECTEURS(state, data) {
-        state.secteurs = data
+    SET_COUNTRY(state, data) {
+        state.countries = data;
     },
-    SET_CATEGORIES(state, data) {
-        state.categories = data
-    },
-    SET_COUNTRIES(state, data) {
-        state.countries = data
-    },
-    SET_SEARCH(state, data) {
-        state.search = data
-    },
-    SET_ACTIVE_SECTEUR(state, data) {
-        state.activeSecteur = data
-    },
-    SET_MENU(state, data) {
-        state.menu = data
-    },
-    SET_SOLUTIONS_ACTIVE(state, data) {
-        state.solutionsActive = data
-    },
+    // SET_SECTEURS(state, data) {
+    //     state.secteurs = data
+    // },
+    // SET_CATEGORIES(state, data) {
+    //     state.categories = data
+    // },
+    // SET_COUNTRIES(state, data) {
+    //     state.countries = data
+    // },
+    // SET_SEARCH(state, data) {
+    //     state.search = data
+    // },
+    // SET_ACTIVE_SECTEUR(state, data) {
+    //     state.activeSecteur = data
+    // },
+    // SET_MENU(state, data) {
+    //     state.menu = data
+    // },
+    // SET_SOLUTIONS_ACTIVE(state, data) {
+    //     state.solutionsActive = data
+    // },
     SET_LANG(state, data) {
         state.lang = data
     }

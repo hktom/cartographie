@@ -96,27 +96,14 @@ const new_state = {
         "Série B",
         "Série C",
     ],
-    secteurs_list: [
-        "Agriculture",
-        "Agriculture & FoodTech",
-        "AgriTech",
-        "Data science",
-        "E-santé",
-        "Drone",
-        "Education, formation professionnelle & emploi",
-        "Services financiers & Paiements",
-        "E-commerce & Vente au détail",
-        "Logistique & Chaînes d'approvisionnement",
-        "Nouvelles mobilités & Transports",
-        "Autre",
-    ],
+    secteurs_list: [],
 };
 
 export const state = {
     uri: {
         url: "https://resilient.digital-africa.co/",
         api: "/wp-json/wp/v2/mini_fiche?_embed=author,wp:term,wp:featuredmedia&per_page=100",
-        secteur_api: "wp-json/wp/v2/secteur",
+        secteur_api: "wp-json/wp/v2/mf_secteurs",
     },
     filter: null,
     sub_filter: null,

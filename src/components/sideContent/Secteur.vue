@@ -9,7 +9,7 @@
         style="border-radius:0px;height:100%"
       >
         <b-list-group-item
-        v-if="sector.count>0"
+          v-if="sector.count > 0"
           class="d-flex justify-content-between align-items-center"
           @click="listPosts(sector.id)"
         >
@@ -24,30 +24,29 @@
 </template>
 
 <script>
-import vuescroll from 'vuescroll';
+import vuescroll from "vuescroll";
 export default {
-  components: {vuescroll},
+  components: { vuescroll },
   data() {
     return {};
   },
   computed: {
     sectors() {
-      console.log(this.$store.state.sectors);
+
       return this.$store.state.sectors;
     },
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-    listPosts(sector_id){
+    listPosts(sector_id) {
       return this.$store.dispatch("listPosts", sector_id);
-    }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/sass/_variables.scss";
+@import "../../assets/sass/_variables.scss";
 
 .list-group {
   margin-left: 0px;

@@ -54,58 +54,80 @@ export const filterSearch = (
     return result;
 };
 
-export const checkCountries = (data) => {
-    let countries = [];
-    data.forEach((pub) => {
-        pub.pays.forEach((pays, index) => {
-            const exist = countries.findIndex((x) => x.id == pays);
-            if (exist != -1) {
-                countries[exist].nb++;
-                countries[exist].solutions.push(pub);
-            } else {
-                countries.push({
-                    id: pays,
-                    name: pub._embedded["wp:term"][3][index]["name"],
-                    nb: 1,
-                    solutions: [pub],
-                });
-            }
-        });
+export const sectorReducer = (data) => {
+    let sectors = [];
+    let sectors_options = [];
+    data.map((item, index) => {
+        sectors[index] = { id: item.id, count: item.count, name: item.name, taxonomy: item.taxonomy };
+        sectors_options[index] = { label: item.name.replace("&amp;", "&"), options: item.id };
     });
+    return { sectors: sectors, options: sectors_options };
+};
+
+function _filter(post, id) {
+    if (post._embedded) {
+        let indexe = post._embedded["wp:term"][0].findIndex((term) => term.id == id);
+        if (indexe != -1) {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
+export const filterPost = (data, sector_id) => {
+    let posts = data.filter((post) => _filter(post, sector_id));
+    console.log("POSTS", posts);
+    return posts;
+}
+
+function check_condition(value, check, condition) {
+    if (condition == "range") {
+        return check[0] <= value && check[1] >= value ? true : false;
+    }
+
+    if (condition == "includes") {
+        return check.includes[value] ? true : false;
+    }
+
+    if (condition == "equal") {
+        return value == check ? true : false;
+    }
+    if (condition == "default") {
+        return true;
+    }
+    return false;
+}
+
+export const reducerCountries = (posts, acf, acf_value, condition) => {
+    let countries = [];
+
+    posts.forEach((post) => {
+        const countryIndex = countries.findIndex((country) => country.name == post.acf.pays_enreg_structure && check_condition(post.acf[acf], acf_value, condition));
+
+        if (countryIndex != -1) {
+            countries[countryIndex].count++;
+        } else {
+            countries.push({
+                name: post.acf.pays_enreg_structure,
+                count: 1
+            });
+        }
+
+    });
+
     return countries;
 };
 
-export const checkCategories = (data) => {
-    let categories = [];
-    data.forEach((pub) => {
-        const exist = categories.findIndex(
-            (x) => x.name == pub.acf.categorie_solution
-        );
-        if (exist != -1) {
-            categories[exist].nb++;
-            categories[exist].solutions.push(pub);
+export const reducerPostData = (data) => {
+    data.map((item) => {
+        if (item.acf.pays_solution_deployee != "") {
+            let strToArray = item.acf.pays_solution_deployee.split(", ");
+            item.acf.pays_solution_deployee = strToArray;
         } else {
-            categories.push({
-                name: pub.acf.categorie_solution,
-                solutions: [pub],
-                nb: 1,
-            });
+            item.acf.pays_solution_deployee = [];
         }
+
     });
-
-    return categories;
-};
-
-export const sectorReducer = (data) => {
-    let sectors = [];
-    data.map((item, index) => {
-        sectors[index] = { id: item.id, count: item.count, name: item.name, taxonomy: item.taxonomy }
-    });
-    return sectors;
-};
-
-export const filterPost = (data, sector_id) => {
-    console.log("FILTER", sector_id);
     return data;
-    //return data.filter((post) => post._embedded["wp:term"][0][4].id == sector_id);
 }

@@ -55,7 +55,7 @@ const new_state = {
         },
         {
             option: "République démocratique du Congo",
-            en: "Democratic Republic of Congo",
+            en: "Democratic Republic of the Congo",
             label: "République démocratique du Congo",
         },
         { option: "Côte d’Ivoire", en: "Ivory Coast", label: "Côte d’Ivoire" },

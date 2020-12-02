@@ -2,9 +2,10 @@
   <div id="app">
 
   <b-row>
-    <b-col cols="12" lg="8">
+    <b-col cols="12" lg="4">
       <map-search class="search"></map-search>
     </b-col>
+    <b-col cols="12" lg="4"></b-col>
     <b-col cols="12" lg="4" style="margin-top:10px" class="d-none d-lg-block">
       <div style="z-index:5;position:absolute;height:0px;width:95%">
       <side-content></side-content>

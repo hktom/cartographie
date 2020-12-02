@@ -2,38 +2,38 @@
   <div class="map-search active-cyan-4 mb-4">
     <div class="container-search">
       <div class="container-input position-relative">
-        <search v-if="filter_search.active" />
-        <select-range v-if="filter_range.active" :filter="filter_range.value" />
-        <select-option v-if="filter_options.active" :filter="filter_options"/>
+        <search></search>
+        <!-- <select-range v-if="filter_range.active" :filter="filter_range.value" />
+        <select-option v-if="filter_options.active" :filter="filter_options"/> -->
       </div>
       <!-- Filter -->
-      <select-filter />
+      <!-- <select-filter></select-filter> -->
     </div>
   </div>
 </template>
 
 <script>
 import search from "./mapSearch/search.vue";
-import selectFilter from "./mapSearch/selectFilter.vue";
-import selectRange from "./mapSearch/selectRange.vue";
-import selectOption from "./mapSearch/selectOption.vue";
+//import selectFilter from "./mapSearch/selectFilter.vue";
+// import selectRange from "./mapSearch/selectRange.vue";
+// import selectOption from "./mapSearch/selectOption.vue";
 
 export default {
-  components: { selectFilter, search, selectRange, selectOption },
+  components: { search},
   data() {
     return {
     };
   },
   computed: {
-    filter_search(){
-      return this.$store.state.filter_search
-    },
-    filter_range(){
-      return this.$store.state.filter_range
-    },
-    filter_options(){
-      return this.$store.state.filter_options
-    }
+    // filter_search(){
+    //   return this.$store.state.filter_search
+    // },
+    // filter_range(){
+    //   return this.$store.state.filter_range
+    // },
+    // filter_options(){
+    //   return this.$store.state.filter_options
+    // }
   },
   watch: {
     
@@ -82,7 +82,8 @@ select {
   box-sizing: border-box;
 }
 .container-input {
-  width: calc(100% - 250px);
+  // width: calc(100% - 250px);
+  width:100%;
 }
 .container-filtre {
   width: 250px;

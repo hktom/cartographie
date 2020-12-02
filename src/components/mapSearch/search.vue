@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <form @submit="research">
     <font-awesome-icon v-if="search == ''" class="ico-search" icon="search" />
     <font-awesome-icon
       v-else
@@ -14,25 +14,26 @@
       aria-label="Search"
       v-model="search"
     />
-  </div>
+  </form>
 </template>
 
 <script>
 export default {
   data() {
     return {
-        search : "" , 
+      search: "",
     };
   },
-  computed: {
-        
-    },
-    watch: {
-    },
-        methods: {
-        
-    },
-    
+  computed: {},
+  watch: {
+  },
+  methods: {
+    research(e){
+      e.preventDefault();
+      console.log(this.search);
+      return this.$store.dispatch("searchKey", this.search);
+    }
+  },
 };
 </script>
 

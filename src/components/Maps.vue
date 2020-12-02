@@ -8,7 +8,6 @@
     <div v-else>
       <div id="map"></div>
       <div id="geocoder" class="geocoder"></div>
-      {{ countries }}
     </div>
   </div>
 </template>
@@ -31,9 +30,6 @@ export default {
     loading() {
       return this.$store.state.loading;
     },
-    country_list(){
-      return this.$store.state.country_list;
-    },
   },
   mounted() {
     this.initMap();
@@ -44,19 +40,14 @@ export default {
         .querySelectorAll("#marker-nbre-post")
         .forEach((domElement) => domElement.remove());
       this.countries.forEach((data) => {
-        this.setMarker(data.name, data.count, data);
+        this.setMarker(data.name, data.count);
       });
     },
   },
   methods: {
-    reduceCountriesForMapBox(){
-      let mapbox_countries=[];
-      this.country_list.map((item)=>{
-        let index=this.countries.findIndex((_item)=>_item.name==item.label);
-        if(index!=-1) mapbox_countries.push(item.en);
-      })
-      console.log(mapbox_countries);
-      return mapbox_countries;
+    filterMap(country_name){
+      //console.log(country_name);
+      return this.$store.dispatch("mapFilter", country_name);
     },
     initMap() {
       mapboxgl.accessToken =
@@ -78,7 +69,7 @@ export default {
           "name_fr",
         ]);
         countries.forEach((data) => {
-          this.setMarker(data.name, data.count, data);
+          this.setMarker(data.name, data.count);
         });
         this.countrieShap();
       });
@@ -87,7 +78,8 @@ export default {
     countrieShap() {
       let hoveredStateId = this.hoveredStateId;
       const map = this.map;
-      const setPub = this.setPub;
+      //const setPub = this.setPub;
+      const filterMap=this.filterMap;
       const markerClick = this.getMarkerClick;
 
       //soucres geojson
@@ -104,13 +96,12 @@ export default {
         layout: {},
         paint: {
           "fill-color": "red",
-          "fill-opacity": 0.2,
-          // "fill-opacity": [
-          //   "case",
-          //   ["boolean", ["feature-state", "hover"], false],
-          //   0.2,
-          //   0.0,
-          // ],
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            0.2,
+            0.0,
+          ],
         },
       });
       this.map.addLayer({
@@ -124,10 +115,6 @@ export default {
         },
       });
 
-      // Filter
-      let _countries=this.reduceCountriesForMapBox();
-      this.map.setFilter('state-fills', ['in', 'name'].concat(_countries));
-      // When the user moves their mouse over the state-fill layer, we'll update the
       // feature state for the feature under the mouse.
       this.map.on("mousemove", "state-fills", function(e) {
         if (e.features.length > 0) {
@@ -158,15 +145,14 @@ export default {
 
       this.map.on("click", "state-fills", function(e) {
         if (!markerClick()) {
-          const country_name = e.features[0].properties.admin
-            .toLowerCase()
-            .replaceAll(" ", "");
+          const country_name = e.features[0].properties.admin.toLowerCase();
           const targetMarker = document.querySelector(
             "#marker-nbre-post." + country_name
           );
+          filterMap(country_name);
           if (targetMarker) targetMarker.click();
           else {
-            setPub([]);
+            //setPub([]);
             const active = document.querySelector(".activeMarker");
             if (active) {
               active.classList.remove("activeMarker");
@@ -176,10 +162,11 @@ export default {
       });
     },
 
-    setMarker(countryName, totalPost, data) {
+    setMarker(countryName, totalPost) {
       const map = this.map;
-      const setPub = this.setPub;
+      //const setPub = this.setPub;
       const setMarkerClick = this.setMarkerClick;
+      const filterMap=this.filterMap;
 
       this.mapboxClient.geocoding
         .forwardGeocode({
@@ -197,6 +184,7 @@ export default {
             res.body.features.length
           ) {
             var feature = res.body.features[0];
+            //const country_name = e.features[0].properties.admin
             // create DOM element for the marker
             var el = document.createElement("div");
             el.innerHTML = `${totalPost}`;
@@ -211,7 +199,8 @@ export default {
                 active.classList.remove("activeMarker");
               }
               e.target.classList.add("activeMarker");
-              setPub(data);
+              filterMap(countryName);
+              //setPub(data);
               setTimeout(() => {
                 setMarkerClick(false);
               }, 100);
@@ -222,16 +211,16 @@ export default {
           }
         });
     },
-    setPub(data) {
-      //redefinir menu
-      this.setMenu(2);
-      // definir les publication
-      if (data.solutions) {
-        this.setSolutionsActive(data.solutions);
-      } else {
-        this.setSolutionsActive([]);
-      }
-    },
+    // setPub(data) {
+    //   //redefinir menu
+    //   // this.setMenu(2);
+    //   // // definir les publication
+    //   // if (data.solutions) {
+    //   //   this.setSolutionsActive(data.solutions);
+    //   // } else {
+    //   //   this.setSolutionsActive([]);
+    //   // }
+    // },
     setMarkerClick(val) {
       this.markerClick = val;
     },

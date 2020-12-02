@@ -1,3 +1,23 @@
+export const researchAction = (data, searchValue) => {
+    return data.filter(
+        (item) =>
+        item.acf.pays_solution_deployee.findIndex(
+            (country) => searchValue == country
+        ) != -1 ||
+        item.acf.pays_enreg_structure.toLowerCase().search(searchValue) != -1 ||
+        item.acf.titre_de_la_solution.toLowerCase().search(searchValue) != -1 ||
+        item.acf.autre_zone.toLowerCase().search(searchValue) != -1 ||
+        item.acf.annee_creation_entreprise.toLowerCase().search(searchValue) !=
+        -1 ||
+        item.acf.nombre_employe.toLowerCase().search(searchValue) != -1 ||
+        item.acf.la_solution.toLowerCase().search(searchValue) != -1 ||
+        item.acf.categorie_solution.toLowerCase().search(searchValue) != -1 ||
+        item.acf.autre_categorie_solution.toLowerCase().search(searchValue) !=
+        -1 ||
+        item.acf.stade_de_developpement.toLowerCase().search(searchValue) != -1
+    );
+};
+
 export const filterSearch = (
     data,
     filter_value,
@@ -12,21 +32,32 @@ export const filterSearch = (
 
     if (filter_selected == main_options[0]) {
         result = data.filter(
-            (item) => item.acf.pays_enreg_structure == filter_value);
+            (item) => item.acf.pays_enreg_structure == filter_value
+        );
     }
     if (filter_selected == main_options[1]) {
-        result = data.filter((item) => filter_value.includes(item.acf.categorie_solution));
+        result = data.filter((item) =>
+            filter_value.includes(item.acf.categorie_solution)
+        );
     }
     if (filter_selected == main_options[2]) {
-        result = data.filter(
-            (item) => item.acf.pays_solution_deployee.some((country) => filter_value.includes(country)));
+        result = data.filter((item) =>
+            item.acf.pays_solution_deployee.some((country) =>
+                filter_value.includes(country)
+            )
+        );
     }
     if (filter_selected == main_options[3]) {
         result = data.filter(
-            (item) => item.acf.annee_creation_entreprise == filter_value);
+            (item) => item.acf.annee_creation_entreprise == filter_value
+        );
     }
     if (filter_selected == main_options[4]) {
-        result = data.filter((item) => item.acf.nombre_employe <= filter_value[0] && item.acf.nombre_employe <= filter_value[1]);
+        result = data.filter(
+            (item) =>
+            item.acf.nombre_employe <= filter_value[0] &&
+            item.acf.nombre_employe <= filter_value[1]
+        );
     }
     if (filter_selected == main_options[5]) {
         result = data.filter((item) =>
@@ -35,7 +66,12 @@ export const filterSearch = (
     }
 
     if (filter_selected == main_options[6]) {
-        result = data.filter((item) => item.acf.type_fonds == filter_value.type && (item.acf.montant_fonds <= filter_value.amount[0] && item.acf.montant_fonds <= filter_value.amount[1]));
+        result = data.filter(
+            (item) =>
+            item.acf.type_fonds == filter_value.type &&
+            item.acf.montant_fonds <= filter_value.amount[0] &&
+            item.acf.montant_fonds <= filter_value.amount[1]
+        );
         console.log("financement", result);
     }
 
@@ -46,15 +82,25 @@ export const sectorReducer = (data) => {
     let sectors = [];
     let sectors_options = [];
     data.map((item, index) => {
-        sectors[index] = { id: item.id, count: item.count, name: item.name, taxonomy: item.taxonomy };
-        sectors_options[index] = { label: item.name.replace("&amp;", "&"), options: item.id };
+        sectors[index] = {
+            id: item.id,
+            count: item.count,
+            name: item.name,
+            taxonomy: item.taxonomy,
+        };
+        sectors_options[index] = {
+            label: item.name.replace("&amp;", "&"),
+            options: item.id,
+        };
     });
     return { sectors: sectors, options: sectors_options };
 };
 
 function _filter(post, id) {
     if (post._embedded) {
-        let indexe = post._embedded["wp:term"][0].findIndex((term) => term.id == id);
+        let indexe = post._embedded["wp:term"][0].findIndex(
+            (term) => term.id == id
+        );
         if (indexe != -1) {
             return true;
         }
@@ -67,7 +113,7 @@ export const filterPost = (data, sector_id) => {
     let posts = data.filter((post) => _filter(post, sector_id));
     console.log("POSTS", posts);
     return posts;
-}
+};
 
 function check_condition(value, check, condition) {
     if (condition == "range") {
@@ -91,17 +137,20 @@ export const reducerCountries = (posts, acf, acf_value, condition) => {
     let countries = [];
 
     posts.forEach((post) => {
-        const countryIndex = countries.findIndex((country) => country.name == post.acf.pays_enreg_structure && check_condition(post.acf[acf], acf_value, condition));
+        const countryIndex = countries.findIndex(
+            (country) =>
+            country.name == post.acf.pays_enreg_structure &&
+            check_condition(post.acf[acf], acf_value, condition)
+        );
 
         if (countryIndex != -1) {
             countries[countryIndex].count++;
         } else {
             countries.push({
                 name: post.acf.pays_enreg_structure,
-                count: 1
+                count: 1,
             });
         }
-
     });
 
     return countries;
@@ -115,23 +164,29 @@ export const reducerPostData = (data) => {
         } else {
             item.acf.pays_solution_deployee = [];
         }
-
     });
     return data;
-}
+};
 
 export const acfFilterReducer = (field, main_options) => {
-    if (field == main_options[0]) return { acf: "pays_enreg_structure", conditon: 'equal' };
+    if (field == main_options[0])
+        return { acf: "pays_enreg_structure", conditon: "equal" };
 
-    if (field == main_options[1]) return { acf: "categorie_solution", condition: 'includes' };
+    if (field == main_options[1])
+        return { acf: "categorie_solution", condition: "includes" };
 
-    if (field == main_options[2]) return { acf: "pays_solution_deployee", condition: 'includes' };
+    if (field == main_options[2])
+        return { acf: "pays_solution_deployee", condition: "includes" };
 
-    if (field == main_options[3]) return { acf: "annee_creation_entreprise", condition: 'equal' };
+    if (field == main_options[3])
+        return { acf: "annee_creation_entreprise", condition: "equal" };
 
-    if (field == main_options[4]) return { acf: "nombre_employe", condition: 'range' };
+    if (field == main_options[4])
+        return { acf: "nombre_employe", condition: "range" };
 
-    if (field == main_options[5]) return { acf: "stade_de_developpement", condition: 'includes' };
+    if (field == main_options[5])
+        return { acf: "stade_de_developpement", condition: "includes" };
 
-    if (field == main_options[6]) return { acf: ["type_fonds", "montant_fonds"], conditon: 'range_equal' };
-}
+    if (field == main_options[6])
+        return { acf: ["type_fonds", "montant_fonds"], conditon: "range_equal" };
+};

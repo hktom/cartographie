@@ -4,6 +4,8 @@ import { filterPost } from './helpers'
 import { reducerCountries } from './helpers'
 import { reducerPostData } from './helpers'
 import { acfFilterReducer } from './helpers'
+import { researchAction } from './helpers'
+
 const axios = require('axios').default;
 
 export const actions = {
@@ -18,7 +20,7 @@ export const actions = {
             .get(state.uri.url + lang + state.uri.api)
             .then(({ data }) => {
                 let posts = reducerPostData(data);
-                let acf = "pays_solution_deployee";
+                let acf = "pays_enreg_structure";
                 commit("SET_DATA", posts);
                 commit("SET_COUNTRY", reducerCountries(posts, acf, null, 'default'));
                 commit("SET_LOADING", false);
@@ -38,10 +40,18 @@ export const actions = {
 
     // Search Key
     searchKey({ state, commit }, payload) {
-        let search = payload.search.toLowerCase();
-        let result = filterSearch(state.data, search, state);
+        let search = payload.toLowerCase();
+        commit("LIST_POSTS", researchAction(state.data, search));
         //const filtredCountries = checkCountries(result);
-        commit("SET_COUNTRIES", result);
+        //commit("SET_COUNTRIES", result);
+
+    },
+    // filter from map
+    mapFilter({ state, commit }, payload) {
+        let main_options = state.main_filter_options;
+        let countryName = state.country_list.filter((item) => item.option.toLowerCase() == payload.toLowerCase() || item.en.toLowerCase() == payload.toLowerCase());
+        let result = filterSearch(state.data, countryName[0].label, main_options, "Pays d'origine");
+        commit("LIST_POSTS", result);
 
     },
     listPosts({ state, commit }, playload) {
@@ -51,13 +61,13 @@ export const actions = {
     filterBy({ state, commit }, payload) {
         let filter = payload;
         console.log("FILTER BY", payload);
+        // filter null
         if (!filter || filter.length <= 0) {
             commit("SET_COUNTRY", reducerCountries(state.data, "pays_solution_deployee", null, 'default'));
             return false;
 
         }
 
-        console.log("Filter by force");
         let filter_selected = state.main_filter_options_selected;
         let main_options = state.main_filter_options;
         let result = filterSearch(state.data, filter, main_options, filter_selected);

@@ -4,17 +4,17 @@ import { filterPost } from './helpers'
 import { reducerCountries } from './helpers'
 import { reducerPostData } from './helpers'
 import { acfFilterReducer } from './helpers'
-
+const axios = require('axios').default;
 
 export const actions = {
 
     // Load Data
     loadData({ commit, state }) {
-        commit("SET_LOADING", true);
+        //commit("SET_LOADING", true);
         let lang = "";
         if (state.lang == "en") lang = "en";
 
-        window.axios
+        axios
             .get(state.uri.url + lang + state.uri.api)
             .then(({ data }) => {
                 let posts = reducerPostData(data);
@@ -27,7 +27,7 @@ export const actions = {
 
     loadSectors({ commit, state }) {
         commit("SET_LOADING_SECTOR", true);
-        window.axios
+        axios
             .get(state.uri.url + state.uri.secteur_api)
             .then(({ data }) => {
                 commit("SET_SECTORS", sectorReducer(data).sectors);

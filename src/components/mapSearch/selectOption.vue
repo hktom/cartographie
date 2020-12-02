@@ -1,8 +1,12 @@
 <template>
   <div lass="range-wrapper range-wrapper-multi-select">
     <v-select
-     ref="dropdown"
-      :multiple="main_filter_options_selected==main_filter_options[1] || main_filter_options_selected==main_filter_options[2] || main_filter_options_selected==main_filter_options[5]"
+      ref="dropdown"
+      :multiple="
+        main_filter_options_selected == main_filter_options[1] ||
+          main_filter_options_selected == main_filter_options[2] ||
+          main_filter_options_selected == main_filter_options[5]
+      "
       :autoscroll="true"
       :searchable="true"
       :options="filter.options"
@@ -15,26 +19,34 @@
 
 <script>
 export default {
-  props:['filter'],
+  props: ["filter"],
   data() {
     return {};
   },
   mounted: function() {
-    this.$refs.dropdown.open=true;
+    this.$refs.dropdown.open = true;
   },
   computed: {
     main_filter_options() {
       return this.$store.state.main_filter_options;
     },
-    main_filter_options_selected(){
+    main_filter_options_selected() {
       return this.$store.state.main_filter_options_selected;
-    }
+    },
   },
   watch: {},
   methods: {
-    select_filter(val){
-      return this.$store.dispatch("filterBy", val);
-    }
+    select_filter(val) {
+      if (
+        val &&
+        (this.main_filter_options[0] == this.main_filter_options_selected ||
+          this.main_filter_options[2] == this.main_filter_options_selected)
+      ) {
+        return this.$store.dispatch("filterBy", val.option);
+      } else {
+        return this.$store.dispatch("filterBy", val);
+      }
+    },
   },
 };
 </script>

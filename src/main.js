@@ -34,7 +34,6 @@ Vue.use(IconsPlugin)
     //Vue.use(vuescroll, { ops: {}, name: 'vuescroll' });
 library.add(fas);
 Vue.config.productionTip = false
-window.axios = require("axios").default;
 Vue.config.productionTip = false;
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

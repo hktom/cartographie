@@ -9,8 +9,6 @@
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
-    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script> -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 
     <style>
@@ -23,18 +21,29 @@
 <body>
 
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+            Please enable it to continue.</strong>
     </noscript>
-    <div id="app" class="mt-0"></div>
-    <!-- built files will be auto injected -->
+    <div class="app" id="app" class="mt-0" height="500" fill_color="red" border_color="transparent" geo_json="https://raw.githubusercontent.com/hktom/assets/master/africa-countries.geo.json" position_lng="5" position_lat="35" zoom="2.2" map_url_style="mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft"
+        access_token="pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg">
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js"></script>
     <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
 
     <script>
-        window.mapboxSdk = mapboxSdk
+        window.mapboxSdk = mapboxSdk;
+        window.lang = document.getElementsByTagName("html")[0].getAttribute("lang");
+        window.height = document.getElementsByClassName("app")[0].getAttribute("height");
+        window.fill_color = document.getElementsByClassName("app")[0].getAttribute("fill_color");
+        window.border_color = document.getElementsByClassName("app")[0].getAttribute("border_color");
+        window.geo_json = document.getElementsByClassName("app")[0].getAttribute("geo_json");
+        window.position_lng = document.getElementsByClassName("app")[0].getAttribute("position_lng");
+        window.position_lat = document.getElementsByClassName("app")[0].getAttribute("position_lat");
+        window.zoom = document.getElementsByClassName("app")[0].getAttribute("zoom");
+        window.map_url_style = document.getElementsByClassName("app")[0].getAttribute("map_url_style");
+        window.access_token = document.getElementsByClassName("app")[0].getAttribute("access_token");
     </script>
 </body>
 

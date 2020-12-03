@@ -1,27 +1,28 @@
 <template>
   <div>
     <!-- list item -->
-    <div class="text-muted small">
+    <h4 class="mb-1">{{ acf.titre_de_la_solution }}</h4>
+    <div class="text-muted mb-2">
       {{ $t("last-update") }} : {{ getDate(data.modified) }}
     </div>
-    <h3 class="mb-2">{{ acf.titre_de_la_solution }}</h3>
     <!-- Structure Pays -->
-    <div v-if="acf.pays_enreg_structure" class="d-flex align-items-center">
+    <div v-if="acf.pays_enreg_structure" class="d-flex align-items-center mb-2">
       <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
-      <span class="small mr-1">
+      <span class="mr-1">
         {{ acf.pays_enreg_structure }}
       </span>
     </div>
     <!-- Structure Pays -->
+
     <!-- Structure embed Solution -->
     <div v-if="terms.length > 0" class="d-flex align-items-baseline mt-2">
       <span class="icon-pictos-bridgepictos-02 mr-2"></span>
-      <div>
-        <div
-          class="small"
+      
+        <!-- <div
           v-if="acf.categorie_solution != `- Select a category `"
           v-html="acf.categorie_solution"
-        ></div>
+        ></div> -->
+
         <div style="margin-top:-5px">
           <span
             class="text-pays mr-1 mt-n1"
@@ -29,10 +30,10 @@
             :key="'pays' + id"
           >
             <span v-if="id != 0" class="small"> | </span>
-            <span class="small d-inline" v-html="item.name"></span>
+            <span class="d-inline" v-html="item.name"></span>
           </span>
         </div>
-      </div>
+      
     </div>
     <!-- Structure embed Solution -->
 

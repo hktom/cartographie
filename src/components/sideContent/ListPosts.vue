@@ -1,35 +1,29 @@
 <template>
-  <div class="text-left">
-    <div>
+  <div class="text-left bg-white">
       <div class="header-back">
         <span
-          class="icon-pictos-bridgeback ico-back color-orange"
+          class="icon-pictos-bridgeback ico-back "
           @click="goBack()"
         >
           <span class="l l1"></span>
           <span class="l l2"></span>
         </span>
-        <h2>{{ $t("use-case") }}</h2>
+        <h5 class="pt-3">Liste mini-fiche par secteur</h5>
       </div>
-      <vuescroll class="vueScroll">
         <b-list-group>
           <b-list-group-item v-for="(post, i) in posts" :key="i">
             <card :data="post"></card>
           </b-list-group-item>
         </b-list-group>
-      </vuescroll>
-    </div>
   </div>
 </template>
 
 <script>
-import vuescroll from "vuescroll";
 import Card from "./card";
 
 export default {
   props: ["data"],
   components: {
-    vuescroll,
     Card,
   },
   data() {
@@ -50,33 +44,42 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../assets/sass/_variables.scss";
-.list-group-item {
-  cursor: pointer;
-  .more {
-    display: flex;
-    align-items: center;
-    color: $orange;
-  }
+<style lang="scss">
+
+.header-back .ico-back {
+  box-shadow: none !important;
+  border-radius: 0px !important;
 }
-.list-item {
-  margin-bottom: 20px;
-  margin-left: 0px;
-  li {
-    margin: 0px;
-  }
+
+.header-back .ico-back:hover{
+  background-color: none !important;
 }
-@media screen and (min-width: 992px) {
-  .vueScroll {
-    height: 400px !important;
-    background-color: white;
-  }
-}
-.header-back h2 {
-  transform: scale(1);
-  @media (min-width: 992px) {
-    transform: scale(0);
-  }
-}
+// @import "../../assets/sass/_variables.scss";
+// .list-group-item {
+//   cursor: pointer;
+//   .more {
+//     display: flex;
+//     align-items: center;
+//     color: $orange;
+//   }
+// }
+// .list-item {
+//   margin-bottom: 20px;
+//   margin-left: 0px;
+//   li {
+//     margin: 0px;
+//   }
+// }
+// @media screen and (min-width: 992px) {
+//   .vueScroll {
+//     height: 400px !important;
+//     background-color: white;
+//   }
+// }
+// .header-back h2 {
+//   transform: scale(1);
+//   @media (min-width: 992px) {
+//     transform: scale(0);
+//   }
+// }
 </style>

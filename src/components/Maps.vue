@@ -1,12 +1,12 @@
 <template>
-  <div class="map-wrapper">
+  <div class="map-wrapper w-100 h-100">
     <div class="loader-map" v-if="loading">
       <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div v-else>
-      <div id="map"></div>
+    <div v-else class="w-100 h-100">
+      <div id="map" class="w-100 h-100"></div>
       <div id="geocoder" class="geocoder"></div>
     </div>
   </div>
@@ -50,14 +50,13 @@ export default {
       return this.$store.dispatch("mapFilter", country_name);
     },
     initMap() {
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoidGhlc3kiLCJhIjoiY2tmMm5hZWM3MTlxczJ4bzAzaXR5cm5rciJ9.hD0g1llrf64deGWq2V_rqg";
+      mapboxgl.accessToken =window.window.access_token;
       this.mapboxClient = window.mapboxSdk({ accessToken: mapboxgl.accessToken });
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft",
-        center: [35, 5],
-        zoom: 2.5, // starting zoom
+        style: window.map_url_style,
+        center: [window.position_lat, window.position_lng],
+        zoom: window.zoom, // starting zoom
       });
     
       // Add zoom and rotation controls to the map.
@@ -85,9 +84,7 @@ export default {
       //soucres geojson
       this.map.addSource("states", {
         type: "geojson",
-        data:
-          window.geo_json ||
-          "https://raw.githubusercontent.com/hktom/assets/master/africa-countries.geo.json",
+        data: window.geo_json ,
       });
       this.map.addLayer({
         id: "state-fills",
@@ -95,7 +92,7 @@ export default {
         source: "states",
         layout: {},
         paint: {
-          "fill-color": "red",
+          "fill-color": window.fill_color,
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
@@ -110,7 +107,7 @@ export default {
         source: "states",
         layout: {},
         paint: {
-          "line-color": window.border_color || "transparent",
+          "line-color": window.border_color,
           "line-width": 0.5,
         },
       });
@@ -233,34 +230,40 @@ export default {
 
 <style lang="scss">
 @import "../assets/sass/_variables.scss";
-.map-wrapper {
-  width: 101%;
-  background-color: #eee;
-  height: 500px;
-  #map {
-    width: 100%;
-    height: 500px;
-    min-width: 300px;
-    max-height: 500px;
-    z-index: 2;
+  a.mapboxgl-ctrl-logo, .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+      display: none;
   }
-}
-.mapboxgl-ctrl-top-right {
-  width: 100%;
-  padding: 10px 20px;
-  .mapboxgl-ctrl-geocoder {
-    width: 100%;
-    float: none;
-    max-width: none;
-  }
-}
-.loader-map {
-  position: absolute;
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
+  #map:focus { outline: none; }
+
+// .map-wrapper {
+//   width: 101%;
+//   background-color: #eee;
+//   height: 500px;
+//   #map {
+//     width: 100%;
+//     height: 500px;
+//     min-width: 300px;
+//     max-height: 500px;
+//     z-index: 2;
+//   }
+// }
+// .mapboxgl-ctrl-top-right {
+//   width: 100%;
+//   padding: 10px 20px;
+//   .mapboxgl-ctrl-geocoder {
+//     width: 100%;
+//     float: none;
+//     max-width: none;
+//   }
+// }
+// .loader-map {
+//   position: absolute;
+//   z-index: 3;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
 #marker-nbre-post {
   line-height: 20px;
   background-color: $red;
@@ -269,6 +272,7 @@ export default {
   font-size: 9px;
   border-radius: 50%;
   color: white;
+  text-align: center;
   cursor: pointer;
   font-weight: bold;
   top: 22px;
@@ -291,10 +295,5 @@ export default {
     }
   }
 }
-.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
-  display: none;
-}
-a.mapboxgl-ctrl-logo {
-  display: none;
-}
+
 </style>

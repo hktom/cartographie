@@ -63,6 +63,15 @@ export const mutations = {
     SET_COUNTRY(state, data) {
         state.countries = data;
     },
+    SET_FILTER_BASE(state, data) {
+        state.base_filter_selected = data
+    },
+    SET_SEARCH_VALUE(state, data) {
+        state.search_value = data;
+    },
+    SET_SEARCH_KEY(state, data) {
+        state.search_key = data;
+    },
     // SET_SECTEURS(state, data) {
     //     state.secteurs = data
     // },

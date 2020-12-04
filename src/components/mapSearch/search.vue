@@ -1,7 +1,7 @@
 <template>
 <div class="search-wrappper">
     <form @submit="research">
-    <font-awesome-icon v-if="search == ''" class="ico-search" icon="search" />
+    <font-awesome-icon v-if="!search" class="ico-search" icon="search" />
     <font-awesome-icon
       v-else
       class="ico-search ico-close"
@@ -23,17 +23,37 @@
 export default {
   data() {
     return {
-      search: "",
+      search: null,
     };
   },
-  computed: {},
+  computed: {
+    search_value(){
+      return this.$store.state.search_value;
+    },
+    base_filter(){
+      return this.$store.state.base_filter;
+    }
+  },
   watch: {
   },
   methods: {
+    resetSearch(){
+      this.search=null;
+      this.$store.commit("SET_SEARCH_VALUE", this.search);
+      this.$store.commit("SHOW_LIST_SECTORS", "list_sectors");
+      this.$store.dispatch("resetMap");
+    },
     research(e){
       e.preventDefault();
       console.log(this.search);
-      return this.$store.dispatch("searchKey", this.search);
+      if(this.search=="" || !this.search){
+        this.search=null;
+        this.resetSearch();
+        return false;
+      }
+      this.$store.commit("SET_FILTER_BASE",  this.base_filter[0]);
+      this.$store.commit("SET_SEARCH_VALUE", this.search);
+      this.$store.dispatch("searchKey", this.search);
     }
   },
 };

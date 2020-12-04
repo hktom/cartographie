@@ -1,9 +1,7 @@
 export const researchAction = (data, searchValue) => {
     return data.filter(
         (item) =>
-        item.acf.pays_solution_deployee.findIndex(
-            (country) => searchValue == country
-        ) != -1 ||
+        item.acf.pays_solution_deployee.toString().toLowerCase().search(searchValue) != -1 ||
         item.acf.pays_enreg_structure.toLowerCase().search(searchValue) != -1 ||
         item.acf.titre_de_la_solution.toLowerCase().search(searchValue) != -1 ||
         item.acf.autre_zone.toLowerCase().search(searchValue) != -1 ||
@@ -24,9 +22,16 @@ export const filterSearch = (
     main_options,
     filter_selected
 ) => {
-    let result = data;
+    let result = [];
 
     if (filter_value == null) {
+        return result;
+    }
+
+    if (filter_selected == "all_country") {
+        result = data.filter(
+            (item) => item.acf.pays_enreg_structure == filter_value || item.acf.pays_solution_deployee.includes(filter_value)
+        );
         return result;
     }
 
@@ -115,33 +120,32 @@ export const filterPost = (data, sector_id) => {
     return posts;
 };
 
-function check_condition(value, check, condition) {
-    if (condition == "range") {
-        return check[0] <= value && check[1] >= value ? true : false;
-    }
+// function check_condition(value, check, condition) {
+//     if (condition == "range") {
+//         return check[0] <= value && check[1] >= value ? true : false;
+//     }
 
-    if (condition == "includes") {
-        return check.includes[value] ? true : false;
-    }
+//     if (condition == "includes") {
+//         return check.includes[value] ? true : false;
+//     }
 
-    if (condition == "equal") {
-        return value == check ? true : false;
-    }
-    if (condition == "default") {
-        return true;
-    }
-    return false;
-}
+//     if (condition == "equal") {
+//         return value == check ? true : false;
+//     }
+//     if (condition == "default") {
+//         return true;
+//     }
+//     return false;
+// }
 
-export const reducerCountries = (posts, acf, acf_value, condition) => {
+export const reducerCountries = (posts) => {
+    //acf, acf_value, condition
     let countries = [];
 
     posts.forEach((post) => {
         const countryIndex = countries.findIndex(
-            (country) =>
-            country.name == post.acf.pays_enreg_structure &&
-            check_condition(post.acf[acf], acf_value, condition)
-        );
+            (country) => country.name == post.acf.pays_enreg_structure);
+        //check_condition(post.acf[acf], acf_value, condition);
 
         if (countryIndex != -1) {
             countries[countryIndex].count++;
@@ -150,6 +154,28 @@ export const reducerCountries = (posts, acf, acf_value, condition) => {
                 name: post.acf.pays_enreg_structure,
                 count: 1,
             });
+        }
+    });
+
+    return countries;
+};
+
+export const reducerCountriesMulti = (posts) => {
+    let countries = [];
+
+    posts.forEach((post) => {
+        const countryIndex = countries.findIndex(
+            (item) => post.acf.pays_solution_deployee.toString().toLowerCase().search(item.name.toLowerCase()) != -1);
+
+        if (countryIndex != -1) {
+            countries[countryIndex].count++;
+        } else {
+            post.acf.pays_solution_deployee.map((item) => {
+                countries.push({
+                    name: item,
+                    count: 1,
+                });
+            })
         }
     });
 

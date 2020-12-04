@@ -5,6 +5,7 @@ import { reducerCountries } from './helpers'
 import { reducerPostData } from './helpers'
 import { acfFilterReducer } from './helpers'
 import { researchAction } from './helpers'
+import { reducerCountriesMulti } from './helpers'
 
 const axios = require('axios').default;
 
@@ -20,9 +21,9 @@ export const actions = {
             .get(state.uri.url + lang + state.uri.api)
             .then(({ data }) => {
                 let posts = reducerPostData(data);
-                let acf = "pays_enreg_structure";
+                //let acf = "pays_enreg_structure";
                 commit("SET_DATA", posts);
-                commit("SET_COUNTRY", reducerCountries(posts, acf, null, 'default'));
+                commit("SET_COUNTRY", reducerCountries(posts));
                 commit("SET_LOADING", false);
             });
     },
@@ -41,21 +42,43 @@ export const actions = {
     // Search Key
     searchKey({ state, commit }, payload) {
         let search = payload.toLowerCase();
-        commit("LIST_POSTS", researchAction(state.data, search));
-        //const filtredCountries = checkCountries(result);
-        //commit("SET_COUNTRIES", result);
+        let posts = researchAction(state.data, search);
+        commit("LIST_POSTS", posts);
+        commit("SET_SEARCH_KEY", `Rechercher : ${payload}`);
 
+        let filer_base = state.base_filter_selected.option;
+
+        //commit("SET_SEARCH_KEY", reducerCountries(posts));
+
+        if (filer_base == 1)
+            commit("SET_COUNTRY", reducerCountries(posts));
+        else
+            commit("SET_COUNTRY", reducerCountriesMulti(posts));
+
+    },
+    search_key_with_null({ state, commit }, payload) {
+        if (payload == 1)
+            commit("SET_COUNTRY", reducerCountries(state.data));
+        else
+            commit("SET_COUNTRY", reducerCountriesMulti(state.data));
+    },
+    resetMap({ state, commit }) {
+        commit("SET_COUNTRY", reducerCountries(state.data));
     },
     // filter from map
     mapFilter({ state, commit }, payload) {
         let main_options = state.main_filter_options;
         let countryName = state.country_list.filter((item) => item.option.toLowerCase() == payload.toLowerCase() || item.en.toLowerCase() == payload.toLowerCase());
-        let result = filterSearch(state.data, countryName[0].label, main_options, "Pays d'origine");
-        commit("LIST_POSTS", result);
+        let posts = filterSearch(state.data, countryName[0].label, main_options, "all_country");
+        commit("SET_SEARCH_KEY", `Pays : ${countryName[0].label}`);
+        commit("LIST_POSTS", posts);
 
     },
-    listPosts({ state, commit }, playload) {
-        commit("LIST_POSTS", filterPost(state.data, playload));
+    listPosts({ state, commit }, payload) {
+        let posts = filterPost(state.data, payload.id);
+        commit("SET_SEARCH_KEY", `Secteur: ${payload.name.replace("&amp;", "&")}`);
+        commit("SET_COUNTRY", reducerCountries(posts));
+        commit("LIST_POSTS", posts);
     },
     // Filter By Criteria
     filterBy({ state, commit }, payload) {

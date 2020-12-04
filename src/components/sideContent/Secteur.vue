@@ -11,7 +11,7 @@
         <b-list-group-item
           v-if="sector.count > 0"
           class="d-flex justify-content-between align-items-center"
-          @click="listPosts(sector.id)"
+          @click="listPosts(sector)"
         >
           <span v-html="sector.name"></span>
           <span class="count">{{sector.count}}</span>
@@ -35,8 +35,8 @@ export default {
   },
   mounted() {},
   methods: {
-    listPosts(sector_id) {
-      return this.$store.dispatch("listPosts", sector_id);
+    listPosts(sector) {
+      return this.$store.dispatch("listPosts", sector);
     },
   },
 };

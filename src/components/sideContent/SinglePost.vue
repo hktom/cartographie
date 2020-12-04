@@ -17,7 +17,7 @@
           </div>
           <h3 class="mt-3" v-html="data.title.rendered"></h3>
 
-          <div class="mb-4">
+          <div class="mb-4 d-flex justify-content-start">
             
             <icon-button
             :value="acf.lien_vers_la_solution"
@@ -26,7 +26,7 @@
             />
             
             <icon-button
-            :value="acf.adress_mail_contact"
+            :value="'mailto:'+acf.adress_mail_contact"
             :label="acf.adress_mail_contact"
             icon="envelope"
             />
@@ -34,7 +34,8 @@
             <icon-button
             :value="acf.liens_ext"
             :label="$t('autre_lien')"
-            icon="envelope"
+            custom_icon="icon-pictos-bridgeexternal-link color-white"
+            :custom="true"
             />
 
           </div>
@@ -49,12 +50,7 @@
             :option="3"
             icon="icon-pictos-bridgepictos-02"
             :value="terms"
-          />
-
-          <mini-card
-            :option="3"
-            icon="icon-pictos-bridgepictos-02"
-            :value="terms"
+            :termIndex="0"
           />
 
           <mini-card
@@ -93,48 +89,44 @@
             label="Stade d'evolution"
           />
 
-          <!-- 
-            
-            <div v-if="acf.type_fonds || pub.acf.montant_fonds">
-              <h5 class="st">Besoin en financement</h5>
-              <p v-html="`${acf.type_fonds} pour ${pub.acf.montant_fonds}`"></p>
-            </div>
+          <mini-card
+            v-if="acf.type_fonds && acf.montant_fonds > 0"
+            :option="0"
+            :value="`${acf.type_fonds} pour ${acf.montant_fonds}`"
+            label="Besoin en financement"
+          />
+          
+          <mini-card
+            :option="0"
+            :value="acf.investisseur"
+            :label="$t('investisseur')"
+          />
 
-            <div v-if="acf.investisseur">
-              <h5 class="st">{{ $t("investisseur") }}</h5>
-              <p v-html="acf.investisseur"></p>
-            </div>
+           <mini-card
+            :option="0"
+            :value="acf.suivie_structure_oui"
+            label="Accompagnement par une structure"
+          />
+           
+           <mini-card
+            :option="0"
+            :value="acf.prix_et_distinctions_"
+            label="Prix et distinctions"
+          />
+           
+           <mini-card
+            :option="0"
+            :value="acf.un_chiffre__mot_cle"
+            label="Un chiffre / mot clé"
+          />
 
-            <div v-if="acf.solution_prix">
-              <h5 class="st">{{ $t("solution_prix") }}</h5>
-              <p v-html="acf.solution_prix"></p>
-            </div>
-
-            <div v-if="acf.etiquette">
-              <h5 class="st">{{ $t("etiquette") }}</h5>
-              <p v-html="acf.etiquette"></p>
-            </div>
-            
-            <div v-if="acf.suivie_structure">
-              <h5 class="st">{{ $t("accompagnement") }}</h5>
-              <div v-if="acf.suivie_structure">
-                <span class="text-muted">
-                  {{ $t("suivie_structure") }}
-                </span>
-                <p v-html="acf.suivie_structure"></p>
-              </div>
-              <div
-                v-if="
-                  acf.suivie_structure_oui &&
-                    acf.suivie_structure.toLowerCase() == 'oui'
-                "
-              >
-                <span class="text-muted">
-                  {{ $t("suivie_structure_oui") }}
-                </span>
-                <p v-html="acf.suivie_structure_oui"></p>
-              </div>
-            </div> -->
+          <mini-card
+            :option="3"
+            icon="icon-pictos-bridgepictos-02"
+            :value="tags"
+            :termIndex="1"
+          />
+         
         </div>
       </div>
     </div>
@@ -155,6 +147,9 @@ export default {
   },
   mounted() {},
   computed: {
+    tags(){
+      return [];
+    },
     terms() {
       if (this.$store.state.post._embedded) {
         return this.$store.state.post._embedded;

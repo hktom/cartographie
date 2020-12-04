@@ -19,13 +19,13 @@
     </div>
 
     <div
-      class="mt-4 d-flex align-items-baseline mb-4"
       v-if="option == 3 && value.length > 0"
+      class="mt-4 d-flex align-items-baseline mb-4"
     >
       <span :class="`${icon} mr-2`"></span>
       <span
         class="text-pays mr-1 mt-n1"
-        v-for="(item, id) in value[0]"
+        v-for="(item, id) in value[termIndex]"
         :key="'terms' + id"
       >
         <span v-if="id != 0" class="small"> | </span>
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-props: ["value", "label", "option", "icon"],
+props: ["value", "label", "option", "icon", "termIndex"],
 
 };
 </script>

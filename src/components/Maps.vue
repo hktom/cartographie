@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     filterMap(country_name){
-      //console.log(country_name);
       return this.$store.dispatch("mapFilter", country_name);
     },
     initMap() {

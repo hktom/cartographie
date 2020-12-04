@@ -252,17 +252,19 @@ export const state = {
     },
     filter: null,
     sub_filter: null,
-    base_filter_selected: [{
+    search_value: null,
+    search_key: null,
+    base_filter_selected: {
         label: "Filtrer par pays d'origine",
-        option: 1
-    }],
+        option: 1,
+    },
     base_filter: [{
             label: "Filtrer par pays d'origine",
-            option: 1
+            option: 1,
         },
         {
             label: "Filtrer par pays de déploiement",
-            option: 2
+            option: 2,
         },
     ],
     search: [],

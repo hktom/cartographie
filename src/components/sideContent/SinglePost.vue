@@ -17,6 +17,10 @@
           </div>
           <h3 class="mt-3" v-html="data.title.rendered"></h3>
 
+          <div v-if="data['_embedded']['wp:featuredmedia']">
+            <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:200px; object-fit:cover"/>
+          </div>
+
           <div class="mb-4 d-flex justify-content-start">
             
             <icon-button
@@ -122,6 +126,13 @@
             :option="0"
             :data="acf.un_chiffre__mot_cle"
             label="Un chiffre ou mot-clé"
+          />
+
+          <mini-card
+          class="w-100"
+            :option="0"
+            :data="acf.a_lire"
+            label="A lire"
           />
 
           <!-- <mini-card

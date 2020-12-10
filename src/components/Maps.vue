@@ -148,7 +148,7 @@ export default {
 
       this.map.on("click", "state-fills", function(e) {
         if (!markerClick()) {
-          const country_name = e.features[0].properties.admin.toLowerCase();
+          const country_name = e.features[0].properties.admin;
           const targetMarker = document.querySelector(
             "#marker-nbre-post." + country_name
           );
@@ -187,6 +187,7 @@ export default {
             active.classList.remove("activeMarker");
           }
           e.target.classList.add("activeMarker");
+          console.log("Country Name Marker", countryName);
           filterMap(countryName);
           setTimeout(() => {
             setMarkerClick(false);

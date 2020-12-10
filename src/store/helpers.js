@@ -1,22 +1,30 @@
 export const reducerCategories = (data) => {
     let categories = [];
-    data.forEach((item) => {
-        let index = categories.findIndex((category) => category.name.toLowerCase() == item.acf.categorie_solution.toLowerCase());
-        if (index != -1)
-            categories[index].count++;
+    data.forEach((post) => {
+        let index = categories.findIndex(
+            (category) =>
+            category.name.toLowerCase() == post.acf.categorie_solution.toLowerCase()
+        );
+        if (index != -1) categories[index].count++;
         else {
-            if (item.acf.categorie_solution && item.acf.categorie_solution != "- Select a category -") {
-                categories.push({ name: item.acf.categorie_solution, count: 1 });
+            if (
+                post.acf.categorie_solution &&
+                post.acf.categorie_solution != "- Select a category -"
+            ) {
+                categories.push({ name: post.acf.categorie_solution, count: 1 });
             }
         }
     });
     return categories;
-}
+};
 
 export const researchAction = (data, searchValue) => {
     return data.filter(
         (item) =>
-        item.acf.pays_solution_deployee.toString().toLowerCase().search(searchValue) != -1 ||
+        item.acf.pays_solution_deployee
+        .toString()
+        .toLowerCase()
+        .search(searchValue) != -1 ||
         item.acf.pays_enreg_structure.toLowerCase().search(searchValue) != -1 ||
         item.acf.titre_de_la_solution.toLowerCase().search(searchValue) != -1 ||
         item.acf.autre_zone.toLowerCase().search(searchValue) != -1 ||
@@ -30,6 +38,16 @@ export const researchAction = (data, searchValue) => {
         item.acf.stade_de_developpement.toLowerCase().search(searchValue) != -1
     );
 };
+
+export const mapFilterPost = (data, countryName) => {
+    let result = [];
+    result = data.filter(
+        (item) =>
+        item.acf.pays_enreg_structure.toLowerCase() == countryName.toLowerCase() ||
+        item.acf.pays_solution_deployee.some((item) => item.toLowerCase() == countryName.toLowerCase())
+    );
+    return result;
+}
 
 export const filterSearch = (
     data,
@@ -45,7 +63,9 @@ export const filterSearch = (
 
     if (filter_selected == "all_country") {
         result = data.filter(
-            (item) => item.acf.pays_enreg_structure == filter_value || item.acf.pays_solution_deployee.includes(filter_value)
+            (item) =>
+            item.acf.pays_enreg_structure.toLowerCase() == filter_value.toLowerCase() ||
+            item.acf.pays_solution_deployee.some((item) => item.toLowerCase() == filter_value.toLowerCase())
         );
         return result;
     }
@@ -161,7 +181,10 @@ export const reducerCountries = (posts) => {
         // let deploy_countries = post.acf.pays_solution_deployee.map((item) => item.toLowerCase());
 
         let index = countries.findIndex(
-            (country) => country.name.toLowerCase() == post.acf.pays_enreg_structure.toLowerCase());
+            (country) =>
+            country.name.toLowerCase() ==
+            post.acf.pays_enreg_structure.toLowerCase()
+        );
 
         if (index != -1) {
             countries[index].count++;
@@ -174,18 +197,17 @@ export const reducerCountries = (posts) => {
 
         // Pays de deployement
         post.acf.pays_solution_deployee.map((item) => {
-            let sub_index = countries.findIndex((country) => country.name.toLowerCase() == item.toLowerCase());
+            let sub_index = countries.findIndex(
+                (country) => country.name.toLowerCase() == item.toLowerCase()
+            );
 
-            if (sub_index != -1)
-                countries[sub_index].count++;
+            if (sub_index != -1) countries[sub_index].count++;
             else
                 countries.push({
                     name: item,
                     count: 1,
                 });
-
         });
-
     });
 
     return countries;
@@ -196,7 +218,12 @@ export const reducerCountriesMulti = (posts) => {
 
     posts.forEach((post) => {
         const countryIndex = countries.findIndex(
-            (item) => post.acf.pays_solution_deployee.toString().toLowerCase().search(item.name.toLowerCase()) != -1);
+            (item) =>
+            post.acf.pays_solution_deployee
+            .toString()
+            .toLowerCase()
+            .search(item.name.toLowerCase()) != -1
+        );
 
         if (countryIndex != -1) {
             countries[countryIndex].count++;
@@ -206,7 +233,7 @@ export const reducerCountriesMulti = (posts) => {
                     name: item,
                     count: 1,
                 });
-            })
+            });
         }
     });
 

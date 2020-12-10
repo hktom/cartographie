@@ -8,7 +8,7 @@
       <h5 class="pt-3">{{ search_key }}</h5>
     </div>
     <b-list-group v-if="posts.length>0">
-      <b-list-group-item v-for="(post, i) in posts" :key="i">
+      <b-list-group-item v-for="(post) in posts" :key="post.id">
         <card :data="post"></card>
       </b-list-group-item>
     </b-list-group>
@@ -47,6 +47,9 @@ export default {
       this.$store.commit("SET_SEARCH_VALUE", null);
       this.$store.commit("SET_FILTER_BASE", this.base_filter[0]);
       return this.$store.commit("SHOW_LIST_SECTORS", "list_sectors");
+    },
+    showPost(data) {
+      return this.$store.commit("SHOW_POST", data);
     },
   },
   watch: {},

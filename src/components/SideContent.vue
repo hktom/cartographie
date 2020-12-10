@@ -47,6 +47,6 @@ export default {
 }
 .vueScroll{
   background-color:white;
-  height: 450px !important;
+  height: 400px !important;
 }
 </style>

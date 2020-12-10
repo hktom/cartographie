@@ -2,7 +2,7 @@
   <div id="app" class="w-100" :style="`position:relative;height:${height}px`">
     <Maps class="maps-position"></Maps>
     <div class="container-search"><map-search class="search"></map-search></div>
-    <div class="map_filter_option">
+    <!-- <div class="map_filter_option">
       <v-select
         :disabled="this.search_value?true:false"
         :autoscroll="true"
@@ -12,7 +12,7 @@
         :value="$store.state.base_filter_selected"
         @input="select_filter"
       ></v-select>
-    </div>
+    </div> -->
      <div class="container-side"><side-content></side-content></div>
   </div>
 </template>
@@ -28,8 +28,8 @@ export default {
   components: {},
   mounted() {
     this.$store.commit("SET_LANG", this.$i18n.locale);
+    this.$store.dispatch("loadGeoCoordinate", window.geo_json);
     this.$store.dispatch("loadData");
-    this.$store.dispatch("loadSectors");
   },
   methods: {
     select_filter(val) {

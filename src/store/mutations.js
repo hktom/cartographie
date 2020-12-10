@@ -72,6 +72,12 @@ export const mutations = {
     SET_SEARCH_KEY(state, data) {
         state.search_key = data;
     },
+    SET_CATEGORIES(state, data) {
+        state.category = data;
+    },
+    SET_GEO_COORDINATES(state, data) {
+        state.geo_coordinates = data;
+    },
     // SET_SECTEURS(state, data) {
     //     state.secteurs = data
     // },

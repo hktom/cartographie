@@ -17,6 +17,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';
 import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css'
 import 'vue-slider-component/theme/antd.css'
+// import * as turf from "@turf/turf";
 
 Vue.use(vuescroll, {
     ops: {
@@ -28,6 +29,7 @@ Vue.use(vuescroll, {
     name: 'vuescroll'
 });
 
+//Vue.use(turf)
 Vue.use(VueI18n)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

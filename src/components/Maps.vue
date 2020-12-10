@@ -9,6 +9,7 @@
       <div id="map" class="w-100 h-100"></div>
       <div id="geocoder" class="geocoder"></div>
     </div>
+    
   </div>
 </template>
 
@@ -30,6 +31,12 @@ export default {
     loading() {
       return this.$store.state.loading;
     },
+    geo_coordinates(){
+      return this.$store.state.geo_coordinates;
+    },
+    country_list(){
+      return this.$store.state.country_list;
+    }
   },
   mounted() {
     this.initMap();
@@ -160,63 +167,41 @@ export default {
 
     setMarker(countryName, totalPost) {
       const map = this.map;
-      //const setPub = this.setPub;
-      const setMarkerClick = this.setMarkerClick;
-      const filterMap=this.filterMap;
+      const geo_coordinates = this.geo_coordinates;
+      let setMarkerClick = this.setMarkerClick;
+      let filterMap=this.filterMap;
+      let country_list=this.country_list.filter((item)=>item.label.toLowerCase()==countryName.toLowerCase() || item.en==countryName.toLowerCase());
+      
+      if(country_list.length > 0){
+        var index=geo_coordinates.findIndex((item)=>item.name.toLowerCase()==country_list[0].en.toLowerCase() || item.name.toLowerCase()==country_list[0].label.toLowerCase());
 
-      this.mapboxClient.geocoding
-        .forwardGeocode({
-          query: countryName,
-          autocomplete: false,
-          limit: 1,
-          language: ["fr", "en"],
-        })
-        .send()
-        .then(function(res) {
-          if (
-            res &&
-            res.body &&
-            res.body.features &&
-            res.body.features.length
-          ) {
-            var feature = res.body.features[0];
-            //const country_name = e.features[0].properties.admin
-            // create DOM element for the marker
-            var el = document.createElement("div");
-            el.innerHTML = `${totalPost}`;
-            el.id = "marker-nbre-post";
-            el.classList.add(
-              res.body.features[0].place_name.toLowerCase().replaceAll(" ", "")
-            );
-            el.addEventListener("click", (e) => {
-              setMarkerClick(true);
-              const active = document.querySelector(".activeMarker");
-              if (active) {
-                active.classList.remove("activeMarker");
-              }
-              e.target.classList.add("activeMarker");
-              filterMap(countryName);
-              //setPub(data);
-              setTimeout(() => {
-                setMarkerClick(false);
-              }, 100);
-            });
-            var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
-            marker.remove(map);
-            marker.addTo(map);
+        if(index!=-1){
+        var el = document.createElement("div");
+        el.innerHTML = totalPost;
+        el.id = "marker-nbre-post";
+        el.classList.add(countryName.toLowerCase().replaceAll(" ", ""));
+        el.addEventListener("click", (e) => {
+          setMarkerClick(true);
+          const active = document.querySelector(".activeMarker");
+          if (active) {
+            active.classList.remove("activeMarker");
           }
+          e.target.classList.add("activeMarker");
+          filterMap(countryName);
+          setTimeout(() => {
+            setMarkerClick(false);
+          }, 100);
         });
+        var marker = new mapboxgl.Marker(el).setLngLat(geo_coordinates[index].coordinates);
+        marker.remove(map);
+        marker.addTo(map);
+        
+      }
+
+      }
+      
     },
-    // setPub(data) {
-    //   //redefinir menu
-    //   // this.setMenu(2);
-    //   // // definir les publication
-    //   // if (data.solutions) {
-    //   //   this.setSolutionsActive(data.solutions);
-    //   // } else {
-    //   //   this.setSolutionsActive([]);
-    //   // }
-    // },
+    
     setMarkerClick(val) {
       this.markerClick = val;
     },
@@ -234,35 +219,6 @@ export default {
   }
 
   #map:focus { outline: none; }
-
-// .map-wrapper {
-//   width: 101%;
-//   background-color: #eee;
-//   height: 500px;
-//   #map {
-//     width: 100%;
-//     height: 500px;
-//     min-width: 300px;
-//     max-height: 500px;
-//     z-index: 2;
-//   }
-// }
-// .mapboxgl-ctrl-top-right {
-//   width: 100%;
-//   padding: 10px 20px;
-//   .mapboxgl-ctrl-geocoder {
-//     width: 100%;
-//     float: none;
-//     max-width: none;
-//   }
-// }
-// .loader-map {
-//   position: absolute;
-//   z-index: 3;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-// }
 #marker-nbre-post {
   line-height: 20px;
   background-color: $red;

@@ -1,7 +1,7 @@
 <template>
   <div class="text-left bg-white">
     
-    <h4 class="px-3 py-2">Secteurs</h4>
+    <h4 class="px-3 py-2">Categories</h4>
       <b-list-group
         v-for="(sector, i) in sectors"
         :key="i"
@@ -29,8 +29,7 @@ export default {
   },
   computed: {
     sectors() {
-
-      return this.$store.state.sectors;
+      return this.$store.state.category;
     },
   },
   mounted() {},

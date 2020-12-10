@@ -6,11 +6,40 @@ import { reducerPostData } from './helpers'
 import { acfFilterReducer } from './helpers'
 import { researchAction } from './helpers'
 import { reducerCountriesMulti } from './helpers'
+import { reducerCategories } from './helpers'
+import * as turf from "@turf/turf";
 
 const axios = require('axios').default;
 
 export const actions = {
 
+    loadGeoCoordinate({ commit }, payload) {
+        axios
+            .get(payload)
+            .then(({ data }) => {
+                let polygone = null;
+                let geo_coordinates = [];
+                data.features.map((item) => {
+                    switch (item.geometry.type) {
+                        case "MultiPolygon":
+                            polygone = turf.multiPolygon(item.geometry.coordinates);
+                            break;
+                        case "Polygon":
+                            polygone = turf.polygon(item.geometry.coordinates);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    let coordinates = turf.centerOfMass(polygone);
+                    geo_coordinates.push({
+                        name: item.properties.name_long,
+                        coordinates: coordinates.geometry.coordinates
+                    })
+                });
+                commit("SET_GEO_COORDINATES", geo_coordinates);
+            });
+    },
     // Load Data
     loadData({ commit, state }) {
         //commit("SET_LOADING", true);
@@ -23,7 +52,9 @@ export const actions = {
                 let posts = reducerPostData(data);
                 //let acf = "pays_enreg_structure";
                 commit("SET_DATA", posts);
+                commit("SET_CATEGORIES", reducerCategories(posts));
                 commit("SET_COUNTRY", reducerCountries(posts));
+                commit("SET_LOADING_SECTOR", false);
                 commit("SET_LOADING", false);
             });
     },
@@ -75,8 +106,8 @@ export const actions = {
 
     },
     listPosts({ state, commit }, payload) {
-        let posts = filterPost(state.data, payload.id);
-        commit("SET_SEARCH_KEY", `Secteur: ${payload.name.replace("&amp;", "&")}`);
+        let posts = filterPost(state.data, payload.name);
+        commit("SET_SEARCH_KEY", `Category: ${payload.name.replace("&amp;", "&")}`);
         commit("SET_COUNTRY", reducerCountries(posts));
         commit("LIST_POSTS", posts);
     },

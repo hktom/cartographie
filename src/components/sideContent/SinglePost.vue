@@ -20,19 +20,22 @@
           <div class="mb-4 d-flex justify-content-start">
             
             <icon-button
-            :value="acf.lien_vers_la_solution"
+            v-if="acf.lien_vers_la_solution"
+            :data="acf.lien_vers_la_solution"
             :label="$t('site_web.textes')"
             icon="globe"
             />
             
             <icon-button
-            :value="'mailto:'+acf.adress_mail_contact"
+            v-if="acf.adress_mail_contact"
+            :data="'mailto:'+acf.adress_mail_contact"
             :label="acf.adress_mail_contact"
             icon="envelope"
             />
             
             <icon-button
-            :value="acf.liens_ext"
+            v-if="acf.liens_ext"
+            :data="acf.liens_ext"
             :label="$t('autre_lien')"
             custom_icon="icon-pictos-bridgeexternal-link color-white"
             :custom="true"
@@ -43,89 +46,91 @@
           <mini-card
             :option="1"
             icon="icon-pictos-bridgepictos_Plan-de-travail-1"
-            :value="acf.pays_enreg_structure"
+            :data="acf.pays_enreg_structure"
           />
 
           <mini-card
             :option="3"
             icon="icon-pictos-bridgepictos-02"
-            :value="terms"
+            :data="terms"
             :termIndex="0"
+            :acf="acf"
           />
 
           <mini-card
             :option="2"
-            :value="acf.pays_solution_deployee"
+            :data="acf.pays_solution_deployee"
             :label="$t('pays_deploiement')"
           />
 
           <mini-card
             :option="0"
-            :value="acf.annee_creation_entreprise"
+            :data="acf.annee_creation_entreprise"
             :label="$t('annee_creation')"
           />
 
           <mini-card
             :option="0"
-            :value="acf.nombre_employe"
+            :data="acf.nombre_employe"
             :label="$t('nbre_employee')"
           />
 
           <mini-card
             :option="0"
-            :value="acf.description_solution"
+            :data="acf.description_solution"
             :label="$t('description')"
           />
 
           <mini-card
             :option="0"
-            :value="acf.categorie_solution"
+            :data="acf.categorie_solution"
             label="Categorie"
           />
 
           <mini-card
             :option="0"
-            :value="acf.stade_de_developpement"
-            label="Stade d'evolution"
+            :data="acf.stade_de_developpement"
+            label="Stade"
           />
 
           <mini-card
             v-if="acf.type_fonds && acf.montant_fonds > 0"
             :option="0"
-            :value="`${acf.type_fonds} pour ${acf.montant_fonds}`"
+            :data="`${acf.type_fonds} pour ${acf.montant_fonds}`"
             label="Besoin en financement"
           />
           
           <mini-card
             :option="0"
-            :value="acf.investisseur"
-            :label="$t('investisseur')"
+            :data="acf.investisseur"
+            label="Investisseur(s)"
           />
 
            <mini-card
             :option="0"
-            :value="acf.suivie_structure_oui"
-            label="Accompagnement par une structure"
+            :data="acf.accompagnement_par_une_structure"
+            label="Accompagnement(s)"
           />
            
            <mini-card
             :option="0"
-            :value="acf.prix_et_distinctions_"
+            :data="acf.prix_et_distinctions_"
             label="Prix et distinctions"
           />
            
            <mini-card
             :option="0"
-            :value="acf.un_chiffre__mot_cle"
-            label="Un chiffre / mot clé"
+            :data="acf.un_chiffre__mot_cle"
+            label="Un chiffre ou mot-clé"
           />
 
-          <mini-card
+          <!-- <mini-card
             :option="3"
             icon="icon-pictos-bridgepictos-02"
-            :value="tags"
+            :data="terms"
             :termIndex="1"
-          />
+            :acf="acf"
+          /> -->
          
         </div>
       </div>
@@ -151,8 +156,8 @@ export default {
       return [];
     },
     terms() {
-      if (this.$store.state.post._embedded) {
-        return this.$store.state.post._embedded;
+      if (this.$store.state.post._embedded["wp:term"]) {
+        return this.$store.state.post._embedded["wp:term"];
       } else {
         return [];
       }

@@ -15,15 +15,13 @@
     <!-- Structure Pays -->
 
     <!-- Structure embed Solution -->
-    <div v-if="terms.length > 0" class="d-flex align-items-baseline mt-2">
+    <div v-if="is_terms_and_category_valid" class="d-flex align-items-baseline mt-2">
       <span class="icon-pictos-bridgepictos-02 mr-2"></span>
       
-        <!-- <div
-          v-if="acf.categorie_solution != `- Select a category `"
-          v-html="acf.categorie_solution"
-        ></div> -->
-
         <div style="margin-top:-5px">
+          <div v-if="acf.categorie_solution" v-html="acf.categorie_solution" class="w-100">
+        </div>
+
           <span
             class="text-pays mr-1 mt-n1"
             v-for="(item, id) in terms[0]"
@@ -39,9 +37,12 @@
 
     <!-- Button -->
     <p class="mt-3" v-html="resume(acf.description_solution)"></p>
-    <a href="#!" class="more" @click="showPost(data)">
+    <b-button variant="light" class="more button-more" @click="showPost(data)">
       {{ $t("more") }} <span class="icon-pictos-bridgego color-orange"></span>
-    </a>
+    </b-button>
+    <!-- <a href="#" class="more" @click="showPost(data)">
+      {{ $t("more") }} <span class="icon-pictos-bridgego color-orange"></span>
+    </a> -->
     <!-- Button -->
 
     <!-- list item -->
@@ -55,11 +56,15 @@ export default {
     return {
       acf: {},
       terms: [],
+      is_terms_and_category_valid:false,
     };
   },
   mounted() {
     this.acf = this.data.acf;
     this.terms = this.data._embedded?this.data._embedded["wp:term"]:[];
+    if(this.terms.length > 0 || this.acf.categorie_solution){
+      this.is_terms_and_category_valid=true;
+    }
   },
   computed: {},
   methods: {
@@ -85,4 +90,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.button-more{
+  background-color: transparent !important;
+  border:none !important;
+  &:hover{
+    color: orange;
+    background-color: transparent !important;
+  border:none !important;
+  }
+}
+</style>

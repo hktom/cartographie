@@ -1,8 +1,10 @@
 const new_state = {
     side_content: null,
+    geo_coordinates: [],
     posts: [],
     post: [],
     sectors: [],
+    category: [],
     filter_search: {
         value: null,
         active: true,

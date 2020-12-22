@@ -10,15 +10,15 @@
           <span class="l l2"></span>
         </span>
       </div>
-      <div class="card">
+      <div class="card" style="border:none !important">
         <div class="card-body">
           <div class="text-muted small">
             {{ $t("last-update") }} : {{ getDate(data.modified) }}
           </div>
-          <h3 class="mt-3" v-html="data.title.rendered"></h3>
+          <div class="mt-3 h1" v-html="data.title.rendered"></div>
 
           <div v-if="data['_embedded']['wp:featuredmedia']">
-            <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:200px; object-fit:cover"/>
+            <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:auto; object-fit:cover"/>
           </div>
 
           <div class="mb-4 d-flex justify-content-start">
@@ -94,54 +94,49 @@
           <mini-card
             :option="0"
             :data="acf.stade_de_developpement"
-            label="Stade"
+            :label="$t('stade')"
           />
 
           <mini-card
             v-if="acf.type_fonds && acf.montant_fonds > 0"
             :option="0"
-            :data="`${acf.type_fonds} pour ${acf.montant_fonds}`"
-            label="Besoin en financement"
+            :data="`${acf.type_fonds} pour ${acf.montant_fonds} $`"
+            :label="$t('besoin_financement')"
           />
+          
           
           <mini-card
             :option="0"
             :data="acf.investisseur"
-            label="Investisseur(s)"
+            :label="$t('investisseur')"
           />
 
+          
            <mini-card
             :option="0"
             :data="acf.accompagnement_par_une_structure"
-            label="Accompagnement(s)"
+            :label="$t('accompagnement')"
           />
            
            <mini-card
             :option="0"
             :data="acf.prix_et_distinctions_"
-            label="Prix et distinctions"
+            :label="$t('prix')"
           />
            
            <mini-card
             :option="0"
             :data="acf.un_chiffre__mot_cle"
-            label="Un chiffre ou mot-clé"
+            :label="$t('mot clé')"
           />
 
-          <mini-card
-          class="w-100"
+          <div style="width:100%;overflow:hidden">
+            <mini-card
             :option="0"
             :data="acf.a_lire"
-            label="A lire"
+            :label="$t('a lire')"
           />
-
-          <!-- <mini-card
-            :option="3"
-            icon="icon-pictos-bridgepictos-02"
-            :data="terms"
-            :termIndex="1"
-            :acf="acf"
-          /> -->
+          </div> 
          
         </div>
       </div>
@@ -186,7 +181,7 @@ export default {
     getDate(datePub) {
       const date = new Date(datePub);
       let month = date.getMonth() + 1;
-      month = month.length > 1 ? month : "0" + month;
+      month = month >= 10 ? month : "0" + month;
       return date.getDate() + "/" + month + "/" + date.getFullYear();
     },
     goBack() {

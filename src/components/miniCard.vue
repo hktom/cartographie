@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mt-4" v-if="option == 0 && data">
-      <h5 class="st mb-2">{{ label }}</h5>
-      <p v-html="data"></p>
+      <div class="st mb-2 h4" style="color:orange;font-weight:200">{{ label }}</div>
+      <div class="html-render" style="color:black;width:100% !important;overflow-x:hidden!important" v-html="data"></div>
     </div>
 
     <div class="mt-4 d-flex align-items-center" v-if="option == 1 && data">
@@ -63,4 +63,11 @@ mounted(){
 };
 </script>
 
-<style></style>
+<style>
+iframe.wp-embedded-content {
+    display: none !important;
+}
+.html-render *{
+  color:black !important;
+}
+</style>

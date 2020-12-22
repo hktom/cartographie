@@ -69,7 +69,8 @@ export const actions = {
         let search = payload.toLowerCase();
         let posts = researchAction(state.data, search);
         commit("LIST_POSTS", posts);
-        commit("SET_SEARCH_KEY", `Rechercher : ${payload}`);
+        // recherche
+        commit("SET_SEARCH_KEY", `${payload}`);
 
         let filer_base = state.base_filter_selected.option;
 
@@ -99,7 +100,8 @@ export const actions = {
     },
     listPosts({ state, commit }, payload) {
         let posts = filterPost(state.data, payload.name);
-        commit("SET_SEARCH_KEY", `Category: ${payload.name.replace("&amp;", "&")}`);
+        //category
+        commit("SET_SEARCH_KEY", `${payload.name.replace("&amp;", "&")}`);
         commit("SET_COUNTRY", reducerCountries(posts));
         commit("LIST_POSTS", posts);
     },

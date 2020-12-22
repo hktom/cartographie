@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="showPost(data)">
     <!-- list item -->
     <h4 class="mb-1">{{ acf.titre_de_la_solution }}</h4>
     <div class="text-muted mb-2">
@@ -83,7 +83,7 @@ export default {
     getDate(datePub) {
       const date = new Date(datePub);
       let month = date.getMonth() + 1;
-      month = month.length > 1 ? month : "0" + month;
+      month = month >= 10 ? month : '0'+month;
       return date.getDate() + "/" + month + "/" + date.getFullYear();
     },
   },

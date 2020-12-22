@@ -1,7 +1,7 @@
 <template>
   <div class="text-left bg-white">
     
-    <h4 class="px-3 py-2">Categories</h4>
+    <h4 class="px-3 py-2">{{$t('categories')}}</h4>
       <b-list-group
         v-for="(sector, i) in sectors"
         :key="i"
@@ -43,31 +43,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/sass/_variables.scss";
-
-// .list-group {
-//   margin-left: 0px;
-// }
-// .list-group-item {
-//   cursor: pointer;
-//   border-radius: 0px;
-//   margin: 0px;
-//   .badge-nb {
-//     border-radius: 5px;
-//     border-top-right-radius: unset;
-//     border-bottom-left-radius: unset;
-//     background-color: $red;
-//   }
-// }
-// h2 {
-//   color: $yellow;
-//   display: block;
-//   @media (min-width: 992px) {
-//     display: none;
-//   }
-// }
-// @media screen and (min-width: 992px) {
-//   .vueScroll {
-//     max-height: 300px !important;
-//   }
-// }
 </style>

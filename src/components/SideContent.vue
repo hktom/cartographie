@@ -48,5 +48,6 @@ export default {
 .vueScroll{
   background-color:white;
   height: 400px !important;
+  overflow-x: hidden !important;
 }
 </style>

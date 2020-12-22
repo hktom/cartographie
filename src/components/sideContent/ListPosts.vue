@@ -5,7 +5,7 @@
         <span class="l l1"></span>
         <span class="l l2"></span>
       </span>
-      <h5 class="pt-3">{{ search_key }}</h5>
+      <div class="pt-3">{{ search_key }}</div>
     </div>
     <b-list-group v-if="posts.length>0">
       <b-list-group-item v-for="(post) in posts" :key="post.id">
@@ -13,7 +13,7 @@
       </b-list-group-item>
     </b-list-group>
     <b-list-group v-else>
-      <div class="px-4">Aucune mini fiche correspond à la recherche</div>
+      <div class="px-4"> {{$t('404')}} </div>
     </b-list-group>
   </div>
 </template>

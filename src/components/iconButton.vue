@@ -1,8 +1,8 @@
 <template>
   <div>
     <a
-      v-if="value"
-      :href="value"
+      v-if="data"
+      :href="data"
       class="link-btn-ico mr-2"
       target="_blank"
       :title="label"
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ["icon", "value", "label", "custom", "custom_icon"],
+  props: ["icon", "data", "label", "custom", "custom_icon"],
 };
 </script>
 

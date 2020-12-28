@@ -1,3 +1,10 @@
+function stripHtml(html)
+{
+   let tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
+
 export const reducerCategories = (data) => {
     let categories = [];
     data.forEach((post) => {
@@ -31,11 +38,17 @@ export const researchAction = (data, searchValue) => {
         item.acf.annee_creation_entreprise.toLowerCase().search(searchValue) !=
         -1 ||
         item.acf.nombre_employe.toLowerCase().search(searchValue) != -1 ||
-        item.acf.la_solution.toLowerCase().search(searchValue) != -1 ||
+        stripHtml(item.acf.la_solution).toLowerCase().search(searchValue) != -1 ||
         item.acf.categorie_solution.toLowerCase().search(searchValue) != -1 ||
         item.acf.autre_categorie_solution.toLowerCase().search(searchValue) !=
         -1 ||
-        item.acf.stade_de_developpement.toLowerCase().search(searchValue) != -1
+        item.acf.stade_de_developpement.toLowerCase().search(searchValue) != -1 || 
+        item.acf.type_fonds.toLowerCase().search(searchValue) != -1 || 
+        stripHtml(item.acf.solution_prix).toLowerCase().search(searchValue) != -1 || 
+        stripHtml(item.acf.description_solution).toLowerCase().search(searchValue) != -1 || 
+        stripHtml(item.acf.investisseur).toLowerCase().search(searchValue) != -1 || 
+        stripHtml(item.acf.accompagnement_par_une_structure).toLowerCase().search(searchValue) != -1 || 
+        stripHtml(item.acf.prix_et_distinctions_).toLowerCase().search(searchValue) != -1
     );
 };
 

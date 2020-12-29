@@ -3,12 +3,11 @@
     <a
       v-if="data"
       :href="data"
-      class="link-btn-ico mr-2"
+      :class="`mr-2 mini-fiche-link-icon-button p-2 ${size}`"
       target="_blank"
       :title="label"
     >
-      <font-awesome-icon class="color-white" :icon="icon" v-if="!custom" />
-      <span :class="custom_icon" v-if="custom"></span>
+      <span :class="icon"></span>
     </a>
   </div>
 </template>
@@ -16,6 +15,11 @@
 <script>
 export default {
   props: ["icon", "data", "label", "custom", "custom_icon"],
+  data(){
+    return{
+      size:window.button_icon_size
+    }
+  }
 };
 </script>
 

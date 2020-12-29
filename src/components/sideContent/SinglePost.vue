@@ -1,61 +1,66 @@
 <template>
   <div class="text-left">
     <div>
-      <div class="header-back">
+      <div :class="`header-back pl-4 mini-fiche-icon-back-color mt-4 ${button_back_icon_size}`" @click="goBack()">
         <span
-          class="icon-pictos-bridgeback ico-back color-orange"
-          @click="goBack()"
+          :class="`${button_back_icon}`" 
         >
-          <span class="l l1"></span>
-          <span class="l l2"></span>
         </span>
       </div>
+
       <div class="card" style="border:none !important">
         <div class="card-body">
-          <div class="text-muted small">
+          <div class="text-muted small mini-fiche-date">
             {{ $t("last-update") }} : {{ getDate(data.modified) }}
           </div>
-          <div class="mt-3 h1" v-html="data.title.rendered"></div>
+          <div class="mt-3 mini-fiche-title" v-html="data.title.rendered"></div>
 
-          <div v-if="data['_embedded']['wp:featuredmedia']">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6">
+                <div v-if="data['_embedded']['wp:featuredmedia']">
             <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:auto; object-fit:cover"/>
           </div>
+              </div>
 
-          <div class="mb-4 d-flex justify-content-start">
+              <div class="col-3 ml-3">
+          <div class="mb-4 d-flex justify-content-start align-items-center">
             
             <icon-button
             v-if="acf.lien_vers_la_solution"
             :data="acf.lien_vers_la_solution"
             :label="$t('site_web.textes')"
-            icon="globe"
+            :icon="`${mini_fiche_word_icon}`"
             />
             
             <icon-button
             v-if="acf.adress_mail_contact"
             :data="'mailto:'+acf.adress_mail_contact"
             :label="acf.adress_mail_contact"
-            icon="envelope"
+            :icon="`${mini_fiche_email_icon}`"
             />
             
             <icon-button
             v-if="acf.liens_ext"
             :data="acf.liens_ext"
             :label="$t('autre_lien')"
-            custom_icon="icon-pictos-bridgeexternal-link color-white"
-            :custom="true"
+            :icon="`${mini_fiche_link_icon}`"
             />
 
+          </div>
+              </div>
+            </div>
           </div>
 
           <mini-card
             :option="1"
-            icon="icon-pictos-bridgepictos_Plan-de-travail-1"
+            :icon="`${country_registrement_icon}`"
             :data="acf.pays_enreg_structure"
           />
 
           <mini-card
             :option="3"
-            icon="icon-pictos-bridgepictos-02"
+            :icon="category_icon"
             :data="terms"
             :termIndex="0"
             :acf="acf"
@@ -130,7 +135,7 @@
             :label="$t('mot clé')"
           />
 
-          <div style="width:100%;overflow:hidden">
+          <div style="width:100%;overflow:hidden" class="a-lire">
             <mini-card
             :option="0"
             :data="acf.a_lire"
@@ -154,7 +159,15 @@ export default {
     IconButton,
   },
   data() {
-    return {};
+    return {
+      button_back_icon:window.button_back_icon,
+      button_back_icon_size: window.button_back_icon_size,
+      category_icon:window.category_icon,
+      country_registrement_icon:window.country_registrement_icon,
+      mini_fiche_word_icon:window.mini_fiche_word_icon,
+      mini_fiche_email_icon:window.mini_fiche_email_icon,
+      mini_fiche_link_icon:window.mini_fiche_link_icon,
+    };
   },
   mounted() {},
   computed: {
@@ -191,34 +204,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// @import "../../assets/sass/_variables.scss";
+<style>
 
-// .list-group-item {
-//   cursor: pointer;
-// }
-// .st {
-//   font-size: 14px;
-//   color: $yellow;
-//   font-weight: bold;
-// }
-// .image {
-//   width: 100%;
-//   margin-bottom: 20px;
-// }
+.header-back{
+  cursor: pointer !important;
+}
 
-// @media screen and (min-width: 992px) {
-//   .vueScroll {
-//     height: 400px !important;
-
-//     ::v-deep {
-//       .__view {
-//         width: auto !important;
-//       }
-//       .__rail-is-horizontal {
-//         display: none;
-//       }
-//     }
-//   }
-// }
 </style>

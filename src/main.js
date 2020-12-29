@@ -11,13 +11,13 @@ import messages from './i18n/messages'
 import vSelect from 'vue-select'
 import VueSimpleRangeSlider from 'vue-simple-range-slider';
 import VueSlider from 'vue-slider-component'
-import "./assets/sass/style.scss"
+//import "./assets/sass/style.scss"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css';
 import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css'
 import 'vue-slider-component/theme/antd.css'
-// import * as turf from "@turf/turf";
+import * as turf from "@turf/turf";
 
 Vue.use(vuescroll, {
     ops: {
@@ -29,7 +29,7 @@ Vue.use(vuescroll, {
     name: 'vuescroll'
 });
 
-//Vue.use(turf)
+Vue.use(turf)
 Vue.use(VueI18n)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

@@ -1,25 +1,29 @@
 <template>
   <div @click="showPost(data)">
     <!-- list item -->
-    <h4 class="mb-1">{{ acf.titre_de_la_solution }}</h4>
-    <div class="text-muted mb-2">
+    <div class="mb-1 mini-fiche-title">{{ acf.titre_de_la_solution }}</div>
+    <div class="text-muted mb-2 mini-fiche-date">
       {{ $t("last-update") }} : {{ getDate(data.modified) }}
     </div>
     <!-- Structure Pays -->
     <div v-if="acf.pays_enreg_structure" class="d-flex align-items-center mb-2">
-      <span class="icon-pictos-bridgepictos_Plan-de-travail-1 mr-2"></span>
-      <span class="mr-1">
+      <div :class="`terms-icon-style ${icon_size}`">
+        <span :class="`${country_registrement_icon} mr-2`"></span>
+      </div>
+      <div class="mr-1 mini-fiche-content">
         {{ acf.pays_enreg_structure }}
-      </span>
+      </div>
     </div>
     <!-- Structure Pays -->
 
     <!-- Structure embed Solution -->
     <div v-if="is_terms_and_category_valid" class="d-flex align-items-baseline mt-2">
-      <span class="icon-pictos-bridgepictos-02 mr-2"></span>
+      <div :class="`terms-icon-style ${icon_size}`">
+      <span :class="`${category_icon} mr-2`"></span>
+      </div>
       
         <div style="margin-top:-5px">
-          <div v-if="acf.categorie_solution" v-html="acf.categorie_solution" class="w-100">
+          <div v-if="acf.categorie_solution" class="small mini-fiche-content w-100" v-html="acf.categorie_solution">
         </div>
 
           <span
@@ -27,8 +31,8 @@
             v-for="(item, id) in terms[0]"
             :key="'pays' + id"
           >
-            <span v-if="id != 0" class="small"> | </span>
-            <span class="d-inline" v-html="item.name"></span>
+            <span v-if="id != 0" class="mini-fiche-content"> | </span>
+            <span class="d-inline mini-fiche-content" v-html="item.name"></span>
           </span>
         </div>
       
@@ -36,15 +40,13 @@
     <!-- Structure embed Solution -->
 
     <!-- Button -->
-    <p class="mt-3" v-html="resume(acf.description_solution)"></p>
-    <b-button variant="light" class="more button-more" @click="showPost(data)">
-      {{ $t("more") }} <span class="icon-pictos-bridgego color-orange"></span>
+    <p class="mt-3 mini-fiche-content" v-html="resume(acf.description_solution)"></p>
+    <b-button variant="light" class="button-more mini-fiche-more-button" @click="showPost(data)">
+      {{ $t("more") }} 
+      <span :class="more_button_icon_size">
+        <span :class="`${more_button_icon} ml-2`"></span>
+      </span>
     </b-button>
-    <!-- <a href="#" class="more" @click="showPost(data)">
-      {{ $t("more") }} <span class="icon-pictos-bridgego color-orange"></span>
-    </a> -->
-    <!-- Button -->
-
     <!-- list item -->
   </div>
 </template>
@@ -57,6 +59,11 @@ export default {
       acf: {},
       terms: [],
       is_terms_and_category_valid:false,
+      country_registrement_icon:window.country_registrement_icon,
+      category_icon:window.category_icon,
+      icon_size:window.mini_fiche_terms_icon_size,
+      more_button_icon:window.more_button_icon,
+      more_button_icon_size:window.more_button_icon_size,
     };
   },
   mounted() {
@@ -95,9 +102,9 @@ export default {
   background-color: transparent !important;
   border:none !important;
   &:hover{
-    color: orange;
+    //color: orange;
     background-color: transparent !important;
-  border:none !important;
+    border:none !important;
   }
 }
 </style>

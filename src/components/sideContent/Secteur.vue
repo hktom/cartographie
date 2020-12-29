@@ -1,7 +1,9 @@
 <template>
   <div class="text-left bg-white">
     
-    <h4 class="px-3 py-2">{{$t('categories')}}</h4>
+    <div class="px-3 py-2 mini-fiche-title">
+      {{$t('categories')}}
+    </div>
       <b-list-group
         v-for="(sector, i) in sectors"
         :key="i"
@@ -13,8 +15,8 @@
           class="d-flex justify-content-between align-items-center"
           @click="listPosts(sector)"
         >
-          <span v-html="sector.name"></span>
-          <span class="count">{{sector.count}}</span>
+          <span class="mini-fiche-categories" v-html="sector.name"></span>
+          <span class="mini-fiche-categories-count">{{sector.count}}</span>
       
         </b-list-group-item>
       </b-list-group>
@@ -41,6 +43,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../assets/sass/_variables.scss";
+.list-group-item {
+  cursor: pointer;
+  border-radius: 0px;
+  margin: 0px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  // .count {
+  //   font-size: 1.5rem;
+  //   color: $orange;
+  //   font-weight: bold;
+  // }
+}
 </style>

@@ -1,12 +1,14 @@
 <template>
-  <div class="text-left bg-white">
-    <div class="header-back">
-      <span class="icon-pictos-bridgeback ico-back " @click="goBack()">
-        <span class="l l1"></span>
-        <span class="l l2"></span>
+  <div class="text-left bg-white mt-4">
+    <div :class="`header-back mini-fiche-icon-back-color pl-4 
+    ${button_back_icon_size}`">
+      <span :class="`${button_back_icon}`" 
+      @click="goBack()">
       </span>
-      <div class="pt-3">{{ search_key }}</div>
     </div>
+
+    <div class="pt-3 pl-3 mini-fiche-content"><i>{{ search_key }}</i></div>
+
     <b-list-group v-if="posts.length>0">
       <b-list-group-item v-for="(post) in posts" :key="post.id">
         <card :data="post"></card>
@@ -27,7 +29,11 @@ export default {
     Card,
   },
   data() {
-    return {};
+    return {
+      button_back_icon: window.button_back_icon,
+      button_back_icon_size: window.button_back_icon_size,
+
+    };
   },
   mounted() {},
   computed: {
@@ -65,32 +71,9 @@ export default {
 .header-back .ico-back:hover {
   background-color: none !important;
 }
-// @import "../../assets/sass/_variables.scss";
-// .list-group-item {
-//   cursor: pointer;
-//   .more {
-//     display: flex;
-//     align-items: center;
-//     color: $orange;
-//   }
-// }
-// .list-item {
-//   margin-bottom: 20px;
-//   margin-left: 0px;
-//   li {
-//     margin: 0px;
-//   }
-// }
-// @media screen and (min-width: 992px) {
-//   .vueScroll {
-//     height: 400px !important;
-//     background-color: white;
-//   }
-// }
-// .header-back h2 {
-//   transform: scale(1);
-//   @media (min-width: 992px) {
-//     transform: scale(0);
-//   }
-// }
+
+.header-back{
+  cursor: pointer !important;
+}
+
 </style>

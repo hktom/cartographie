@@ -34,17 +34,6 @@ export default {
 
 <style lang="scss">
 @import "../assets/sass/_variables.scss";
-.list-group-item {
-  cursor: pointer;
-  border-radius: 0px;
-  margin: 0px;
-  border-top: none;
-  .count {
-    font-size: 1.5rem;
-    color: $orange;
-    font-weight: bold;
-  }
-}
 .vueScroll{
   background-color:white;
   height: 400px !important;

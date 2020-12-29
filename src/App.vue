@@ -101,30 +101,4 @@ export default {
     width: 95%;
   }
 }
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-@media (min-width: 992px){
-  .maps-position{
-  position: absolute;
-  top: 0;
-  z-index: 4;
-}
-
-    .side-content{
-      position: absolute;
-      right: 35px;
-      top: -6px;
-      z-index: 5;
-    }
-  }
-  .row{
-    width: 100%;
-  } */
 </style>

@@ -1,20 +1,20 @@
 <template>
   <div>
     <div class="mt-4" v-if="option == 0 && data">
-      <div class="st mb-2 h4" style="color:orange;font-weight:200">{{ label }}</div>
-      <div class="html-render" style="color:black;width:100% !important;overflow-x:hidden!important" v-html="data"></div>
+      <div class="mb-2 mini-fiche-label">{{ label }}</div>
+      <div class="mini-fiche-content" v-html="data"></div>
     </div>
 
     <div class="mt-4 d-flex align-items-center" v-if="option == 1 && data">
-      <span :class="`${icon} mr-2`"></span>
-      <span class="mr-1">{{ data }}</span>
+      <div :class="`terms-icon-style ${size}`"><span :class="`${icon} mr-2`"></span></div>
+      <span class="mr-1 mini-fiche-content">{{ data }}</span>
     </div>
 
     <div class="mt-4" v-if="option == 2 && data.length > 0">
-      <h5 class="st mb-2">{{ label }}</h5>
+      <h5 class="mb-2 mini-fiche-label">{{ label }}</h5>
       <span v-for="(item, id) in data" :key="'country' + id">
-        <span v-if="id != 0"> | </span>
-        <span class="d-inline" v-html="item"></span>
+        <span v-if="id != 0" class="mini-fiche-content"> | </span>
+        <span class="d-inline mini-fiche-content" v-html="item"></span>
       </span>
     </div>
 
@@ -22,11 +22,11 @@
       v-if="option == 3 && data.length > 0"
       class="mt-4 d-flex align-items-baseline mb-4"
     >
-      <span :class="`${icon} mr-2`"></span>
+      <div :class="`terms-icon-style ${size}`"><span :class="`${icon} mr-2`"></span></div>
 
       <div v-if="is_terms_and_category_valid">
 
-        <div v-if="acf.categorie_solution" v-html="acf.categorie_solution" class="w-100">
+        <div class="mini-fiche-content w-100" v-if="acf.categorie_solution" v-html="acf.categorie_solution">
         </div>
 
         <span
@@ -34,8 +34,8 @@
         v-for="(item, id) in data[termIndex]"
         :key="'terms' + id"
       >
-        <span v-if="id != 0" class="small"> | </span>
-        <span class="d-inline" v-html="item.name"></span>
+        <span v-if="id != 0" class="mini-fiche-content"> | </span>
+        <span class="d-inline mini-fiche-content" v-html="item.name"></span>
       </span>
 
       </div>
@@ -49,6 +49,7 @@ props: ["data", "label", "option", "icon", "termIndex", "acf"],
 data(){
   return{
     is_terms_and_category_valid:false,
+    size:window.mini_fiche_terms_icon_size,
   }
 },
 mounted(){
@@ -64,10 +65,10 @@ mounted(){
 </script>
 
 <style>
-iframe.wp-embedded-content {
+/* iframe.wp-embedded-content {
     display: none !important;
 }
 .html-render *{
   color:black !important;
-}
+} */
 </style>

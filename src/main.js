@@ -49,9 +49,9 @@ Vue.component('VueSlider', VueSlider)
 
 let local_lang = null;
 if (document.querySelector('html'))
-    local_lang = document.querySelector('html').lang.toLowerCase();
+    local_lang = document.querySelector('html').lang;
 
-local_lang = local_lang == "en-en" || local_lang == "en" ? 'en' : 'fr'
+local_lang = local_lang == "fr-FR" || local_lang == "fr" ? 'fr' : 'en';
 
 const i18n = new VueI18n({
     locale: local_lang, // set locale

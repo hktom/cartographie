@@ -17,13 +17,13 @@
 
           <div class="container-fluid">
             <div class="row">
-              <div class="col-6">
-                <div v-if="data['_embedded']['wp:featuredmedia']">
+          
+          <div class="col-6" v-if="data['_embedded']['wp:featuredmedia']">
             <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:auto; object-fit:cover"/>
           </div>
-              </div>
+              
 
-              <div class="col-3 ml-3">
+          <div class="col-3 ml-3 mt-3">
           <div class="mb-4 d-flex justify-content-start align-items-center">
             
             <icon-button
@@ -139,7 +139,7 @@
             <mini-card
             :option="0"
             :data="acf.a_lire"
-            :label="$t('a lire')"
+            :label="''"
           />
           </div> 
          

@@ -11,7 +11,7 @@
     </div>
 
     <div class="mt-4" v-if="option == 2 && data.length > 0">
-      <h5 class="mb-2 mini-fiche-label">{{ label }}</h5>
+      <div class="mb-2 mini-fiche-label">{{ label }}</div>
       <span v-for="(item, id) in data" :key="'country' + id">
         <span v-if="id != 0" class="mini-fiche-content"> | </span>
         <span class="d-inline mini-fiche-content" v-html="item"></span>

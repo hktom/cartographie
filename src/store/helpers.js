@@ -56,10 +56,10 @@ export const mapFilterPost = (data, countryName) => {
     let result = [];
     result = data.filter(
         (item) =>
-        item.acf.pays_enreg_structure.toLowerCase() == countryName.toLowerCase() ||
-        item.acf.pays_solution_deployee.some((item) => item.toLowerCase() == countryName.toLowerCase())
+        item.acf.pays_enreg_structure.toLowerCase() == countryName.toLowerCase() 
     );
     return result;
+    // item.acf.pays_solution_deployee.some((item) => item.toLowerCase() == countryName.toLowerCase()
 }
 
 export const filterSearch = (
@@ -125,7 +125,7 @@ export const filterSearch = (
             item.acf.montant_fonds <= filter_value.amount[0] &&
             item.acf.montant_fonds <= filter_value.amount[1]
         );
-        console.log("financement", result);
+        //console.log("financement", result);
     }
 
     return result;
@@ -209,19 +209,21 @@ export const reducerCountries = (posts) => {
         }
 
         // Pays de deployement
-        post.acf.pays_solution_deployee.map((item) => {
-            let sub_index = countries.findIndex(
-                (country) => country.name.toLowerCase() == item.toLowerCase()
-            );
+        // post.acf.pays_solution_deployee.map((item) => {
+        //     let sub_index = countries.findIndex(
+        //         (country) => country.name.toLowerCase() == item.toLowerCase()
+        //     );
 
-            if (sub_index != -1) countries[sub_index].count++;
-            else
-                countries.push({
-                    name: item,
-                    count: 1,
-                });
-        });
+        //     if (sub_index != -1) countries[sub_index].count++;
+        //     else
+        //         countries.push({
+        //             name: item,
+        //             count: 1,
+        //         });
+        // });
     });
+
+    //console.log("countries", countries);
 
     return countries;
 };
@@ -255,7 +257,7 @@ export const reducerCountriesMulti = (posts) => {
 
 export const reducerPostData = (data) => {
     data.map((item) => {
-        if (item.acf.pays_solution_deployee != "") {
+        if (item.acf.pays_solution_deployee != "" && item.acf.pays_solution_deployee) {
             let strToArray = item.acf.pays_solution_deployee.split(", ");
             item.acf.pays_solution_deployee = strToArray;
         } else {

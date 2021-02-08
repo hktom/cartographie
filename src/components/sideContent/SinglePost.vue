@@ -138,7 +138,7 @@
           <div style="width:100%;overflow:hidden" class="a-lire">
             <mini-card
             :option="0"
-            :data="acf.a_lire"
+            :data="`<a class='mb-2 mini-fiche-label link-mini-fiche-label' href='${acf.a_lire}'>${$t('a lire')}</a>`"
             :label="''"
           />
           </div> 
@@ -205,7 +205,9 @@ export default {
 </script>
 
 <style>
-
+.link-mini-fiche-label:hover{
+  text-decoration: none !important;
+}
 .header-back{
   cursor: pointer !important;
 }

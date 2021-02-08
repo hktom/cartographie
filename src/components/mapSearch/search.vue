@@ -45,7 +45,7 @@ export default {
     },
     research(e){
       e.preventDefault();
-      console.log(this.search);
+      //console.log(this.search);
       if(this.search=="" || !this.search){
         this.search=null;
         this.resetSearch();

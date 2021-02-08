@@ -89,13 +89,13 @@ export const actions = {
     // filter from map
     mapFilter({ state, commit }, payload) {
         //let main_options = state.main_filter_options;
-        let countryName = state.country_list.filter(
-            (item) =>
-            item.option.toLowerCase() == payload.toLowerCase() ||
-            item.en.toLowerCase() == payload.toLowerCase()
-        );
+        // let countryName = state.country_list.filter(
+        //     (item) =>
+        //     item.label.toLowerCase() == payload.toLowerCase() ||
+        //     item.en.toLowerCase() == payload.toLowerCase()
+        // );
 
-        commit("LIST_POSTS", mapFilterPost(state.data, countryName[0].label));
+        commit("LIST_POSTS", mapFilterPost(state.data, payload));
         commit("SET_SEARCH_KEY", `Pays : ${payload}`);
     },
     listPosts({ state, commit }, payload) {
@@ -108,7 +108,7 @@ export const actions = {
     // Filter By Criteria
     filterBy({ state, commit }, payload) {
         let filter = payload;
-        console.log("FILTER BY", payload);
+        //console.log("FILTER BY", payload);
         // filter null
         if (!filter || filter.length <= 0) {
             commit(

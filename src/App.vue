@@ -28,12 +28,13 @@ export default {
   components: {},
   mounted() {
     this.$store.commit("SET_LANG", this.$i18n.locale);
-    this.$store.dispatch("loadGeoCoordinate", window.geo_json);
-    this.$store.dispatch("loadData");
+    this.$store.dispatch("loadGeoCoordinate", window.geo_json).then(()=>{
+      this.$store.dispatch("loadData");
+    });
   },
   methods: {
     select_filter(val) {
-      console.log(val);
+      //console.log(val);
       if (val) {
         this.$store.commit("SET_FILTER_BASE", val);
         if(this.search_value){
@@ -58,6 +59,7 @@ export default {
 </script>
 
 <style>
+.mapboxgl-canvas:focus{outline:none !important}
 .map_filter_option {
   position: absolute;
   top: 412px;

@@ -18,8 +18,8 @@
           <div class="container-fluid">
             <div class="row">
           
-          <div class="col-6" v-if="data['_embedded']['wp:featuredmedia']">
-            <img :src="data['_embedded']['wp:featuredmedia'][0].link" style="width:200px;height:auto; object-fit:cover"/>
+          <div class="col-6" v-if="data.featured_media_src_url">
+            <img :src="data.featured_media_src_url" style="width:200px;height:auto; object-fit:cover"/>
           </div>
               
 

@@ -60,6 +60,9 @@ export const mutations = {
     ...filter_mutation,
     ...load_mutation,
     ...post_mutations,
+    SET_HTTP_REQUEST_DONE(state) {
+        state.http_request_done ++;
+    },
     SET_COUNTRY(state, data) {
         state.countries = data;
     },

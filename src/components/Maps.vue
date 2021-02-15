@@ -26,9 +26,7 @@ export default {
   },
   computed: {
     lang() {
-      return window.lang == "fr-FR" || window.lang == "fr"
-        ? "name_fr"
-        : "name_en";
+      return window.lang == "fr-FR" || window.lang == "fr" ? "fr" : "en";
     },
     countries() {
       return this.$store.state.countries;
@@ -42,18 +40,34 @@ export default {
     country_list() {
       return this.$store.state.country_list;
     },
+    http_request_done() {
+      return this.$store.state.http_request_done;
+    },
   },
   mounted() {
     this.initMap();
   },
   watch: {
+    http_request_done() {
+      if (this.http_request_done >= 2) {
+        document
+          .querySelectorAll("#marker-nbre-post")
+          .forEach((domElement) => domElement.remove());
+        this.countries.forEach((data) => {
+          this.setMarker(data.name, data.count);
+        });
+      }
+    },
+
     countries() {
-      document
-        .querySelectorAll("#marker-nbre-post")
-        .forEach((domElement) => domElement.remove());
-      this.countries.forEach((data) => {
-        this.setMarker(data.name, data.count);
-      });
+      if (this.http_request_done >= 2) {
+        document
+          .querySelectorAll("#marker-nbre-post")
+          .forEach((domElement) => domElement.remove());
+        this.countries.forEach((data) => {
+          this.setMarker(data.name, data.count);
+        });
+      }
     },
   },
   methods: {
@@ -64,19 +78,10 @@ export default {
       } else {
         polygon = turf.polygon(coordinates);
       }
-      //console.log(turf.centerOfMass(polygon));
       return turf.centerOfMass(polygon).geometry.coordinates;
     },
-    filterMap(country_name, fromMaker=false) {
-      //console.log(country_name);
-      if (this.lang == "name_fr" && !fromMaker) {
-        let countryFr = this.country_list.filter(
-          (item) => item.en.toLowerCase() == country_name.toLowerCase()
-        );
-        return this.$store.dispatch("mapFilter", countryFr[0].label);
-      } else {
-        return this.$store.dispatch("mapFilter", country_name);
-      }
+    filterMap(country_name) {
+      return this.$store.dispatch("mapFilter", country_name);
     },
     initMap() {
       mapboxgl.accessToken = window.window.access_token;
@@ -93,7 +98,7 @@ export default {
       // Add zoom and rotation controls to the map.
       this.map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
       const countries = this.countries;
-      const lang = this.lang;
+      const lang = "name_" + this.lang;
       this.map.on("load", () => {
         this.map.setLayoutProperty("country-label", "text-field", [
           "get",
@@ -108,6 +113,7 @@ export default {
     // Country Shape
     countrieShap() {
       let hoveredStateId = this.hoveredStateId;
+      let lang = this.lang;
       const map = this.map;
       //const setPub = this.setPub;
       const filterMap = this.filterMap;
@@ -134,6 +140,9 @@ export default {
           ],
         },
       });
+
+      
+
       this.map.addLayer({
         id: "state-borders",
         type: "line",
@@ -180,9 +189,11 @@ export default {
               e.features[0].geometry.type,
               e.features[0].geometry.coordinates
             ),
-            zoom: 3.2,
+            zoom: 2.5,
           });
-          const country_name = e.features[0].properties.admin;
+          const indexlang = "name-" + lang;
+          const country_name = e.features[0].properties[indexlang];
+          //console.log("contry name", lang, country_name);
           const targetMarker = document.querySelector(
             "#marker-nbre-post." + country_name
           );
@@ -201,55 +212,51 @@ export default {
 
     setMarker(countryName, totalPost) {
       const map = this.map;
-      const geo_coordinates = this.geo_coordinates;
+      let geo_coordinates = this.geo_coordinates;
       let setMarkerClick = this.setMarkerClick;
       let filterMap = this.filterMap;
-      //const turfCenter=this.turfCenter;
-      let country_list = this.country_list.filter(
+
+      var index = geo_coordinates.findIndex(
         (item) =>
-          item.label.toLowerCase() == countryName.toLowerCase() ||
-          item.en.toLowerCase() == countryName.toLowerCase()
+          item.name_fr.toLowerCase() == countryName.toLowerCase() ||
+          item.name_en.toLowerCase() == countryName.toLowerCase()
       );
 
-      if (country_list.length > 0) {
-        var index = geo_coordinates.findIndex(
-          (item) =>
-            item.name.toLowerCase() == country_list[0].en.toLowerCase() ||
-            item.name.toLowerCase() == country_list[0].label.toLowerCase()
-        );
+      if (index != -1) {
+        var el = document.createElement("div");
+        el.innerHTML = totalPost;
+        el.id = "marker-nbre-post";
+        el.classList.add(countryName.toLowerCase().replaceAll(" ", ""));
 
-        if (index != -1) {
-          var el = document.createElement("div");
-          el.innerHTML = totalPost;
-          el.id = "marker-nbre-post";
-          el.classList.add(countryName.toLowerCase().replaceAll(" ", ""));
-
-          // Marker on Click
-          el.addEventListener("click", (e) => {
-            // map.flyTo({
-            //   center: turfCenter(
-            //     e.features[0].geometry.type,
-            //     e.features[0].geometry.coordinates
-            //   ),
-            //   zoom: 3.2,
-            // });
-            setMarkerClick(true);
-            const active = document.querySelector(".activeMarker");
-            if (active) {
-              active.classList.remove("activeMarker");
-            }
-            e.target.classList.add("activeMarker");
-            filterMap(countryName, true);
-            setTimeout(() => {
-              setMarkerClick(false);
-            }, 100);
-          });
-          var marker = new mapboxgl.Marker(el).setLngLat(
-            geo_coordinates[index].coordinates
+        // Marker on Click
+        el.addEventListener("click", (e) => {
+          let _country = geo_coordinates.filter(
+            (item) =>
+              item.name_fr.toLowerCase() == countryName.toLowerCase() ||
+              item.name_en.toLowerCase() == countryName.toLowerCase()
           );
-          marker.remove(map);
-          marker.addTo(map);
-        }
+
+          map.flyTo({
+            center: _country[0].coordinates,
+            zoom: 2.5,
+          });
+
+          setMarkerClick(true);
+          const active = document.querySelector(".activeMarker");
+          if (active) {
+            active.classList.remove("activeMarker");
+          }
+          e.target.classList.add("activeMarker");
+          filterMap(countryName);
+          setTimeout(() => {
+            setMarkerClick(false);
+          }, 100);
+        });
+        var marker = new mapboxgl.Marker(el).setLngLat(
+          geo_coordinates[index].coordinates
+        );
+        marker.remove(map);
+        marker.addTo(map);
       }
     },
 

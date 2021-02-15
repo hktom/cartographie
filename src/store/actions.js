@@ -31,27 +31,31 @@ export const actions = {
 
                 let coordinates = turf.centerOfMass(polygone);
                 geo_coordinates.push({
-                    name: item.properties.name_long,
+                    name_fr: item.properties['name-fr'],
+                    name_en: item.properties['name-en'],
                     coordinates: coordinates.geometry.coordinates,
                 });
             });
+
+            //console.log(geo_coordinates);
             commit("SET_GEO_COORDINATES", geo_coordinates);
+            commit("SET_HTTP_REQUEST_DONE");
         });
     },
     // Load Data
     loadData({ commit, state }) {
         //commit("SET_LOADING", true);
-        let lang = "";
-        if (state.lang == "en") lang = "en";
-
+        //if (state.lang == "en") lang = "en";
+        //let acf = "pays_enreg_structure";
+        let lang = window.lang == "fr-FR" || window.lang == "fr" ? "" : "en";
         axios.get(state.uri.url + lang + state.uri.api).then(({ data }) => {
             let posts = reducerPostData(data);
-            //let acf = "pays_enreg_structure";
             commit("SET_DATA", posts);
             commit("SET_CATEGORIES", reducerCategories(posts));
             commit("SET_COUNTRY", reducerCountries(posts));
             commit("SET_LOADING_SECTOR", false);
             commit("SET_LOADING", false);
+            commit("SET_HTTP_REQUEST_DONE");
         });
     },
 
@@ -88,14 +92,9 @@ export const actions = {
     },
     // filter from map
     mapFilter({ state, commit }, payload) {
-        //let main_options = state.main_filter_options;
-        // let countryName = state.country_list.filter(
-        //     (item) =>
-        //     item.label.toLowerCase() == payload.toLowerCase() ||
-        //     item.en.toLowerCase() == payload.toLowerCase()
-        // );
-
-        commit("LIST_POSTS", mapFilterPost(state.data, payload));
+        let posts=mapFilterPost(state.data, payload);
+        //commit("SET_COUNTRY", reducerCountries(posts));
+        commit("LIST_POSTS", posts);
         commit("SET_SEARCH_KEY", `Pays : ${payload}`);
     },
     listPosts({ state, commit }, payload) {

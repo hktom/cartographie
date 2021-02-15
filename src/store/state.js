@@ -1,5 +1,6 @@
 let new_state = {
     side_content: null,
+    http_request_done:0,
     geo_coordinates: [],
     posts: [],
     post: [],

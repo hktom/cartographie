@@ -13,7 +13,7 @@
         @input="select_filter"
       ></v-select>
     </div> -->
-     <div class="container-side"><side-content></side-content></div>
+    <div class="container-side"><side-content></side-content></div>
   </div>
 </template>
 
@@ -27,21 +27,17 @@ export default {
   },
   components: {},
   mounted() {
-    this.$store.commit("SET_LANG", this.$i18n.locale);
-    this.$store.dispatch("loadGeoCoordinate", window.geo_json).then(()=>{
-      this.$store.dispatch("loadData");
-    });
+    this.$store.dispatch("loadGeoCoordinate", window.geo_json);
+    this.$store.dispatch("loadData");
+    this.$store.commit("SET_LANG", this.$i18n.locale)
   },
   methods: {
     select_filter(val) {
-      //console.log(val);
       if (val) {
         this.$store.commit("SET_FILTER_BASE", val);
-        if(this.search_value){
+        if (this.search_value) {
           this.$store.dispatch("searchKey", this.search_value);
-        }
-        else
-        {
+        } else {
           this.$store.dispatch("search_key_with_null", val.option);
         }
       }
@@ -59,7 +55,9 @@ export default {
 </script>
 
 <style>
-.mapboxgl-canvas:focus{outline:none !important}
+.mapboxgl-canvas:focus {
+  outline: none !important;
+}
 .map_filter_option {
   position: absolute;
   top: 412px;
@@ -85,21 +83,22 @@ export default {
   right: 10px;
 }
 
-@media (max-width: 992px){
-  .map_filter_option{
-     top:0px;
-     margin-left: 0px;
-     left: 0px;
-     width: 100%;
-     position: relative;
+@media (max-width: 992px) {
+  .map_filter_option {
+    top: 0px;
+    margin-left: 0px;
+    left: 0px;
+    width: 100%;
+    position: relative;
     padding: 20px 54px;
   }
-  .container-side, .map_filter_option {
+  .container-side,
+  .map_filter_option {
     position: relative;
     padding: 20px 54px;
     width: 100%;
   }
-  .container-search{
+  .container-search {
     width: 95%;
   }
 }

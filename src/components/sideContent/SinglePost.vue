@@ -137,6 +137,7 @@
 
           <div style="width:100%;overflow:hidden" class="a-lire">
             <mini-card
+            v-if="acf.a_lire && acf.a_lire!=''"
             :option="0"
             :data="`<a class='mb-2 mini-fiche-label link-mini-fiche-label' href='${acf.a_lire}'>${$t('a lire')}</a>`"
             :label="''"
@@ -160,6 +161,7 @@ export default {
   },
   data() {
     return {
+      //countries:[],
       button_back_icon:window.button_back_icon,
       button_back_icon_size: window.button_back_icon_size,
       category_icon:window.category_icon,
@@ -169,7 +171,10 @@ export default {
       mini_fiche_link_icon:window.mini_fiche_link_icon,
     };
   },
-  mounted() {},
+  mounted() {
+    // this.countries=this.acf.pa;
+    if(this.acf.autre_zone!='') this.acf.pays_solution_deployee.push(this.acf.autre_zone)
+  },
   computed: {
     tags(){
       return [];

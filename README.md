@@ -1,5 +1,7 @@
 # cartographie
 
+Cartographie is an interactive map that display wordpress custom posts by their location based on MapBox. 
+
 ## Project setup
 ```
 npm install

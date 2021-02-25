@@ -1,38 +1,52 @@
 export const stripHtml = (html) => {
-  let tmp = document.createElement("DIV");
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
+  try {
+    let tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  } catch (error) {
+    return "";
+  }
 };
 
 export const normalizedata = (data) => {
-  let lorwercase = data.toLowerCase();
-  let strip = stripHtml(lorwercase);
-  return strip.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  try {
+    let lorwercase = data.toLowerCase();
+    let strip = stripHtml(lorwercase);
+    return strip.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  } catch (error) {
+    console.error(error);
+    return "";
+  }
 };
 
 export const reducerCategories = (data) => {
   let categories = [];
-  data.forEach((post) => {
-    let index = categories.findIndex(
-      (category) =>
-        category.name.toLowerCase() == post.acf.categorie_solution.toLowerCase()
-    );
-    if (index != -1) categories[index].count++;
-    else {
-      if (
-        post.acf.categorie_solution &&
-        post.acf.categorie_solution != "- Select a category -"
-      ) {
-        categories.push({ name: post.acf.categorie_solution, count: 1 });
+  try {
+    data.forEach((post) => {
+      let index = categories.findIndex(
+        (category) =>
+          category.name.toLowerCase() ==
+          post.acf.categorie_solution.toLowerCase()
+      );
+      if (index != -1) categories[index].count++;
+      else {
+        if (
+          post.acf.categorie_solution &&
+          post.acf.categorie_solution != "- Select a category -"
+        ) {
+          categories.push({ name: post.acf.categorie_solution, count: 1 });
+        }
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.error(error);
+  }
   return categories;
 };
 
 // filter search action
 export const researchAction = (data, search) => {
-  let searchValue=normalizedata(search);
+  let searchValue = normalizedata(search);
   return data.filter(
     (item) =>
       normalizedata(item.acf.pays_solution_deployee.toString()).search(
@@ -204,18 +218,19 @@ export const reducerCountries = (posts) => {
 
   posts.forEach((post) => {
     // let deploy_countries = post.acf.pays_solution_deployee.map((item) => item.toLowerCase());
+    let _temp_countries = "";
+    if (post.acf.pays_enreg_structure)
+      _temp_countries = post.acf.pays_enreg_structure;
 
     let index = countries.findIndex(
-      (country) =>
-        country.name.toLowerCase() ==
-        post.acf.pays_enreg_structure.toLowerCase()
+      (country) => country.name.toLowerCase() == _temp_countries.toLowerCase()
     );
 
     if (index != -1) {
       countries[index].count++;
     } else {
       countries.push({
-        name: post.acf.pays_enreg_structure,
+        name: _temp_countries,
         count: 1,
       });
     }

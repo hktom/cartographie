@@ -139,16 +139,19 @@
             <mini-card
             v-if="acf.a_lire && acf.a_lire!=''"
             :option="0"
-            :data="`<a class='mb-2 mini-fiche-label link-mini-fiche-label' href='${acf.a_lire}'>${$t('a lire')}</a>`"
-            :label="''"
+            :data="acf.a_lire"
+            :label="`${$t('a lire')}`"
           />
           </div> 
          
         </div>
       </div>
     </div>
+
+    <!-- :data="`<a class='mb-2 mini-fiche-label link-mini-fiche-label' href='${acf.a_lire}'>${$t('a lire')}</a>`" -->
   </div>
 </template>
+
 
 <script>
 import IconButton from '../iconButton.vue';
@@ -215,6 +218,18 @@ export default {
 }
 .header-back{
   cursor: pointer !important;
+}
+
+.wp-embedded-content a{
+  text-decoration: none !important;
+}
+
+.wp-embedded-content a:hover{
+  text-decoration: none !important;
+}
+
+.mini-fiche-content p iframe{
+  display: none !important;
 }
 
 </style>

@@ -222,10 +222,10 @@ export default {
 
 .wp-embedded-content a{
   text-decoration: none !important;
-  font-family: "Mont", Sans-serif;
-    font-size: 1rem;
-    font-weight: 300;
-    color: #221E1F;
+  font-family: "Mont", Sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 300 !important;
+    color: #221E1F !important;
 }
 
 .wp-embedded-content a:hover{

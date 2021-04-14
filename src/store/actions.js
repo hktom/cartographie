@@ -9,7 +9,6 @@ import { reducerCountriesMulti } from "./helpers";
 import { reducerCategories } from "./helpers";
 import { mapFilterPost } from "./helpers";
 import * as turf from "@turf/turf";
-
 const axios = require("axios").default;
 
 export const actions = {

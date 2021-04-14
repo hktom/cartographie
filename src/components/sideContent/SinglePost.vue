@@ -90,11 +90,11 @@
             :label="$t('description')"
           />
 
-          <mini-card
+          <!-- <mini-card
             :option="0"
             :data="acf.categorie_solution"
             label="Categorie"
-          />
+          /> -->
 
           <mini-card
             :option="0"

@@ -19,7 +19,7 @@
     </div>
 
     <div
-      v-if="option == 3 && data.length > 0"
+      v-if="option == 3"
       class="mt-4 d-flex align-items-baseline mb-4"
     >
       <div :class="`terms-icon-style ${size}`"><span :class="`${icon} mr-2`"></span></div>
